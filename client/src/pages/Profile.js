@@ -1,11 +1,13 @@
 import React from 'react';
+import Tabs from '../components/Tabs'
 
-const Home = () => {
+const Profile = () => {
     return (
         <>
         <h1>PROFILE PAGE</h1>
+        <Tabs />
         </>
     )
 }
 
-export default Home;
+export default Profile;

@@ -1,6 +1,5 @@
 // https://mui.com/material-ui/react-drawer/
 // VERY Nice looking side navigation bar which I will be using on all of my websites!
-
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -9,8 +8,10 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-
+import MenuIcon from '@mui/icons-material/MenuOpenRounded';
 import { Link } from "react-router-dom";
+
+import '../styles/Header.css'
 
 export default function TemporaryDrawer() {
     const [state, setState] = React.useState({
@@ -28,15 +29,15 @@ export default function TemporaryDrawer() {
     const list = (anchor) => (
 
         <Box
-            sx={{ width: 250 }}
+            className="navigationBox"
             role="presentation"
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
 
             {/* Within this list - turn all of these into navigation items */}
-            <List>
-                
+            <List className='navList'>
+
                 <ListItem>
                     <ListItemButton>
                         <Link to="/" className="navlink">Home</Link>
@@ -51,7 +52,20 @@ export default function TemporaryDrawer() {
 
                 <ListItem>
                     <ListItemButton>
+                        <Link to="/profiles" className="navlink">Profiles List</Link>
+                    </ListItemButton>
+                </ListItem>
+
+                <ListItem>
+                    <ListItemButton>
                         <Link to="/materialUI" className="navlink">MaterialUI</Link>
+                    </ListItemButton>
+                </ListItem>
+
+                {/* Needs to updated to logging out onClick */}
+                <ListItem>
+                    <ListItemButton>
+                        <Link to="/" className="navlink">Logout</Link>
                     </ListItemButton>
                 </ListItem>
 
@@ -65,10 +79,15 @@ export default function TemporaryDrawer() {
     );
 
     return (
-        <div>
+        <header>
+            <div>
+                <h1>CM</h1>
+            </div>
             {['top'].map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer(anchor, true)}>Menu</Button>
+                    <Button onClick={toggleDrawer(anchor, true)}>
+                    <MenuIcon />
+                    </Button>
                     <Drawer
                         anchor={anchor}
                         open={state[anchor]}
@@ -78,6 +97,6 @@ export default function TemporaryDrawer() {
                     </Drawer>
                 </React.Fragment>
             ))}
-        </div>
+        </header>
     );
 }

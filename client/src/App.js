@@ -3,12 +3,13 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import '../src/styles/App.css'
 
-// Import pages & components
-// import { Header, Footer } from './components'
-// import { Home, Profile } from './pages'
+// Import Pages
 import Home from './pages/Home'
 import Profile from './pages/Profile'
-import MaterialUI from './pages/MaterialUI';
+import MaterialUI from './pages/MaterialUI'
+import Profiles from './pages/ProfilesList'
+
+// Import Components
 import Header from './components/Header'
 import Footer from './components/Footer'
 
@@ -31,6 +32,7 @@ function App() {
 
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/profiles" element={<Profiles />} />
               <Route path="/materialUI" element={<MaterialUI />} />
 
             </Routes>

@@ -1,0 +1,14 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navigationBox {
+    background-color: rgb(255, 255, 143);
+    overflow: hidden;
+}
+
+.navList {
+    width: 100%;
+}
