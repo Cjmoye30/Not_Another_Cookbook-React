@@ -1,8 +1,14 @@
 /* ----------- MAIN STYLE PAGE ----------- */
-* {
+/* ----------- All semantic elements should be styled here */
+
+/* * {
     border: 1px solid black;
-}
+} */
 
 body {
-    background-color: olive;
+    background-color: rgb(227, 255, 205);
+}
+
+.container {
+    min-height: 100vh;
 }

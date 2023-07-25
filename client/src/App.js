@@ -8,6 +8,7 @@ import '../src/styles/App.css'
 // import { Home, Profile } from './pages'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
+import MaterialUI from './pages/MaterialUI';
 import Header from './components/Header'
 import Footer from './components/Footer'
 
@@ -30,6 +31,7 @@ function App() {
 
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/materialUI" element={<MaterialUI />} />
 
             </Routes>
           </div>
