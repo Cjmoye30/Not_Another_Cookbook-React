@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.e9c5f1f4.css","mappings":"AACA,EACI,qBACJ,CAEA,KACI,sBACJ","sources":["styles/App.css"],"sourcesContent":["/* ----------- MAIN STYLE PAGE ----------- */\r\n* {\r\n    border: 1px solid black;\r\n}\r\n\r\nbody {\r\n    background-color: olive;\r\n}"],"names":[],"sourceRoot":""}

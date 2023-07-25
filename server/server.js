@@ -4,7 +4,6 @@ const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
-const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -16,16 +15,6 @@ const server = new ApolloServer({ typeDefs, resolvers, context: authMiddleware }
 app.use(
     express.urlencoded({ extended: true }),
     express.json()
-    //here is a list of cross origins that are valid, its valid to enable CORS, its just us
-    //wait until after deployment to mess with CORS, also look into HELMET for express
-    // cors({
-    //      origin: [
-    //          HOST,
-    //          'https://arcade-assembly-c977bb949035.herokuapp.com/',
-    //          'https://studio.apollographql.com'
-    //      ]
-    // }),
-
 );
 
 if (process.env.NODE_ENV === 'production') {
