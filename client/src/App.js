@@ -9,6 +9,7 @@ import Profile from './pages/Profile'
 import MaterialUI from './pages/MaterialUI'
 import Profiles from './pages/ProfilesList'
 import Upload from './pages/Upload'
+import Login from './pages/Login'
 
 // Import Components
 import Header from './components/Header'
@@ -36,6 +37,7 @@ function App() {
               <Route path="/profiles" element={<Profiles />} />
               <Route path="/materialUI" element={<MaterialUI />} />
               <Route path="/upload" element={<Upload />} />
+              <Route path="/login" element={<Login />} />
 
             </Routes>
           </div>

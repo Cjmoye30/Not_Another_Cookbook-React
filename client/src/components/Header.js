@@ -68,6 +68,12 @@ export default function TemporaryDrawer() {
                     </ListItemButton>
                 </ListItem>
 
+                <ListItem>
+                    <ListItemButton>
+                        <Link to="/login" className="navlink">Login</Link>
+                    </ListItemButton>
+                </ListItem>
+
                 {/* Needs to updated to logging out onClick */}
                 <ListItem>
                     <ListItemButton>

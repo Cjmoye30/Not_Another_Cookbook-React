@@ -9,6 +9,7 @@ type User {
     lastName: String!
     email: String!,
     password: String!
+    images: [String]
 }
 
 type Auth {
@@ -22,12 +23,10 @@ type Query {
     getAllUsers: [User]
 }
 
-# placeholder for mutations
-# type Mutation {
-
-# }
-
-
+type Mutation {
+    signup(username: String!, email: String!, firstName: String!, lastName: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+}
 `;
 
 module.exports = typeDefs

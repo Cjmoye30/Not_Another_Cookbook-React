@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
-// const { signToken } = require('../utils/auth');
+const { signToken } = require('../utils/auth');
 const { User } = require('../models');
+const { findOne } = require('../models/Users');
 
 const resolvers = {
 
@@ -21,9 +22,39 @@ const resolvers = {
     },
 
     // Placeholder for mutations
-    // Mutation: {
+    Mutation: {
+        signup: async(parent, {username, email, firstName, lastName, password}) => {
+            const newUser = await User.create({username, email, firstName, lastName, password});
+            console.log("New User Info: ", newUser)
 
-    // }
+            const token = signToken(newUser);
+            console.log("New User Token: ", token)
+
+            return {token, newUser}
+        },
+
+        login: async(parent, {email, password}) => {
+            const user = await User.findOne({email})
+
+            if(!email) {
+                throw new AuthenticationError(`ERROR: ${email} was not found in the database.`)
+            }
+
+            const checkPassword = await user.isCorrectPassword(password);
+
+            if(!checkPassword) {
+                throw new AuthenticationError(`ERROR: Invalid password.`)
+            }
+
+            console.log(`Loggin in : ${email}`)
+
+            const token = signToken(user)
+            console.log("Logged in User Token: ", token)
+            
+            return {token, user}
+
+        }
+    }
 
 }
 

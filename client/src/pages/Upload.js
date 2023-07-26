@@ -5,14 +5,16 @@ import { IKImage, IKContext, IKUpload } from 'imagekitio-react';
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
 const authenticationEndpoint = 'http://localhost:3001/auth';
-const folderDest = '/react-starting-template/'
 
 const onError = err => {
     console.log("Error", err);
   };
   
   const onSuccess = res => {
+
+    // When there is a successful file upload, push this URL to the database for the user
     console.log("Success", res);
+    console.log("URL to store in DB: ",res.url)
   };
   
   const onUploadProgress = progress => {
@@ -30,8 +32,6 @@ const Upload = () => {
 
     return (
         <>
-            <h1>ImageKitIo Upload Page</h1>
-
             <h1>Uploading Files</h1>
             <IKContext
                 publicKey={publicKey}
@@ -44,6 +44,8 @@ const Upload = () => {
                     onError={onError}
                     onSuccess={onSuccess}
                     useUniqueFileName={true}
+
+                    // update to whatever folder needed
                     folder={"/sample-folder"}
                     onUploadStart={onUploadStart}
                     onUploadProgress={onUploadProgress}
@@ -55,7 +57,6 @@ const Upload = () => {
                 {/* <p>Custom Upload Button</p> */}
                 {inputRefTest && <button onClick={() => inputRefTest.current.click()}>Upload</button>}
             </IKContext>
-
         </>
     )
 }
