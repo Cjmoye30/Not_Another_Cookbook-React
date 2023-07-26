@@ -18,7 +18,7 @@ export default function LabTabs() {
     <Box sx={{ width: '100%', typography: 'body1' }}>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+          <TabList onChange={handleChange} aria-label="lab API tabs example" centered selectionFollowsFocus>
             <Tab label="Users List" value="userList" />
             <Tab label="Item Two" value="2" />
             <Tab label="Item Three" value="3" />

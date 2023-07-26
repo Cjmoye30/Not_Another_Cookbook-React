@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Button from '@mui/material/Button';
 import '../styles/Home.css'
 
 const Home = () => {
@@ -23,16 +22,14 @@ const Home = () => {
         <li>Practice creating and implementing components which are used on pages - a lot of these can be pulled from class examples.</li>
 
         <hr />
+        
         <li>And lastly, I want to add in notes on each one of these pages for something noteworthy that I've implemented. All of the notes can either be comments in the code or screenshots on the webpage.</li>
         <li>API Calls! - Make sure you can do them with React. Refer to example 19 in the React folder</li>
 
         <li>Header - change to a burger icon to make it look sleek instead of typing out the menu</li>
-
-
+        <li>Add in the avatar components from MaterialUI and have that in the top right of the page when a user is logged in.</li>
 
         </ul>
-
-        
         </>
     )
 }

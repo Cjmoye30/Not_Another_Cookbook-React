@@ -1,13 +1,14 @@
 import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import '../src/styles/App.css'
+import '../src/styles/App.css';
 
 // Import Pages
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import MaterialUI from './pages/MaterialUI'
 import Profiles from './pages/ProfilesList'
+import Upload from './pages/Upload'
 
 // Import Components
 import Header from './components/Header'
@@ -34,6 +35,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/profiles" element={<Profiles />} />
               <Route path="/materialUI" element={<MaterialUI />} />
+              <Route path="/upload" element={<Upload />} />
 
             </Routes>
           </div>
