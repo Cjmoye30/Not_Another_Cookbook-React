@@ -28,7 +28,6 @@ export default function TemporaryDrawer() {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-
         setState({ ...state, [anchor]: open });
     };
 
@@ -41,74 +40,70 @@ export default function TemporaryDrawer() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
 
-            <List className='navList'>
+            {Auth.loggedIn() ?
+                (
+                    <>
+                        <List className='navList'>
+                            <ListItemButton>
+                                <Link to="/" className="navlink">Home</Link>
+                            </ListItemButton>
 
-                <ListItem>
-                    <ListItemButton>
-                        <Link to="/" className="navlink">Home</Link>
-                    </ListItemButton>
-                </ListItem>
+                            <ListItemButton>
+                                <Link to="/me" className="navlink">Profile</Link>
+                            </ListItemButton>
 
-                <ListItem>
-                    <ListItemButton>
-                        <Link to="/me" className="navlink">Profile</Link>
-                    </ListItemButton>
-                </ListItem>
+                            <ListItemButton>
+                                <Link to="/profiles" className="navlink">Profiles List</Link>
+                            </ListItemButton>
 
-                <ListItem>
-                    <ListItemButton>
-                        <Link to="/profiles" className="navlink">Profiles List</Link>
-                    </ListItemButton>
-                </ListItem>
+                            <ListItemButton>
+                                <Link to="/upload" className="navlink">Upload</Link>
+                            </ListItemButton>
 
-                <ListItem>
-                    <ListItemButton>
-                        <Link to="/materialUI" className="navlink">MaterialUI</Link>
-                    </ListItemButton>
-                </ListItem>
+                            <ListItemButton>
+                                <Link className="navlink" onClick={logout}>Logout</Link>
+                            </ListItemButton>
+                        </List>
+                    </>
+                )
+                :
+                (
+                    <>
+                        <List className='navList'>
+                            <ListItemButton>
+                                <Link to="/" className="navlink">Home</Link>
+                            </ListItemButton>
 
-                <ListItem>
-                    <ListItemButton>
-                        <Link to="/upload" className="navlink">Upload</Link>
-                    </ListItemButton>
-                </ListItem>
+                            <ListItemButton>
+                                <Link to="/profiles" className="navlink">Profiles List</Link>
+                            </ListItemButton>
 
-                <ListItem>
-                    <ListItemButton>
-                        <Link to="/login" className="navlink">Login</Link>
-                    </ListItemButton>
-                </ListItem>
+                            <ListItemButton>
+                                <Link to="/login" className="navlink">Login</Link>
+                            </ListItemButton>
 
-                <ListItem>
-                    <ListItemButton>
-                        <Link to="/signup" className="navlink">Signup</Link>
-                    </ListItemButton>
-                </ListItem>
-
-                <ListItem>
-                    <ListItemButton>
-                        <Link className="navlink" onClick={logout}>Logout</Link>
-                    </ListItemButton>
-                </ListItem>
-
-            </List>
-
+                            <ListItemButton>
+                                <Link to="/signup" className="navlink">Signup</Link>
+                            </ListItemButton>
+                        </List>
+                    </>
+                )
+            }
             <Divider />
-
-            {/* Additional items I can use in the header */}
-
         </Box>
     );
 
     return (
         <header>
             <div>
-                <h1>CM</h1>
+                <Link to='/'>
+                    <h1>CM</h1>
+                </Link>
             </div>
             {['top'].map((anchor) => (
                 <React.Fragment key={anchor}>
                     <Button onClick={toggleDrawer(anchor, true)}>
-                    <MenuIcon />
+                        <MenuIcon />
                     </Button>
                     <Drawer
                         anchor={anchor}
