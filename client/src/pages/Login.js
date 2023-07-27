@@ -11,7 +11,6 @@ import Auth from '../utils/auth';
 const Login = () => {
     const [loginUser] = useMutation(LOGIN_USER);
 
-
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 

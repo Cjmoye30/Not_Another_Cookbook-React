@@ -6,7 +6,7 @@ import '../src/styles/App.css';
 // Import Pages
 import Home from './pages/Home'
 import Profile from './pages/Profile'
-import MaterialUI from './pages/MaterialUI'
+// import MaterialUI from './pages/MaterialUI'
 import Profiles from './pages/ProfilesList'
 import Upload from './pages/Upload'
 import Login from './pages/Login'
@@ -33,9 +33,10 @@ function App() {
             <Routes>
 
               <Route path="/" element={<Home />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/me" element={<Profile />} />
+              <Route path="/profile/:userId" element={<Profile />} />
               <Route path="/profiles" element={<Profiles />} />
-              <Route path="/materialUI" element={<MaterialUI />} />
+              {/* <Route path="/materialUI" element={<MaterialUI />} /> */}
               <Route path="/upload" element={<Upload />} />
               <Route path="/login" element={<Login />} />
 

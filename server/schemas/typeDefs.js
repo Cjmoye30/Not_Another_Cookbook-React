@@ -20,6 +20,7 @@ type Auth {
 # Starting queries to get all users and the user who is signed in
 type Query {
     me: User
+    getUser(userId: ID!): User
     getAllUsers: [User]
 }
 

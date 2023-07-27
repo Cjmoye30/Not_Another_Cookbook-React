@@ -7,7 +7,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import ProfilesList from './ProfilesList';
 
 export default function LabTabs() {
-  const [value, setValue] = React.useState('1');
+  const [value, setValue] = React.useState('userList');
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

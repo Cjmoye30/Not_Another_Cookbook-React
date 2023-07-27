@@ -46,7 +46,7 @@ export default function TemporaryDrawer() {
 
                 <ListItem>
                     <ListItemButton>
-                        <Link to="/profile" className="navlink">Profile</Link>
+                        <Link to="/me" className="navlink">Profile</Link>
                     </ListItemButton>
                 </ListItem>
 
