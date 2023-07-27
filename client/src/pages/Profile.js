@@ -25,6 +25,7 @@ const Profile = () => {
     }
 
     if(error) {
+        console.log(error)
         return <div><p>Something went wrong...</p></div>
     }
 

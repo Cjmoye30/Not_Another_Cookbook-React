@@ -1,7 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { User } = require('../models');
-const { findOne } = require('../models/Users');
 
 const resolvers = {
 
@@ -10,7 +9,7 @@ const resolvers = {
         // GET the current user who is signed in
         me: async (parent, args, context) => {
             console.log("Hello from resovlers");
-            console.log(context.user.id)
+            console.log(context.user._id)
             return await User.findOne({ _id: context.user._id })
         },
 
@@ -30,7 +29,6 @@ const resolvers = {
 
     },
 
-    // Placeholder for mutations
     Mutation: {
         signup: async (parent, { username, email, firstName, lastName, password, avatar }) => {
             const newUser = await User.create({ username, email, firstName, lastName, password, avatar });

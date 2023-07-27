@@ -5,6 +5,14 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SIGNUP_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import { useRef } from 'react';
+import { IKImage, IKContext, IKUpload } from 'imagekitio-react';
+const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
+const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
+const authenticationEndpoint = 'http://localhost:3001/auth';
+
+// update the folder to whatever is needed
+const folderDestination = '/sample-avatar-folder';
 
 const Signup = () => {
 
@@ -30,19 +38,28 @@ const Signup = () => {
                     email: email,
                     password: password,
                     username: username,
-                    avatarURL: avatarURL
+                    avatar: avatarURL
                 }
             })
 
             console.log(data)
 
-            const { token } = await data.signupUser;
+            const {token} = await data.signup;
+            console.log(token)
             Auth.login(token)
 
         } catch (err) {
             console.log("ERROR. Something went wrong: ", err)
         }
     }
+
+    const onSuccess = res => {
+        console.log(res.url);
+        setAvatarURL(res.url)
+    }
+
+    const inputRefTest = useRef(null);
+    const ikUploadRefTest = useRef(null);
 
     return (
         <>
@@ -103,6 +120,25 @@ const Signup = () => {
                         value={username}
                         onChange={e => setUsername(e.target.value)}
                     />
+
+                    <IKContext
+                        publicKey={publicKey}
+                        urlEndpoint={urlEndpoint}
+                        authenticationEndpoint={authenticationEndpoint}
+                    >
+                        <p>Upload an image</p>
+                        <IKUpload
+
+                        // user the username as the filename
+                            fileName="test-upload.png"
+                            useUniqueFileName={true}
+                            folder={folderDestination}
+                            inputRef={inputRefTest}
+                            ref={ikUploadRefTest}
+                            onSuccess={onSuccess}
+                            // style={{ display: 'none' }}
+                        />
+                    </IKContext>
 
                     {/* Submit Info */}
                     <Button variant='outlined' type='submit'>Signup</Button>
