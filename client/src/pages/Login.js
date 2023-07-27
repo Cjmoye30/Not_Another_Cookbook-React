@@ -29,17 +29,17 @@ const Login = () => {
         if (password === '') {
             setPasswordError(true)
         }
- 
+
         if (email && password) {
             console.log(email, password)
         }
 
         try {
-            const {data} = await loginUser({
-                variables: {email: email, password: password}
+            const { data } = await loginUser({
+                variables: { email: email, password: password }
             })
             console.log(data);
-            const {token} = await data.login;
+            const { token } = await data.login;
             console.log(token);
             Auth.login(token)
 
@@ -48,23 +48,23 @@ const Login = () => {
         }
     }
 
-    return ( 
+    return (
         <React.Fragment>
-        <form autoComplete="off" onSubmit={handleSubmit}>
-            <h2>Login Form</h2>
-                <TextField 
+            <form autoComplete="off" onSubmit={handleSubmit}>
+                <h2>Login Form</h2>
+                <TextField
                     label="Email"
                     onChange={e => setEmail(e.target.value)}
                     required
                     variant="outlined"
                     color="secondary"
                     type="email"
-                    sx={{mb: 3}}
+                    sx={{ mb: 3 }}
                     fullWidth
                     value={email}
                     error={emailError}
-                 />
-                 <TextField 
+                />
+                <TextField
                     label="Password"
                     onChange={e => setPassword(e.target.value)}
                     required
@@ -74,14 +74,14 @@ const Login = () => {
                     value={password}
                     error={passwordError}
                     fullWidth
-                    sx={{mb: 3}}
-                 />
-                 <Button variant="outlined" color="secondary" type="submit">Login</Button>
-             
-        </form>
-        <small>Need an account? <Link to="/">Register here</Link></small>
+                    sx={{ mb: 3 }}
+                />
+                <Button variant="outlined" color="secondary" type="submit">Login</Button>
+
+            </form>
+            <small>Need an account? <Link to="/">Register here</Link></small>
         </React.Fragment>
-     );
+    );
 }
- 
+
 export default Login;

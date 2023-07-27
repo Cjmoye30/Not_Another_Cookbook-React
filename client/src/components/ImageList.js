@@ -35,6 +35,7 @@ const Images = () => {
                             <img 
                             className='userImage' 
                             src={image}
+                            lqip={{ active: true }}
                             loading='lazy' 
                             />
                         </ImageListItem>

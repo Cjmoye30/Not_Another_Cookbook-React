@@ -8,6 +8,7 @@ import TabPanel from '@mui/lab/TabPanel';
 // Import the components we want to use in the tabs
 import ProfilesList from './ProfilesList';
 import ImageList from './ImageList';
+import Forms from './Forms';
 
 export default function LabTabs() {
   const [value, setValue] = React.useState('userList');
@@ -24,14 +25,14 @@ export default function LabTabs() {
           <TabList onChange={handleChange} aria-label="lab API tabs example" centered selectionFollowsFocus>
             <Tab label="Users List" value="userList" />
             <Tab label="Images" value="2" />
-            <Tab label="Item Three" value="3" />
+            <Tab label="Forms" value="3" />
           </TabList>
         </Box>
 
         {/* within each of the tabs - import a different componet */}
         <TabPanel value="userList"> <ProfilesList /> </TabPanel>
         <TabPanel value="2"> <ImageList /> </TabPanel>
-        <TabPanel value="3">Item Three</TabPanel>
+        <TabPanel value="3"> <Forms /> </TabPanel>
 
       </TabContext>
     </Box>

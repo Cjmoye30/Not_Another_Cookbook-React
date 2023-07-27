@@ -40,6 +40,7 @@ export default function TemporaryDrawer() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
 
+{/* Conditional to check and display certain links if logged in/out */}
             {Auth.loggedIn() ?
                 (
                     <>
