@@ -33,6 +33,10 @@ const userSchema = new Schema(
             min: 7
         },
 
+        avatar: {
+            type: String
+        },
+
         images: [
             {
                 type: String

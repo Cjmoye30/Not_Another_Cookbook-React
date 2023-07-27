@@ -32,8 +32,8 @@ const resolvers = {
 
     // Placeholder for mutations
     Mutation: {
-        signup: async (parent, { username, email, firstName, lastName, password }) => {
-            const newUser = await User.create({ username, email, firstName, lastName, password });
+        signup: async (parent, { username, email, firstName, lastName, password, avatar }) => {
+            const newUser = await User.create({ username, email, firstName, lastName, password, avatar });
             console.log("New User Info: ", newUser)
 
             const token = signToken(newUser);

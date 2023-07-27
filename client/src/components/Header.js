@@ -10,8 +10,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import MenuIcon from '@mui/icons-material/MenuOpenRounded';
 import { Link } from "react-router-dom";
+import Auth from '../utils/auth'
 
 import '../styles/Header.css'
+
+const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+}
 
 export default function TemporaryDrawer() {
     const [state, setState] = React.useState({
@@ -73,10 +79,15 @@ export default function TemporaryDrawer() {
                     </ListItemButton>
                 </ListItem>
 
-                {/* Needs to updated to logging out onClick */}
                 <ListItem>
                     <ListItemButton>
-                        <Link to="/" className="navlink">Logout</Link>
+                        <Link to="/signup" className="navlink">Signup</Link>
+                    </ListItemButton>
+                </ListItem>
+
+                <ListItem>
+                    <ListItemButton>
+                        <Link className="navlink" onClick={logout}>Logout</Link>
                     </ListItemButton>
                 </ListItem>
 

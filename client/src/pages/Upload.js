@@ -9,6 +9,9 @@ const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
 const authenticationEndpoint = 'http://localhost:3001/auth';
 
+// update the folder to whatever is needed
+const folderDestination = '/sample-folder';
+
 const Upload = () => {
   // get the ID of the current user who is logged in from the Auth utility
   const currentUser = Auth.getProfile().data._id;
@@ -36,7 +39,8 @@ const Upload = () => {
     console.log("Success", res);
     console.log("URL to store in DB: ", res.url);
     console.log(currentUser, res.url);
-    uploadImage(currentUser, res.url)
+    uploadImage(currentUser, res.url);
+    window.location.assign('/me');
   };
 
   const onUploadProgress = progress => {
@@ -64,9 +68,7 @@ const Upload = () => {
           onError={onError}
           onSuccess={onSuccess}
           useUniqueFileName={true}
-
-          // update to whatever folder needed
-          folder={"/sample-folder"}
+          folder={folderDestination}
           onUploadStart={onUploadStart}
           onUploadProgress={onUploadProgress}
           inputRef={inputRefTest}

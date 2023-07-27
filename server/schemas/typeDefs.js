@@ -8,6 +8,7 @@ type User {
     firstName: String!
     lastName: String!
     email: String!,
+    avatar: String,
     password: String!
     images: [String]
 }
@@ -25,7 +26,7 @@ type Query {
 }
 
 type Mutation {
-    signup(username: String!, email: String!, firstName: String!, lastName: String!, password: String!): Auth
+    signup(username: String!, email: String!, firstName: String!, lastName: String!, password: String!, avatar: String): Auth
     login(email: String!, password: String!): Auth
     addImage(userId: ID!, imageURL: String!): User
 }

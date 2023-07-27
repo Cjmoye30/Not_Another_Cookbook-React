@@ -10,6 +10,7 @@ import Profile from './pages/Profile'
 import Profiles from './pages/ProfilesList'
 import Upload from './pages/Upload'
 import Login from './pages/Login'
+import Signup from './pages/Signup';
 
 // Import Components
 import Header from './components/Header'
@@ -36,9 +37,9 @@ function App() {
               <Route path="/me" element={<Profile />} />
               <Route path="/profile/:userId" element={<Profile />} />
               <Route path="/profiles" element={<Profiles />} />
-              {/* <Route path="/materialUI" element={<MaterialUI />} /> */}
               <Route path="/upload" element={<Upload />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
 
             </Routes>
           </div>

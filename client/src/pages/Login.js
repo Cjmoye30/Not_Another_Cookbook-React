@@ -17,7 +17,6 @@ const Login = () => {
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
 
-
     const handleSubmit = async (event) => {
         event.preventDefault()
 
