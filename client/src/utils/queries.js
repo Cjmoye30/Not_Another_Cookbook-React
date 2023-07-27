@@ -8,6 +8,7 @@ export const GET_ME = gql`
             firstName
             lastName
             email
+            images
         }
     }
 
@@ -21,6 +22,7 @@ export const GET_ALL_USERS = gql`
             firstName
             lastName
             email
+            images
         }
     }
 `;
@@ -33,6 +35,7 @@ export const GET_USER = gql`
             firstName
             lastName
             email
+            images
         }
     }
 `;

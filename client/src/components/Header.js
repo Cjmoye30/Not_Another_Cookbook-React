@@ -35,7 +35,6 @@ export default function TemporaryDrawer() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
 
-            {/* Within this list - turn all of these into navigation items */}
             <List className='navList'>
 
                 <ListItem>

@@ -7,6 +7,8 @@ import { GET_USER, GET_ME } from '../utils/queries';
 import Auth from '../utils/auth'
 import { useParams } from 'react-router-dom';
 
+import '../styles/Profile.css'
+
 const Profile = () => {
 
     // get the ID from params
@@ -22,10 +24,12 @@ const Profile = () => {
         return <div><p>Loading...</p></div>
     }
 
+    if(error) {
+        return <div><p>Something went wrong...</p></div>
+    }
+
     const user = data?.me || data?.getUser;
     console.log("Data for the user: ", user)
-
-
 
     return (
         <>

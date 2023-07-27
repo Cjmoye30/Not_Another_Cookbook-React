@@ -23,3 +23,16 @@ export const SIGNUP_USER = gql`
         }
     }
 `;
+
+export const ADD_IMAGE = gql`
+    mutation AddImage($userId: ID!, $imageURL: String!) {
+        addImage(userId: $userId, imageURL: $imageURL) {
+            _id
+            username
+            firstName
+            lastName
+            email
+            images
+        }
+    }
+`;

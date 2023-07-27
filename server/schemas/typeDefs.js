@@ -27,6 +27,7 @@ type Query {
 type Mutation {
     signup(username: String!, email: String!, firstName: String!, lastName: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    addImage(userId: ID!, imageURL: String!): User
 }
 `;
 

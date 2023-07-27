@@ -17,7 +17,7 @@ const resolvers = {
         // GET single user
         getUser: async (parent, { userId }) => {
             const user = await User.findOne({ _id: userId });
-            console.log("User for single user query: ",user);
+            console.log("User for single user query: ", user);
             return user;
         },
 
@@ -61,10 +61,18 @@ const resolvers = {
             console.log("Logged in User Token: ", token)
 
             return { token, user }
+        },
 
+        addImage: async (parent, { userId, imageURL }, context) => {
+            const newImage = await User.findOneAndUpdate(
+                { _id: userId },
+                { $addToSet: { images: imageURL } },
+                { new: true, runValidators: true }
+            )
+
+            return newImage;
         }
     }
-
 }
 
 module.exports = resolvers;
