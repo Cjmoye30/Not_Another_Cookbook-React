@@ -62,8 +62,13 @@ export default function TemporaryDrawer() {
                             </ListItemButton>
 
                             <ListItemButton>
+                                <Link to="/createRecipe" className="navlink">Create Recipe</Link>
+                            </ListItemButton>
+
+                            <ListItemButton>
                                 <Link className="navlink" onClick={logout}>Logout</Link>
                             </ListItemButton>
+
                         </List>
                     </>
                 )
@@ -86,6 +91,7 @@ export default function TemporaryDrawer() {
                             <ListItemButton>
                                 <Link to="/signup" className="navlink">Signup</Link>
                             </ListItemButton>
+
                         </List>
                     </>
                 )
