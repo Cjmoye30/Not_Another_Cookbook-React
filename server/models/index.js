@@ -1,3 +1,4 @@
 const User = require('./Users');
+const Recipe = require('./Recipes')
 
-module.exports = { User }
+module.exports = { User, Recipe }

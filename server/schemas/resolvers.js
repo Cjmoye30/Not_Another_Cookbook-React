@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
-const { User } = require('../models');
+const { User, Recipe } = require('../models');
 
 const resolvers = {
 
@@ -25,7 +25,22 @@ const resolvers = {
             const usersData = await User.find();
             console.log("getAllUsers Query: ", usersData)
             return usersData;
+        },
+
+        // GET all recipes
+        getAllRecipes: async () => {
+            const recipeData = await Recipe.find()
+            console.log("RESOLVERS - All Recipe Data: ", recipeData);
+            return recipeData;
+        },
+
+        // GET single recipe
+        getRecipe: async (parent, { recipeId }) => {
+            const recipe = Recipe.findOne({ _id: recipeId });
+            console.log("RESOLVERS - Single Recipe Data: ", recipe);
+            return recipe;
         }
+
 
     },
 
@@ -69,6 +84,18 @@ const resolvers = {
             )
 
             return newImage;
+        },
+
+        addRecipe: async (parent, { name, description, ingredients, measure, image }) => {
+
+            try {
+                const newRecipe = await Recipe.create({ name, description, ingredients, measure, image })
+                console.log("NEW RECIPE CREATED", newRecipe);
+                return newRecipe;
+
+            } catch (err) {
+                console.log("ERROR. New recipe not created", err)
+            }
         }
     }
 }

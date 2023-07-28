@@ -98,7 +98,7 @@ export default function TemporaryDrawer() {
         <header>
             <div>
                 <Link to='/'>
-                    <h1>CM</h1>
+                    <h1>Not Another Cookbook</h1>
                 </Link>
             </div>
             {['top'].map((anchor) => (
