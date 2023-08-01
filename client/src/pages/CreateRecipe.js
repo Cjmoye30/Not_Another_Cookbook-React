@@ -75,26 +75,38 @@ const CreateRecipe = () => {
     const handleSubmit = async (event) => {
         event.preventDefault()
 
-        // filter out blank values
-        const ingredeints = inputFields.map((x) => x.ingredient);
+        const ingredients = inputFields.map((x) => x.ingredient);
         const measurement = inputFields.map((x) => x.measure);
-        
+        const instructions = formInstructions.map((x) => x.instruction);
+
+        /* 
+        Filtering out blank values:
+        Calling the filter method which is going to create a new array of elements which pass the test that we pass in.
+        We then create a callback function to be used in the filter method
+        It takes each individual element of the ingredients array, and returns true or fales based on if the condition is satisfied.
+        trim - removes any leading or trailing whitespace from the element - which basically eliminates any blank values from every being populated into our array
+        If the element is not blank, then it will return true and it will be pushed into our final array.
+        */
+
+        const filterIngredients = ingredients.filter((ingredient) => ingredient.trim() !== '');
+        const filterMeasurement = measurement.filter((measure) => measure.trim() !== '');
+        const filterInstructions = instructions.filter((instruction) => instruction.trim() !=='')
+
         console.log("Recipe Name: ", nameDesc.name)
         console.log("Recipe Description: ", nameDesc.description)
-        console.log("Ingredients Array: ", ingredeints);
-        console.log("Measurement Array: ", measurement);
-        console.log("Instructions Array: ", formInstructions);
+        console.log("Ingredients Array: ", filterIngredients);
+        console.log("Measurement Array: ", filterMeasurement);
+        console.log("Instructions Array: ", filterInstructions);
 
         try {
 
-            const {data} = await addRecipe({
+            const { data } = await addRecipe({
                 variables: {
-                    chef: Auth.getProfile().data._id,
                     name: nameDesc.name,
                     description: nameDesc.description,
-                    ingredeint: ingredeints,
-                    measure: measurement,
-                    instructions: formInstructions
+                    ingredients: filterIngredients,
+                    measure: filterMeasurement,
+                    instructions: filterInstructions
                 }
             })
 
@@ -119,7 +131,7 @@ const CreateRecipe = () => {
                         fullWidth
                         onChange={handleChange}
                         className='nameField'
-                        sx={{mb: 3}}
+                        sx={{ mb: 3 }}
                     />
 
                     <TextField
@@ -128,7 +140,7 @@ const CreateRecipe = () => {
                         fullWidth
                         onChange={handleChange}
                         className='descriptionField'
-                        sx={{mb: 3}}
+                        sx={{ mb: 3 }}
                     />
 
                     <h3>Ingredients & Measurements:</h3>
@@ -166,8 +178,8 @@ const CreateRecipe = () => {
 
                     <h3>Instructions:</h3>
 
-{/* change the height of the textboxes */}
-{/* add back in the hover and focus CSS effects for the textboxes - those look super cool */}
+                    {/* change the height of the textboxes */}
+                    {/* add back in the hover and focus CSS effects for the textboxes - those look super cool */}
                     <List>
                         {formInstructions.map((input, index) => {
                             return (

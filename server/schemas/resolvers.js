@@ -86,7 +86,7 @@ const resolvers = {
             return newImage;
         },
 
-        addRecipe: async (parent, {name, description, ingredients, measure, image }, context) => {
+        addRecipe: async (parent, {name, description, ingredients, measure, instructions, image }, context) => {
 
             try {
                 const newRecipe = await Recipe.create({ 
@@ -94,7 +94,8 @@ const resolvers = {
                     name: name, 
                     description: description, 
                     ingredients: ingredients, 
-                    measure: measure, 
+                    measure: measure,
+                    instructions: instructions,
                     image: image 
                 })
 

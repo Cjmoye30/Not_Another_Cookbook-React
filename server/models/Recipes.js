@@ -23,7 +23,7 @@ const recipeSchema = new Schema(
             }
         ],
 
-        instruction: [
+        instructions: [
             {
                 type: String
             }
