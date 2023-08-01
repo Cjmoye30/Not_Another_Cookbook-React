@@ -23,6 +23,12 @@ const recipeSchema = new Schema(
             }
         ],
 
+        instruction: [
+            {
+                type: String
+            }
+        ],
+
         images: [
             {
                 type: String

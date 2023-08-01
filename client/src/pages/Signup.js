@@ -12,7 +12,7 @@ const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
 const authenticationEndpoint = 'http://localhost:3001/auth';
 
 // update the folder to whatever is needed
-const folderDestination = '/sample-avatar-folder';
+const folderDestination = '/react-cookbook-avatars';
 
 const Signup = () => {
 

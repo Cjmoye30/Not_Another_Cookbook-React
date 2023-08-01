@@ -41,6 +41,13 @@ const userSchema = new Schema(
             {
                 type: String
             }
+        ],
+
+        recipes: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Recipe'
+            }
         ]
     }
 );

@@ -11,6 +11,7 @@ type User {
     avatar: String,
     password: String!
     images: [String]
+    recipes: [Recipe]
 }
 
 type Auth {
@@ -24,6 +25,7 @@ type Recipe {
     description: String
     ingredients: [String]
     measure: [String]
+    instruction: [String]
     images: [String]
     chef: User
 }
@@ -42,7 +44,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addImage(userId: ID!, imageURL: String!): User
 
-    addRecipe(name: String!, description: String, ingredients: [String], measure: [String], images: [String]): Recipe
+    addRecipe(name: String!, description: String, ingredients: [String], measure: [String], instruction: [String], images: [String]): Recipe
     removeRecipe(recipeId: ID!): Recipe
 }
 `;

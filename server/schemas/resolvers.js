@@ -22,7 +22,7 @@ const resolvers = {
 
         // GET all users
         getAllUsers: async () => {
-            const usersData = await User.find();
+            const usersData = await User.find().populate('recipes');
             console.log("getAllUsers Query: ", usersData)
             return usersData;
         },
@@ -86,11 +86,25 @@ const resolvers = {
             return newImage;
         },
 
-        addRecipe: async (parent, { name, description, ingredients, measure, image }) => {
+        addRecipe: async (parent, {name, description, ingredients, measure, image }, context) => {
 
             try {
-                const newRecipe = await Recipe.create({ name, description, ingredients, measure, image })
+                const newRecipe = await Recipe.create({ 
+                    chef: context.user._id, 
+                    name: name, 
+                    description: description, 
+                    ingredients: ingredients, 
+                    measure: measure, 
+                    image: image 
+                })
+
+                const addToUser = await User.findOneAndUpdate(
+                    {_id: context.user._id},
+                    {$addToSet: {recipes: newRecipe._id}}
+                )
+
                 console.log("NEW RECIPE CREATED", newRecipe);
+                console.log("ADD TO USER?: ", addToUser);
                 return newRecipe;
 
             } catch (err) {

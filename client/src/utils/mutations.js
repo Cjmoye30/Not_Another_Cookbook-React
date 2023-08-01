@@ -46,6 +46,9 @@ export const ADD_RECIPE = gql`
             description
             ingredients
             measure
+            chef {
+                _id
+            }
         }
 }
 `;

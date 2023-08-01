@@ -1,0 +1,15 @@
+.instructionField, .ingredientField, .measureField, .nameField, .descriptionField {
+    background-color: rgb(232, 232, 232);
+}
+
+.instructionField {
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 0 10px 0 10px;
+}
+
+.instructionWrapper {
+    display: flex;
+    flex-direction: column;
+}

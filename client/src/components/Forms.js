@@ -37,33 +37,40 @@ const Forms = () => {
     }
 
     const handleSubmit = async (event) => {
-        console.log(inputFields);
+        const ingredeints = inputFields.map((x) => x.ingredient);
+        const measurement = inputFields.map((x) => x.measure);
+        console.log("Ingredients Array: ", ingredeints);
+        console.log("Measurement Array: ", measurement);
     }
 
     return (
         <div className="App">
             <React.Fragment>
                 <form>
-                    {inputFields.map((input, index) => {
-                        return (
-                            <div className='recipeGroup' key={index}>
-                                <TextField
-                                    name='ingredient'
-                                    label='Ingredient'
-                                    sx={{ mb: 3 }}
-                                    value={input.ingredient}
-                                    onChange={event => handleFormChange(index, event)}
-                                />
-                                <TextField
-                                    name='measure'
-                                    label='Measure'
-                                    sx={{ mb: 3 }}
-                                    value={input.measure}
-                                    onChange={event => handleFormChange(index, event)}
-                                />
-                            </div>
-                        )
-                    })}
+                    <ol>
+                        {inputFields.map((input, index) => {
+                            return (
+                                <div className='recipeGroup' key={index}>
+                                    <li>
+                                        <TextField
+                                            name='ingredient'
+                                            label='Ingredient'
+                                            sx={{ mb: 3 }}
+                                            value={input.ingredient}
+                                            onChange={event => handleFormChange(index, event)}
+                                        />
+                                        <TextField
+                                            name='measure'
+                                            label='Measure'
+                                            sx={{ mb: 3 }}
+                                            value={input.measure}
+                                            onChange={event => handleFormChange(index, event)}
+                                        />
+                                    </li>
+                                </div>
+                            )
+                        })}
+                    </ol>
                 </form>
 
                 <div className='addFieldsGroup'>
