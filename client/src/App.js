@@ -10,7 +10,7 @@ import Profiles from './pages/ProfilesList'
 import Upload from './pages/Upload'
 import Login from './pages/Login'
 import Signup from './pages/Signup';
-import CreateRecipe from './pages/CreateRecipe';
+import SingleRecipe from './pages/SingleRecipe';
 
 // Import Components
 import Header from './components/Header'
@@ -40,7 +40,7 @@ function App() {
               <Route path="/upload" element={<Upload />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/createRecipe" element={<CreateRecipe />} />
+              <Route path="singleRecipe/:recipeId" element={<SingleRecipe />} />
 
             </Routes>
           </div>

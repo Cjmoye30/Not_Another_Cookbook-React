@@ -66,3 +66,25 @@ export const GET_USER = gql`
         }     
     }
 `;
+
+export const GET_RECIPE = gql`
+    query GetRecipe($recipeId: ID!) {
+        getRecipe(recipeId: $recipeId) {
+            _id
+            name
+            description
+            ingredients
+            measure
+            instructions
+            image
+            chef {
+                _id
+                username
+                firstName
+                lastName
+                avatar
+            }
+        }
+}
+
+`

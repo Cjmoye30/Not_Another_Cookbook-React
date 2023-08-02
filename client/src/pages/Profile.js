@@ -1,6 +1,5 @@
 import React from 'react';
 import Tabs from '../components/Tabs'
-
 import { useQuery } from '@apollo/client';
 import { GET_USER, GET_ME } from '../utils/queries';
 
