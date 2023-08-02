@@ -4,13 +4,15 @@
         "firstName": "Cambric",
         "lastName": "Moye",
         "email": "Cammy30@gmail.com",
-        "password": "password12345"
+        "password": "password12345",
+        "avatar" : "https://ik.imagekit.io/ofawn8dpgq/react-cookbook-avatars/test-upload_ZawwY3SCwk.png?updatedAt=1690979309168"
     },
     {
         "username": "DragonFly",
         "firstName": "Dragonfly",
         "lastName": "Jones",
         "email": "Dragonfly@gmail.com",
-        "password": "password12345"
+        "password": "password12345",
+        "avatar": "https://ik.imagekit.io/ofawn8dpgq/react-cookbook-avatars/defaultAvatar3.png?updatedAt=1690990067294"
     }
 ]

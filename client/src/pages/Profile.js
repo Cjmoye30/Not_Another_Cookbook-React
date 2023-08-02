@@ -4,7 +4,6 @@ import Tabs from '../components/Tabs'
 import { useQuery } from '@apollo/client';
 import { GET_USER, GET_ME } from '../utils/queries';
 
-import Auth from '../utils/auth'
 import { useParams } from 'react-router-dom';
 
 import '../styles/Profile.css'
@@ -34,8 +33,16 @@ const Profile = () => {
 
     return (
         <>
-            <h1>Welcome, {user.firstName}! </h1>
-            <p>This is your profile page where you can view differnt components in the tabs below</p>
+            <div className='profileHeader'>
+                <img className='profileAvatar' src={user.avatar} /> 
+
+                <div className='profileHeaderText'>
+                    <h1> {user.firstName} {user.lastName} </h1>
+                    <h2> {user.username} </h2>
+                    <h4>Member Since: </h4>
+                    <h4>Total Recipes: {user.recipes.length} </h4>
+                </div>
+            </div>
             <Tabs />
         </>
     )

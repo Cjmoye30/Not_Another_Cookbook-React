@@ -39,13 +39,14 @@ export const ADD_IMAGE = gql`
 `;
 
 export const ADD_RECIPE = gql`
-    mutation Mutation($name: String!, $description: String, $ingredients: [String], $measure: [String], $instructions: [String]) {
-        addRecipe(name: $name, description: $description, ingredients: $ingredients, measure: $measure, instructions: $instructions) {
+    mutation Mutation($name: String!, $description: String, $ingredients: [String], $measure: [String], $instructions: [String], $image: [String]){
+        addRecipe(name: $name, description: $description, ingredients: $ingredients, measure: $measure, instructions: $instructions, image: $image) {
             _id
             name
             description
             ingredients
             measure
+            image
             chef {
                 _id
             }

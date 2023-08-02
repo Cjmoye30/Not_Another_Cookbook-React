@@ -10,12 +10,12 @@ const resolvers = {
         me: async (parent, args, context) => {
             console.log("Hello from resovlers");
             console.log(context.user._id)
-            return await User.findOne({ _id: context.user._id })
+            return await User.findOne({ _id: context.user._id }).populate('recipes')
         },
 
         // GET single user
         getUser: async (parent, { userId }) => {
-            const user = await User.findOne({ _id: userId });
+            const user = await User.findOne({ _id: userId }).populate('recipes')
             console.log("User for single user query: ", user);
             return user;
         },
@@ -29,19 +29,17 @@ const resolvers = {
 
         // GET all recipes
         getAllRecipes: async () => {
-            const recipeData = await Recipe.find()
+            const recipeData = await Recipe.find().populate('chef')
             console.log("RESOLVERS - All Recipe Data: ", recipeData);
             return recipeData;
         },
 
         // GET single recipe
         getRecipe: async (parent, { recipeId }) => {
-            const recipe = Recipe.findOne({ _id: recipeId });
+            const recipe = Recipe.findOne({ _id: recipeId }).populate('chef')
             console.log("RESOLVERS - Single Recipe Data: ", recipe);
             return recipe;
         }
-
-
     },
 
     Mutation: {

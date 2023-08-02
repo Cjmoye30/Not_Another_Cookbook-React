@@ -29,7 +29,7 @@ const recipeSchema = new Schema(
             }
         ],
 
-        images: [
+        image: [
             {
                 type: String
             }

@@ -23,13 +23,16 @@ const CreateRecipe = () => {
 
     const [addRecipe] = useMutation(ADD_RECIPE)
 
+    // hook for name and description
     const [nameDesc, setNameDesc] = useState(
         {
             name: '',
             description: '',
+            imageURL: ''
         }
     )
 
+    // hook for instructions
     const [formInstructions, setFormInstructions] = useState(
         [
             { instruction: '' },
@@ -37,6 +40,46 @@ const CreateRecipe = () => {
             { instruction: '' }
         ]
     )
+
+    // hook for ingredient and measure
+    const [inputFields, setInputFields] = useState([
+        { ingredient: '', measure: '' },
+        { ingredient: '', measure: '' },
+        { ingredient: '', measure: '' },
+        { ingredient: '', measure: '' },
+        { ingredient: '', measure: '' },
+    ])
+
+    const onError = err => {
+        console.log("Error", err);
+    };
+
+    const onSuccess = res => {
+        console.log("Success", res);
+        console.log("URL to store in DB: ", res.url);
+
+        /*
+        Updating the state of the component
+        We are using a spread operator (...nameDesc) to create a "shallow" copy and to preserve the existing values of name and desc.
+        We are then specifying and setting the imageURL to the res.url
+        */
+        
+        setNameDesc({
+            ...nameDesc, imageURL: res.url
+        })
+
+    };
+
+    const onUploadProgress = progress => {
+        console.log("Progress", progress);
+    };
+
+    const onUploadStart = evt => {
+        console.log("Start", evt);
+    };
+
+    const inputRefTest = useRef(null);
+    const ikUploadRefTest = useRef(null);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -46,14 +89,6 @@ const CreateRecipe = () => {
             [name]: value,
         });
     };
-
-    const [inputFields, setInputFields] = useState([
-        { ingredient: '', measure: '' },
-        { ingredient: '', measure: '' },
-        { ingredient: '', measure: '' },
-        { ingredient: '', measure: '' },
-        { ingredient: '', measure: '' },
-    ])
 
     const handleFormChange = (index, event) => {
         let data = [...inputFields];
@@ -80,23 +115,27 @@ const CreateRecipe = () => {
         const instructions = formInstructions.map((x) => x.instruction);
 
         /* 
+
         Filtering out blank values:
+        Firstly - have to make sure we are filtering an of string and NOT an array of objects
         Calling the filter method which is going to create a new array of elements which pass the test that we pass in.
         We then create a callback function to be used in the filter method
         It takes each individual element of the ingredients array, and returns true or fales based on if the condition is satisfied.
         trim - removes any leading or trailing whitespace from the element - which basically eliminates any blank values from every being populated into our array
         If the element is not blank, then it will return true and it will be pushed into our final array.
+        
         */
 
         const filterIngredients = ingredients.filter((ingredient) => ingredient.trim() !== '');
         const filterMeasurement = measurement.filter((measure) => measure.trim() !== '');
-        const filterInstructions = instructions.filter((instruction) => instruction.trim() !=='')
+        const filterInstructions = instructions.filter((instruction) => instruction.trim() !== '')
 
         console.log("Recipe Name: ", nameDesc.name)
         console.log("Recipe Description: ", nameDesc.description)
         console.log("Ingredients Array: ", filterIngredients);
         console.log("Measurement Array: ", filterMeasurement);
         console.log("Instructions Array: ", filterInstructions);
+        console.log("Image URL: ", nameDesc.imageURL)
 
         try {
 
@@ -106,11 +145,14 @@ const CreateRecipe = () => {
                     description: nameDesc.description,
                     ingredients: filterIngredients,
                     measure: filterMeasurement,
-                    instructions: filterInstructions
+                    instructions: filterInstructions,
+                    image: nameDesc.imageURL
                 }
             })
 
             console.log(data)
+
+            // on success - redirect back to the profile page where you can see your recipe uploaded
 
         } catch (err) {
             console.log("ERROR. Recipe not created: ", err)
@@ -196,6 +238,35 @@ const CreateRecipe = () => {
                             )
                         })}
                     </List>
+
+                    <h3>Image Upload</h3>
+                    <IKContext
+                        publicKey={publicKey}
+                        urlEndpoint={urlEndpoint}
+                        authenticationEndpoint={authenticationEndpoint}
+                    >
+                        <p>Upload an image</p>
+                        <IKUpload
+                            fileName="test-upload.png"
+                            name='imageURL'
+                            onChange={handleChange}
+                            onError={onError}
+                            onSuccess={onSuccess}
+                            useUniqueFileName={true}
+                            folder={folderDestination}
+                            onUploadStart={onUploadStart}
+                            onUploadProgress={onUploadProgress}
+                            inputRef={inputRefTest}
+                            ref={ikUploadRefTest}
+                            // style={{ display: 'none' }}
+                        />
+
+                        {/* <p>Custom Upload Button</p> */}
+                        {/* {inputRefTest && <button onClick={() => inputRefTest.current.click()}>Upload</button>} */}
+
+                    </IKContext>
+
+
 
                 </form>
 

@@ -11,6 +11,10 @@ import ListItemButton from '@mui/material/ListItemButton';
 import MenuIcon from '@mui/icons-material/MenuOpenRounded';
 import { Link } from "react-router-dom";
 import Auth from '../utils/auth'
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { useQuery } from '@apollo/client';
+import { GET_USER } from '../utils/queries';
 
 import '../styles/Header.css'
 
@@ -20,6 +24,7 @@ const logout = (event) => {
 }
 
 export default function TemporaryDrawer() {
+
     const [state, setState] = React.useState({
         top: false,
     });
@@ -40,7 +45,7 @@ export default function TemporaryDrawer() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
 
-{/* Conditional to check and display certain links if logged in/out */}
+            {/* Conditional to check and display certain links if logged in/out */}
             {Auth.loggedIn() ?
                 (
                     <>
@@ -70,6 +75,8 @@ export default function TemporaryDrawer() {
                             </ListItemButton>
 
                         </List>
+
+                        {/* create an avatar component and insert here */}
                     </>
                 )
                 :
@@ -102,25 +109,45 @@ export default function TemporaryDrawer() {
 
     return (
         <header>
-            <div>
+            <div className='headerTitle'>
                 <Link to='/'>
                     <h1>Not Another Cookbook</h1>
                 </Link>
             </div>
-            {['top'].map((anchor) => (
-                <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer(anchor, true)}>
-                        <MenuIcon />
-                    </Button>
-                    <Drawer
-                        anchor={anchor}
-                        open={state[anchor]}
-                        onClose={toggleDrawer(anchor, false)}
-                    >
-                        {list(anchor)}
-                    </Drawer>
-                </React.Fragment>
-            ))}
+
+            <div className='headerNav'>
+                {['top'].map((anchor) => (
+                    <React.Fragment key={anchor}>
+                        <Button onClick={toggleDrawer(anchor, true)}>
+                            <MenuIcon />
+                        </Button>
+                        <Drawer
+                            anchor={anchor}
+                            open={state[anchor]}
+                            onClose={toggleDrawer(anchor, false)}
+                        >
+                            {list(anchor)}
+                        </Drawer>
+                    </React.Fragment>
+                ))}
+
+                {/* {Auth.loggedIn() ?
+                    (
+                        <Link to='/me'>
+                            <Stack direction='row' spacing={2}>
+                                <Avatar
+                                    src={userData.avatar}
+                                    alt={userData.firstName + userData.lastName}
+                                    sx={{ height: 50 }}
+                                />
+                            </Stack>
+                        </Link>
+                    ) :
+                    (
+                        <>Not logged in</>
+                    )} */}
+
+            </div>
         </header>
     );
 }

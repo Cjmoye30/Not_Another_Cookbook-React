@@ -9,7 +9,15 @@ export const GET_ME = gql`
             lastName
             email
             avatar
-            images
+            recipes {
+                _id
+                name
+                description
+                ingredients
+                measure
+                instructions
+                image
+            }
         }
     }
 
@@ -24,7 +32,15 @@ export const GET_ALL_USERS = gql`
             lastName
             email
             avatar
-            images
+            recipes {
+                _id
+                name
+                description
+                ingredients
+                measure
+                instructions
+                image
+            }
         }
     }
 `;
@@ -38,7 +54,15 @@ export const GET_USER = gql`
             lastName
             email
             avatar
-            images
-        }
+            recipes {
+                _id
+                name
+                description
+                ingredients
+                measure
+                instructions
+                image
+            }
+        }     
     }
 `;
