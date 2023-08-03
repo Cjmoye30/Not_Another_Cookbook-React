@@ -224,7 +224,7 @@ const CreateRecipe = () => {
                                             <TextField
                                                 name='ingredient'
                                                 label='Ingredient'
-                                                sx={{ b: 1 }}
+                                                sx={{ m: 1 }}
                                                 value={input.ingredient}
                                                 onChange={event => handleFormChange(index, event)}
                                                 className='ingredientField'

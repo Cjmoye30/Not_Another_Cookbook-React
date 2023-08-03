@@ -16,3 +16,9 @@
 .ingAndMeasureWrapper {
     background-color: rgb(176, 255, 255);
 }
+
+/* Update Recipe Modal */
+.ingAndMeasure {
+    display: flex;
+    
+}
