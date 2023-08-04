@@ -25,6 +25,7 @@ const logout = (event) => {
 
 export default function TemporaryDrawer() {
 
+
     const [state, setState] = React.useState({
         top: false,
     });
@@ -73,10 +74,7 @@ export default function TemporaryDrawer() {
                             <ListItemButton>
                                 <Link className="navlink" onClick={logout}>Logout</Link>
                             </ListItemButton>
-
                         </List>
-
-                        {/* create an avatar component and insert here */}
                     </>
                 )
                 :
@@ -98,56 +96,57 @@ export default function TemporaryDrawer() {
                             <ListItemButton>
                                 <Link to="/signup" className="navlink">Signup</Link>
                             </ListItemButton>
-
                         </List>
                     </>
                 )
             }
-            <Divider />
         </Box>
     );
 
     return (
         <header>
-            <div className='headerTitle'>
-                <Link to='/'>
-                    <h1>Not Another Cookbook</h1>
-                </Link>
+            <div className='headerLeft'>
+                <div className='headerNav'>
+                    {['top'].map((anchor) => (
+                        <React.Fragment key={anchor}>
+                            <Button onClick={toggleDrawer(anchor, true)}>
+                                <MenuIcon />
+                            </Button>
+                            <Drawer
+                                anchor={anchor}
+                                open={state[anchor]}
+                                onClose={toggleDrawer(anchor, false)}
+                            >
+                                {list(anchor)}
+                            </Drawer>
+                        </React.Fragment>
+                    ))}
+                </div>
+
+                <div className='headerTitle'>
+                    <Link to='/'>
+                        <h1>Not Another Cookbook</h1>
+                    </Link>
+                </div>
             </div>
 
-            <div className='headerNav'>
-                {['top'].map((anchor) => (
-                    <React.Fragment key={anchor}>
-                        <Button onClick={toggleDrawer(anchor, true)}>
-                            <MenuIcon />
-                        </Button>
-                        <Drawer
-                            anchor={anchor}
-                            open={state[anchor]}
-                            onClose={toggleDrawer(anchor, false)}
-                        >
-                            {list(anchor)}
-                        </Drawer>
-                    </React.Fragment>
-                ))}
-
-                {/* {Auth.loggedIn() ?
-                    (
-                        <Link to='/me'>
-                            <Stack direction='row' spacing={2}>
-                                <Avatar
-                                    src={userData.avatar}
-                                    alt={userData.firstName + userData.lastName}
-                                    sx={{ height: 50 }}
-                                />
-                            </Stack>
+            {Auth.loggedIn() ?
+                (
+                    <Stack direction="row" spacing={2} >
+                        <Link to="/me">
+                            <Avatar src={Auth.getProfile().data.avatar} />
                         </Link>
-                    ) :
-                    (
-                        <>Not logged in</>
-                    )} */}
-
-            </div>
-        </header>
+                    </Stack>
+                )
+                :
+                (
+                    <Stack direction="row" spacing={2} >
+                        <Link to='login'>
+                            <Avatar src="/broken-image.jpg" />
+                        </Link>
+                    </Stack>
+                )
+            }
+        </header >
     );
 }

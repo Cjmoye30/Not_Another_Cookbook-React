@@ -6,9 +6,13 @@ import { GET_RECIPE } from '../utils/queries';
 import TextField from '@mui/material/TextField';
 import { Button, TextareaAutosize } from '@mui/material';
 import { Link } from "react-router-dom";
-
+import { useMutation } from '@apollo/client';
+import { UPDATE_RECIPE } from '../utils/mutations';
 
 const UpdateRecipe = () => {
+
+    const[updateRecipe] = useMutation(UPDATE_RECIPE)
+
     const { recipeId } = useParams();
 
     const { loading, data, error } = useQuery(GET_RECIPE,
@@ -99,8 +103,29 @@ const UpdateRecipe = () => {
         updateInstructions.splice(index, 1);
     }
 
-    const saveUpdates = () => {
+    const saveUpdates = async () => {
         console.log("Updated Data: ", updateData)
+        
+        try {
+            const {data} = await updateRecipe({
+                variables: {
+                    recipeId: recipeId,
+                    name: updateData.name,
+                    description: updateData.description,
+                    ingredients: updateData.ingredients,
+                    measure: updateData.measure,
+                    instructions: updateData.instructions
+                }
+            })
+
+            console.log(data)
+            console.log("SUCCESS! Recipe Updated.")
+            window.location.assign(`/singleRecipe/${recipeId}`)
+
+        } catch (err) {
+            console.log("ERROR. Recipe not updated")
+            console.log(err)
+        }
     }
 
     if (loading) {

@@ -53,3 +53,20 @@ export const ADD_RECIPE = gql`
         }
 }
 `;
+
+export const UPDATE_RECIPE = gql`
+    mutation UpdateRecipe($recipeId: ID!, $name: String!, $description: String, $ingredients: [String], $measure: [String], $instructions: [String], $image: [String]) {
+        updateRecipe(recipeId: $recipeId, name: $name, description: $description, ingredients: $ingredients, measure: $measure, instructions: $instructions, image: $image) {
+            _id
+            name
+            description
+            ingredients
+            measure
+            instructions
+            image
+            chef {
+                _id
+            }
+        }
+}
+`
