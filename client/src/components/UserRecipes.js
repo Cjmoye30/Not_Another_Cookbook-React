@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { Button, TextareaAutosize } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import { DELETE_RECIPE } from '../utils/mutations';
+import '../styles/Home.css'
 
 const UserRecipes = () => {
 
@@ -57,7 +58,7 @@ const UserRecipes = () => {
         <>
             <div>
                 <ImageList
-                    variant='masonry'
+                    variant='mansonry'
                     cols={3}
                     gap={8}
                 >
@@ -78,9 +79,7 @@ const UserRecipes = () => {
                                         subtitle={recipe.description}
                                     />
                                 </ImageListItem>
-
                             </Link>
-                            {/* <Button className='deleteRecipeButton' onClick={() => deleteRecipe(recipe._id)} >X</Button> */}
                         </div>
                     ))}
                 </ImageList>

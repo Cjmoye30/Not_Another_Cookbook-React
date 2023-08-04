@@ -134,7 +134,7 @@ export default function TemporaryDrawer() {
                 (
                     <Stack direction="row" spacing={2} >
                         <Link to="/me">
-                            <Avatar src={Auth.getProfile().data.avatar} />
+                            <Avatar className='headerAvatar' src={Auth.getProfile().data.avatar} />
                         </Link>
                     </Stack>
                 )
@@ -142,7 +142,7 @@ export default function TemporaryDrawer() {
                 (
                     <Stack direction="row" spacing={2} >
                         <Link to='login'>
-                            <Avatar src="/broken-image.jpg" />
+                            <Avatar className='headerAvatar' src="/broken-image.jpg" />
                         </Link>
                     </Stack>
                 )

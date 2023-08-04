@@ -23,3 +23,7 @@ header {
 .navList {
     width: 100%;
 }
+
+.headerAvatar {
+    border: 1px solid black;
+}

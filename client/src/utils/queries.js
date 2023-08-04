@@ -86,5 +86,25 @@ export const GET_RECIPE = gql`
             }
         }
 }
+`;
 
-`
+export const GET_ALL_RECIPES = gql`
+    query GetAllRecipes {
+        getAllRecipes {
+            _id
+            name
+            description
+            ingredients
+            measure
+            instructions
+            image
+            chef {
+                username
+                firstName
+                lastName
+                email
+                avatar
+            }
+        }
+}
+`;

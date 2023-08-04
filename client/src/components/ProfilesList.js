@@ -1,6 +1,8 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_USERS } from '../utils/queries';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 const ProfilesList = () => {
     const { loading, data } = useQuery(GET_ALL_USERS);
@@ -13,24 +15,41 @@ const ProfilesList = () => {
 
     return (
         <>
-            <div className='usersWrapper'>
+            <Box sx={{ flexGrow: 1 }}>
+                <Grid
+                    sx={{ p: 1 }}
+                    container>
 
-                {/* conditional to check if there is any data - returning a message if no data */}
-                {users.length === 0 ?
-                    (
-                        <p>No users in the database yet</p>
-                    )
-                    :
-                    (
-                        users.map((user) => (
-                            <div>
-                                <h1>{user.username}</h1>
-                                <h3>{user.firstName} {user.lastName}</h3>
-                                <p>{user.email}</p>
-                            </div>
-                        ))
-                    )}
-            </div>
+                    {users.length === 0 ?
+                        (
+                            <p>No users in the database yet</p>
+                        )
+                        :
+                        (
+                            users.map((user) => (
+                                <Grid
+                                    item xs={4}
+                                >
+
+                                    <Grid
+                                        sx={{ m: 1, border: 1 }}
+                                        className='homeUserProfile'
+                                    >
+                                        <img
+                                            className='profileListAvatar'
+                                            src={user.avatar}
+                                        />
+                                        <div>
+                                            <h1>{user.username}</h1>
+                                            <h3>{user.firstName} {user.lastName}</h3>
+                                            <p>{user.email}</p>
+                                        </div>
+                                    </Grid>
+                                </Grid>
+                            ))
+                        )}
+                </Grid>
+            </Box>
         </>
     )
 }

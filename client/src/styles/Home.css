@@ -1,0 +1,11 @@
+.profileListWrapper {
+    display: flex;
+}
+
+.homeUserProfile {
+    display: flex;
+}
+
+.profileListAvatar {
+    height: 175px;
+}
