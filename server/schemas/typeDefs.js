@@ -43,9 +43,9 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addImage(userId: ID!, imageURL: String!): User
     addRecipe(name: String!, description: String, ingredients: [String], measure: [String], instructions: [String], image: [String]): Recipe
-    removeRecipe(recipeId: ID!): Recipe
-
     updateRecipe(recipeId: ID!, name: String!, description: String, ingredients: [String], measure: [String], instructions: [String], image: [String]): Recipe
+
+    deleteRecipe(recipeId: ID!): Recipe
 }
 `;
 

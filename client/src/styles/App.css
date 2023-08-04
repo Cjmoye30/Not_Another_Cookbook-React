@@ -1,9 +1,9 @@
 /* ----------- MAIN STYLE PAGE ----------- */
 /* ----------- All semantic elements should be styled here */
 
-/* * {
+* {
     border: 1px solid black;
-} */
+}
 
 body {
     background-color: rgb(227, 255, 205);

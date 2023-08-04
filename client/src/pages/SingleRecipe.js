@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 import UpdateRecipe from '../components/UpdateRecipe';
 import Modal from '@mui/material/Modal';
 import '../styles/SingleRecipe.css'
+import { useMutation } from '@apollo/client';
+import { DELETE_RECIPE } from '../utils/mutations';
 
 const style = {
     position: 'absolute',
@@ -20,26 +22,36 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-  };
+};
+
+
 
 const SingleRecipe = () => {
-
     const { recipeId } = useParams();
-    // console.log("RecipeId from params: ", recipeId);
+
+    const [deleteRecipeMutation] = useMutation(DELETE_RECIPE);
+
+    const deleteRecipe = async () => {
+        console.log(`Delete ${recipeId}`)
+        try {
+            const { data } = await deleteRecipeMutation({
+                variables: { recipeId: recipeId }
+            })
+
+            window.location.assign('/me')
+            
+        } catch (err) {
+            console.log("ERROR. Recipe not deleted: ", err)
+        }
+    }
 
     const { loading, data, error } = useQuery(GET_RECIPE,
         { variables: { recipeId: recipeId } })
 
     const recipeData = data?.getRecipe || {}
-    // console.log(recipeData);
-
     const ingredients = recipeData.ingredients
     const measure = recipeData.measure
     const instructions = recipeData.instructions
-
-    const edit = () => {
-        console.log("Return a modal for the current recipe of the page")
-    }
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -78,8 +90,11 @@ const SingleRecipe = () => {
                 ))}
             </div>
 
-{/* Section for Modal to edit contents */}
-            <Button variant='outlined' onClick={handleOpen}>Edit</Button>
+            <div className='recipeEditbuttons'>
+                <Button variant='outlined' onClick={handleOpen}>Edit</Button>
+                <Button variant='contained' color='error' onClick={deleteRecipe}>DELETE</Button>
+            </div>
+
             <Modal
                 open={open}
                 onClose={handleClose}

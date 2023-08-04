@@ -128,7 +128,7 @@ const resolvers = {
                             instructions: instructions,
                         }
                     },
-                    {$addToSet: {image: image}},
+                    { $addToSet: { image: image } },
                     { new: true, runValidators: true }
                 )
 
@@ -138,6 +138,10 @@ const resolvers = {
             } catch (err) {
                 console.log("ERROR. Recipe not updated: ", err)
             }
+        },
+
+        deleteRecipe: async (parent, { recipeId }, context) => {
+            return Recipe.findOneAndDelete({ _id: recipeId })
         }
     }
 }
