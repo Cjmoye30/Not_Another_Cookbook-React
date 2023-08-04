@@ -17,8 +17,16 @@
     background-color: rgb(176, 255, 255);
 }
 
-/* Update Recipe Modal */
-.ingAndMeasure {
+.ingRow {
     display: flex;
-    
+    justify-content: space-between;
+}
+
+/* --------------------- Update Recipe Modal ---------------------*/
+.updateRecipeModal {
+    text-align: center;
+}
+
+.ingAndMeasureRow, .instructionRow {
+    display: flex;
 }

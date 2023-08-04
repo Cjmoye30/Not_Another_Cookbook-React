@@ -4,18 +4,18 @@ import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { GET_RECIPE } from '../utils/queries';
 import TextField from '@mui/material/TextField';
-import { TextareaAutosize } from '@mui/material';
+import { Button, TextareaAutosize } from '@mui/material';
+import { Link } from "react-router-dom";
 
 
 const UpdateRecipe = () => {
     const { recipeId } = useParams();
-    console.log("RecipeId from params: ", recipeId);
 
     const { loading, data, error } = useQuery(GET_RECIPE,
         { variables: { recipeId: recipeId } })
 
     const recipeData = data?.getRecipe || {}
-    console.log(recipeData);
+    console.log("RECIPE DATA: ", recipeData);
 
     const [updateData, setUpdateData] = useState({
         name: recipeData.name,
@@ -25,19 +25,100 @@ const UpdateRecipe = () => {
         instructions: recipeData.instructions
     });
 
-    const handleChange = (event) => {
+    const handleChange = (event, index, type) => {
         const { name, value } = event.target;
+
+        /*
+        Ingredients, Measures, and Instructions are all arrays - which means we have to handle those differently
+        */
+
+        if (type === 'ingredients') {
+            const updateIngredients = [...updateData.ingredients]
+            updateIngredients[index] = value;
+
+            setUpdateData({
+                ...updateData,
+                ingredients: updateIngredients
+            })
+        } else if (type === 'measure') {
+            const updateMeasures = [...updateData.measure]
+            updateMeasures[index] = value;
+
+            setUpdateData({
+                ...updateData,
+                measure: updateMeasures
+            })
+        } else if (type === 'instructions') {
+            const updateInstructions = [...updateData.instructions]
+            updateInstructions[index] = value;
+
+            setUpdateData({
+                ...updateData,
+                instructions: updateInstructions
+            })
+        } else {
+            setUpdateData({
+                ...updateData,
+                [name]: value,
+            });
+        }
+    };
+
+    const addIngredients = () => {
+        setUpdateData({
+            ...updateData,
+            ingredients: [...updateData.ingredients, ''],
+            measure: [...updateData.measure, '']
+        })
+    }
+
+    const addInstructions = () => {
+        setUpdateData({
+            ...updateData,
+            instructions: [...updateData.instructions, '']
+        })
+    }
+
+    const removeIngredientsAndMeasure = (index) => {
+        // we are getting the current state of the data, getting the index, and then removing whichever index we passed in the parameter
+        const updateIngredients = [...updateData.ingredients]
+        updateIngredients.splice(index, 1);
+
+        const updateMeasure = [...updateData.measure]
+        updateMeasure.splice(index, 1);
 
         setUpdateData({
             ...updateData,
-            [name]: value,
-        });
-    };
+            ingredients: [updateIngredients],
+            measure: [updateMeasure]
+        })
+    }
+
+    const removeInstruction = (index) => {
+        const updateInstructions = [...updateData.instructions]
+        updateInstructions.splice(index, 1);
+    }
+
+    const saveUpdates = () => {
+        console.log("Updated Data: ", updateData)
+    }
+
+    if (loading) {
+        return <>Loading...</>
+    }
+
+    if (error) {
+        console.log("ERROR:", error)
+        return <>
+            Something went wrong...
+            Return <Link to='/'>Home</Link>
+        </>
+    }
 
     return (
         <>
             <React.Fragment>
-                <form>
+                <form className='updateRecipeModal'>
 
                     <h1>Edit Recipe:</h1>
 
@@ -64,38 +145,52 @@ const UpdateRecipe = () => {
                     <h2>Ingredients and Measurements:</h2>
                     {/* map out ingredients and measures */}
                     {updateData.ingredients.map((ingredient, index) => (
-                        <div className='ingAndMeasure'>
+                        <div key={`ingMeaRow${index}`} className='ingAndMeasureRow'>
                             <TextField
                                 value={ingredient}
                                 fullWidth
-                                onChange={handleChange}
+                                onChange={(e) => handleChange(e, index, 'ingredients')}
                                 sx={{ m: 1 }}
+                                key={`ing${index}`}
                             />
                             <TextField
                                 value={updateData.measure[index]}
                                 fullWidth
-                                onChange={handleChange}
+                                onChange={(e) => handleChange(e, index, 'measure')}
                                 sx={{ m: 1 }}
+                                key={`mea${index}`}
                             />
+
+                            <Button onClick={() => removeIngredientsAndMeasure(index)}>Remove</Button>
                         </div>
                     ))}
+
+                    <Button onClick={addIngredients} variant='outlined'>Add Field</Button>
 
                     <hr />
 
                     <h2>Instructions:</h2>
-                    {updateData.instructions.map((instruction) => (
-                        <TextField
-                            value={instruction}
-                            fullWidth
-                            onChange={handleChange}
-                            sx={{ m: 1 }}
-                        />
+                    {updateData.instructions.map((instruction, index) => (
+                        <div key={`instRow${index}`} className='instructionRow'>
+                            <TextField
+                                value={instruction}
+                                fullWidth
+                                onChange={(e) => handleChange(e, index, 'instructions')}
+                                sx={{ m: 1 }}
+                                key={`ins${index}`}
+                            />
+                            <Button onClick={() => removeInstruction(index)}>Remove</Button>
+                        </div>
                     ))}
+                    <Button onClick={addInstructions} variant='outlined'>Add Field</Button>
 
                     <hr />
 
                     <h2>Upload New Image:</h2>
                 </form>
+
+                <Button onClick={saveUpdates} variant='contained'>Save!</Button>
+
             </React.Fragment>
 
         </>

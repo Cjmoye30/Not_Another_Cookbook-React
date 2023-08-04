@@ -84,22 +84,22 @@ const resolvers = {
             return newImage;
         },
 
-        addRecipe: async (parent, {name, description, ingredients, measure, instructions, image }, context) => {
+        addRecipe: async (parent, { name, description, ingredients, measure, instructions, image }, context) => {
 
             try {
-                const newRecipe = await Recipe.create({ 
-                    chef: context.user._id, 
-                    name: name, 
-                    description: description, 
-                    ingredients: ingredients, 
+                const newRecipe = await Recipe.create({
+                    chef: context.user._id,
+                    name: name,
+                    description: description,
+                    ingredients: ingredients,
                     measure: measure,
                     instructions: instructions,
-                    image: image 
+                    image: image
                 })
 
                 const addToUser = await User.findOneAndUpdate(
-                    {_id: context.user._id},
-                    {$addToSet: {recipes: newRecipe._id}}
+                    { _id: context.user._id },
+                    { $addToSet: { recipes: newRecipe._id } }
                 )
 
                 console.log("NEW RECIPE CREATED", newRecipe);
@@ -108,6 +108,35 @@ const resolvers = {
 
             } catch (err) {
                 console.log("ERROR. New recipe not created", err)
+            }
+        },
+
+        // update recipe - find one and update based on the ID and then pass in all of the variables
+        updateRecipe: async (parent, { recipeId, name, description, ingredients, measure, instructions, image }, context) => {
+            console.log("Update RecipeId: ", recipeId);
+
+            try {
+                const updateRecipe = await Recipe.findOneAndUpdate(
+                    { _id: recipeId },
+                    {
+                        $set:
+                        {
+                            name: name,
+                            description: description,
+                            ingredients: ingredients,
+                            measure: measure,
+                            instructions: instructions,
+                        }
+                    },
+                    {$addToSet: {image: image}},
+                    { new: true, runValidators: true }
+                )
+
+                return updateRecipe
+
+
+            } catch (err) {
+                console.log("ERROR. Recipe not updated: ", err)
             }
         }
     }

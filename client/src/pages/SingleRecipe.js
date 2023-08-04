@@ -25,13 +25,13 @@ const style = {
 const SingleRecipe = () => {
 
     const { recipeId } = useParams();
-    console.log("RecipeId from params: ", recipeId);
+    // console.log("RecipeId from params: ", recipeId);
 
     const { loading, data, error } = useQuery(GET_RECIPE,
         { variables: { recipeId: recipeId } })
 
     const recipeData = data?.getRecipe || {}
-    console.log(recipeData);
+    // console.log(recipeData);
 
     const ingredients = recipeData.ingredients
     const measure = recipeData.measure
@@ -60,21 +60,21 @@ const SingleRecipe = () => {
             </div>
 
             <div className='ingAndMeasureWrapper'>
-                <div className='ingRow'>
+                <div >
 
                     {/* Here we can just map through one of the arrays, and then use the index to access the same index in the measure array - since we already pulled that in our variable above */}
                     {ingredients.map((ingredient, index) => (
-                        <div>
-                            <p>{ingredient}</p>
-                            <p>{measure[index]}</p>
+                        <div className='ingRow' key={`ingRow${index}`}>
+                            <p key={`ing${index}`}>{ingredient}</p>
+                            <p key={`mea${index}`}>{measure[index]}</p>
                         </div>
                     ))}
                 </div>
             </div>
 
             <div className='instructionsWrapper'>
-                {instructions.map((instruction) => (
-                    <p> {instruction} </p>
+                {instructions.map((instruction, index) => (
+                    <p key={`inst${index}`}> {instruction} </p>
                 ))}
             </div>
 

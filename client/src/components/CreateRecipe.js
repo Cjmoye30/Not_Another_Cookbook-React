@@ -213,7 +213,6 @@ const CreateRecipe = () => {
 
                     <hr />
 
-{/* use the grid system here to have the ingredients field wider than the measure (70/30) */}
                     <div className='ingredientsAndMeasure'>
                         <h3>Ingredients & Measurements:</h3>
                         <List className='recipeGroup'>
