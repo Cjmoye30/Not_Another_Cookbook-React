@@ -1,14 +1,27 @@
 header {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    background-color: bisque;
     padding: 20px;
+    /* background-color: var(--a1); */
+    background-image: linear-gradient(#191c1e, var(--a1));
+    color: var(--a3);
+    /* border-bottom: 2px solid var(--a3); */
 }
 
 .headerLeft {
     display: flex
+}
+
+.titleLink {
+    font-family: var(--fontTitle);
+    font-size: 2.5rem;
+}
+
+.titleLink, .menuButton svg{
+    color: var(--a3)
 }
 
 .headerNav {
@@ -16,8 +29,8 @@ header {
 }
 
 .navigationBox {
-    background-color: rgb(255, 255, 143);
     overflow: hidden;
+    background-color: whitesmoke
 }
 
 .navList {
@@ -25,5 +38,10 @@ header {
 }
 
 .headerAvatar {
-    border: 1px solid black;
+    border: 1px solid var(--a3);
+    background-color: var(--a3);
+}
+
+.menuButton svg {
+    font-size: 40px;
 }

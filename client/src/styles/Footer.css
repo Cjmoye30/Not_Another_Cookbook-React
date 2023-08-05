@@ -1,0 +1,15 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--a3);
+    background-color: var(--a1);
+    height: 100px;
+    padding: 20px;
+}
+
+footer p a {
+    color: var(--a3);
+}

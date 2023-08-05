@@ -6,7 +6,6 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { Link } from "react-router-dom";
-import { Button, TextareaAutosize } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import { DELETE_RECIPE } from '../utils/mutations';
 import '../styles/Home.css'
@@ -52,13 +51,11 @@ const UserRecipes = () => {
         </div>
     }
     
-
-
     return (
         <>
             <div>
                 <ImageList
-                    variant='mansonry'
+                    variant='masonry'
                     cols={3}
                     gap={8}
                 >

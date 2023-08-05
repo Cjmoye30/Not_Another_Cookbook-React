@@ -28,7 +28,7 @@ const ProfilesList = () => {
                         (
                             users.map((user) => (
                                 <Grid
-                                    item xs={4}
+                                    item lg={4} xs={12}
                                 >
 
                                     <Grid

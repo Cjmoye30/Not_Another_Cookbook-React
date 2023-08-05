@@ -1,16 +1,15 @@
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { useState } from 'react';
 import { GET_RECIPE } from '../utils/queries';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import UpdateRecipe from '../components/UpdateRecipe';
 import Modal from '@mui/material/Modal';
 import '../styles/SingleRecipe.css'
 import { useMutation } from '@apollo/client';
 import { DELETE_RECIPE } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 const style = {
     position: 'absolute',
@@ -25,8 +24,6 @@ const style = {
     p: 4,
 };
 
-
-
 const SingleRecipe = () => {
     const { recipeId } = useParams();
 
@@ -38,9 +35,8 @@ const SingleRecipe = () => {
             const { data } = await deleteRecipeMutation({
                 variables: { recipeId: recipeId }
             })
-
             window.location.assign('/me')
-            
+
         } catch (err) {
             console.log("ERROR. Recipe not deleted: ", err)
         }
@@ -53,6 +49,9 @@ const SingleRecipe = () => {
     const ingredients = recipeData.ingredients
     const measure = recipeData.measure
     const instructions = recipeData.instructions
+
+    const chef = data?.getRecipe.chef._id
+    const loggedInUser = Auth.getProfile().data._id
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -74,8 +73,6 @@ const SingleRecipe = () => {
 
             <div className='ingAndMeasureWrapper'>
                 <div >
-
-                    {/* Here we can just map through one of the arrays, and then use the index to access the same index in the measure array - since we already pulled that in our variable above */}
                     {ingredients.map((ingredient, index) => (
                         <div className='ingRow' key={`ingRow${index}`}>
                             <p key={`ing${index}`}>{ingredient}</p>
@@ -91,10 +88,14 @@ const SingleRecipe = () => {
                 ))}
             </div>
 
-            <div className='recipeEditbuttons'>
-                <Button variant='outlined' onClick={handleOpen}>Edit</Button>
-                <Button variant='contained' color='error' onClick={deleteRecipe}>DELETE</Button>
-            </div>
+            {loggedInUser === chef ? (
+                <div className='recipeEditbuttons'>
+                    <Button variant='outlined' onClick={handleOpen}>Edit</Button>
+                    <Button variant='contained' color='error' onClick={deleteRecipe}>DELETE</Button>
+                </div>
+            ) : (
+                <></>
+            )}
 
             <Modal
                 open={open}
@@ -103,9 +104,9 @@ const SingleRecipe = () => {
                 aria-describedby="modal-modal-description"
                 className='updateRecipeModal'
             >
-                <Box 
-                className='modal-body'
-                sx={style}
+                <Box
+                    className='modal-body'
+                    sx={style}
                 >
                     <UpdateRecipe />
 

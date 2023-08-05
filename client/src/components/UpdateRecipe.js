@@ -93,14 +93,19 @@ const UpdateRecipe = () => {
 
         setUpdateData({
             ...updateData,
-            ingredients: [updateIngredients],
-            measure: [updateMeasure]
+            ingredients: updateIngredients,
+            measure: updateMeasure
         })
     }
 
     const removeInstruction = (index) => {
         const updateInstructions = [...updateData.instructions]
         updateInstructions.splice(index, 1);
+
+        setUpdateData({
+            ...updateData,
+            instructions: updateInstructions
+        })
     }
 
     const saveUpdates = async () => {

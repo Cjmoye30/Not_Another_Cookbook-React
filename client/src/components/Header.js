@@ -1,21 +1,14 @@
-// https://mui.com/material-ui/react-drawer/
-// VERY Nice looking side navigation bar which I will be using on all of my websites!
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import MenuIcon from '@mui/icons-material/MenuOpenRounded';
+import MenuIcon from '@mui/icons-material/MenuBookTwoTone';
 import { Link } from "react-router-dom";
 import Auth from '../utils/auth'
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { useQuery } from '@apollo/client';
-import { GET_USER } from '../utils/queries';
-
 import '../styles/Header.css'
 
 const logout = (event) => {
@@ -109,7 +102,7 @@ export default function TemporaryDrawer() {
                 <div className='headerNav'>
                     {['top'].map((anchor) => (
                         <React.Fragment key={anchor}>
-                            <Button onClick={toggleDrawer(anchor, true)}>
+                            <Button className='menuButton' onClick={toggleDrawer(anchor, true)}>
                                 <MenuIcon />
                             </Button>
                             <Drawer
@@ -125,7 +118,7 @@ export default function TemporaryDrawer() {
 
                 <div className='headerTitle'>
                     <Link to='/'>
-                        <h1>Not Another Cookbook</h1>
+                        <h1 className='titleLink'>Not Another Cookbook</h1>
                     </Link>
                 </div>
             </div>
@@ -134,7 +127,11 @@ export default function TemporaryDrawer() {
                 (
                     <Stack direction="row" spacing={2} >
                         <Link to="/me">
-                            <Avatar className='headerAvatar' src={Auth.getProfile().data.avatar} />
+                            <Avatar 
+                            className='headerAvatar' 
+                            src={Auth.getProfile().data.avatar}
+                            sx={{width: 75, height: 75}}
+                            />
                         </Link>
                     </Stack>
                 )
@@ -142,7 +139,10 @@ export default function TemporaryDrawer() {
                 (
                     <Stack direction="row" spacing={2} >
                         <Link to='login'>
-                            <Avatar className='headerAvatar' src="/broken-image.jpg" />
+                            <Avatar 
+                            className='headerAvatar' 
+                            src="/broken-image.jpg"
+                            />
                         </Link>
                     </Stack>
                 )

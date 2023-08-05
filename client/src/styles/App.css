@@ -5,8 +5,22 @@
     border: 1px solid black;
 } */
 
+:root {
+
+    --a1: #323b32;
+    --a2: #4A5859;
+    --a3: #ecffdf;
+    --a4: #F4B860;
+    --a5: #C83E4D;
+    
+    --fontHeaders: 'Libre Franklin', sans-serif;
+    --fontTitle: 'Pacifico', cursive;
+}
+
 body {
     margin: 0;
+    background-color: var(--a2);
+    color: var(--a1);
 }
 
 .container {
@@ -14,5 +28,9 @@ body {
     max-width: 1250px;
     margin: 0 auto;
     padding: 10px;
-    border: 1px solid black;
+    background-color: var(--a3);
+}
+
+a:visited, a:hover, a:link, a:active {
+    text-decoration: none;
 }

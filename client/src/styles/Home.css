@@ -9,3 +9,33 @@
 .profileListAvatar {
     height: 175px;
 }
+
+.homeImageListItem {
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 10px 8px -7px black;
+    transition: transform 0.4s ease-in-out;
+}
+
+.homeImageListItem:hover {
+    transform: scale(1.03);
+  }
+
+.homePageImageList {
+    background-color: var(--a1)
+}
+
+.homeHeader {
+    padding: 20px;
+    box-shadow: 0 10px 8px -7px black;
+}
+
+.homeTitle {
+    text-align: center;
+    font-family: var(--fontHeaders);
+}
+
+.homeBio {
+    font-family: var(--fontHeaders);
+}
+
