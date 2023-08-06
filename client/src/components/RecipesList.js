@@ -10,8 +10,14 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 const RecipesList = () => {
 
-    // const smallScreen = useMediaQuery((theme) => theme.breakpoints.up('sm'));
-    // const cols = smallScreen ? 12 : 3;
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down('sm'));
+
+    // if there is a match, return 12, if not, return 4
+    let cols = 3
+    if(matches) {
+        cols = 1;
+    }
 
     const { loading, data } = useQuery(GET_ALL_RECIPES);
     const recipesData = data?.getAllRecipes || {}
@@ -30,7 +36,7 @@ const RecipesList = () => {
             <div>
                 <ImageList
                     variant='masonry'
-                    cols={3}
+                    cols={cols}
                     gap={20}
                     sx={{ px: 1, py: 3 }}
                     className='recipeListInner'

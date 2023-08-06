@@ -18,7 +18,6 @@ const logout = (event) => {
 
 export default function TemporaryDrawer() {
 
-
     const [state, setState] = React.useState({
         top: false,
     });

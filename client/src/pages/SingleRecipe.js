@@ -10,6 +10,7 @@ import '../styles/SingleRecipe.css'
 import { useMutation } from '@apollo/client';
 import { DELETE_RECIPE } from '../utils/mutations';
 import Auth from '../utils/auth';
+import Grid from '@mui/material/Grid';
 
 const style = {
     position: 'absolute',
@@ -67,25 +68,45 @@ const SingleRecipe = () => {
     }
 
     return (
-        <>
+        <Box>
             <div className='headerWrapper'>
                 <h1>{recipeData.name}</h1>
-                <img
-                    src={recipeData.image}
-                    className='headerImg'
-                />
-            </div>
-
-            <div className='ingAndMeasureWrapper'>
-                <div >
-                    {ingredients.map((ingredient, index) => (
-                        <div className='ingRow' key={`ingRow${index}`}>
-                            <p key={`ing${index}`}>{ingredient}</p>
-                            <p key={`mea${index}`}>{measure[index]}</p>
-                        </div>
-                    ))}
+                <div>
+                    <img
+                        src={recipeData.image}
+                        className='headerImg'
+                    />
                 </div>
             </div>
+
+            {/* will probably need to use the grid system on this in order to line everything up better */}
+            <Box className='ingAndMeasureWrapper'>
+                <Grid container>
+                    <Grid className='ingAndMeasureHeader' item xs={1}>
+                        <p>Step</p>
+                    </Grid>
+                    <Grid className='ingAndMeasureHeader' item xs={8}>
+                        <p>Ingredient</p>
+                    </Grid>
+                    <Grid className='ingAndMeasureHeader' item xs={3}>
+                        <p>Measure</p>
+                    </Grid>
+
+                    {ingredients.map((ingredient, index) => (
+                        <Grid container>
+                            <Grid item xs={1}>
+                                <p>{index}</p>
+                            </Grid>
+                            <Grid item xs={8}>
+                                <p>{ingredient}</p>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <p>{measure[index]}</p>
+                            </Grid>
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
 
             <div className='instructionsWrapper'>
                 {instructions.map((instruction, index) => (
@@ -118,7 +139,7 @@ const SingleRecipe = () => {
                 </Box>
             </Modal>
 
-        </>
+        </Box>
     )
 }
 

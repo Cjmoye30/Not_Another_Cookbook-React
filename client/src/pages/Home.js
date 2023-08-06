@@ -42,7 +42,7 @@ const Home = () => {
             </div>
 
             <div className='homePageUserList'>
-                <h1>Peep all of our current users and early endorsers:</h1>
+                <h1>Our Users & Early Endorsers:</h1>
                 <ProfilesList />
             </div>
 

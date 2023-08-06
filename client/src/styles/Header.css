@@ -1,12 +1,13 @@
 header {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: space-between;
+    text-align: center;
     align-items: center;
     padding: 20px;
     background-image: linear-gradient(#191c1e, var(--a1));
     color: var(--a3);
+    flex-wrap: wrap-reverse;
 }
 
 .headerLeft {
@@ -43,3 +44,11 @@ header {
 .menuButton svg {
     font-size: 40px;
 }
+
+@media screen and (max-width: 600px) {
+    header {
+        justify-content: center;
+    }
+
+}
+
