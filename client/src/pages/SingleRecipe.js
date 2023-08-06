@@ -25,6 +25,11 @@ const style = {
 };
 
 const SingleRecipe = () => {
+
+    if (!Auth.loggedIn()) {
+        window.location.assign('/login')
+    }
+
     const { recipeId } = useParams();
 
     const [deleteRecipeMutation] = useMutation(DELETE_RECIPE);

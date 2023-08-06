@@ -18,7 +18,8 @@ const ProfilesList = () => {
             <Box sx={{ flexGrow: 1 }}>
                 <Grid
                     sx={{ p: 1 }}
-                    container>
+                    container
+                >
 
                     {users.length === 0 ?
                         (
@@ -28,7 +29,7 @@ const ProfilesList = () => {
                         (
                             users.map((user) => (
                                 <Grid
-                                    item lg={4} xs={12}
+                                    item sm={4} xs={12}
                                 >
 
                                     <Grid

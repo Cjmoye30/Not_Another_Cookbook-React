@@ -5,8 +5,13 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { Link } from "react-router-dom";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const RecipesList = () => {
+
+    // const smallScreen = useMediaQuery((theme) => theme.breakpoints.up('sm'));
+    // const cols = smallScreen ? 12 : 3;
 
     const { loading, data } = useQuery(GET_ALL_RECIPES);
     const recipesData = data?.getAllRecipes || {}
@@ -28,10 +33,13 @@ const RecipesList = () => {
                     cols={3}
                     gap={20}
                     sx={{ px: 1, py: 3 }}
-                    className='homePageImageList'
+                    className='recipeListInner'
                 >
                     {recipesData.map((recipe, index) => (
-                        <Link key={index} to={`/singleRecipe/${recipe._id}`}>
+                        <Link
+                            key={index}
+                            to={`/singleRecipe/${recipe._id}`}
+                        >
                             <ImageListItem
                                 key={index}
                                 className='homeImageListItem'

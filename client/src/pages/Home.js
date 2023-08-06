@@ -2,6 +2,9 @@ import * as React from 'react';
 import '../styles/Home.css';
 import ProfilesList from '../components/ProfilesList'
 import RecipesList from '../components/RecipesList'
+import { Link } from "react-router-dom";
+import Auth from '../utils/auth'
+import '../styles/Home.css'
 
 const Home = () => {
 
@@ -13,16 +16,33 @@ const Home = () => {
 
                 <p className='homeBio'>At our site, every moment counts, and we've meticulously curated a diverse range of recipes to cater to your unique tastes and preferences. From mouthwatering appetizers to irresistible desserts, each dish tells a captivating story through its flavors. Whether you're a seasoned chef or a kitchen novice, we're here to make your culinary journey a delight.</p>
 
+                {Auth.loggedIn() ?
+                    (
+                        <button className='homepagebutton'>
+                            <Link to={`/me`}>Dashboard</Link>
+                        </button>
+                    )
+                    :
+                    (
+                        <div className='homeCTA'>
+                            <button className='homepagebutton'>
+                                <Link to={`/login`}>Login</Link>
+                            </button>
 
+                            <button className='homepagebutton'>
+                                <Link to={`/signup`}>Signup</Link>
+                            </button>
+                        </div>
+                    )}
             </div>
 
-            <div>
-                <h2>Peep all of our delicious food right now (obviously more to come - give it time):</h2>
+            <div className='homePageImageList'>
+                <h1>Recipes from our users:</h1>
                 <RecipesList />
             </div>
 
-            <div>
-                <h2>Peep all of our current users and early endorsers:</h2>
+            <div className='homePageUserList'>
+                <h1>Peep all of our current users and early endorsers:</h1>
                 <ProfilesList />
             </div>
 

@@ -5,10 +5,8 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    /* background-color: var(--a1); */
     background-image: linear-gradient(#191c1e, var(--a1));
     color: var(--a3);
-    /* border-bottom: 2px solid var(--a3); */
 }
 
 .headerLeft {

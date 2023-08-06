@@ -7,7 +7,6 @@ import ListItem from '@mui/material/ListItem';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_RECIPE } from '../utils/mutations';
-import Auth from '../utils/auth';
 import { useRef } from 'react';
 import '../styles/CreateRecipe.css'
 
