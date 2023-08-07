@@ -84,10 +84,10 @@ const SingleRecipe = () => {
                 <div className='outerWrapper'>
                     <Grid className='ingAndMeasureContainer' container >
                         <Grid className='ingAndMeasureHeader ingHeader' item xs={6}>
-                            <p>Ingredient</p>
+                            <h2>Ingredient</h2>
                         </Grid>
                         <Grid className='ingAndMeasureHeader measureHeader' item xs={6}>
-                            <p>Measure</p>
+                            <h2>Measure</h2>
                         </Grid>
 
                         {ingredients.map((ingredient, index) => (

@@ -11,7 +11,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 const RecipesList = () => {
 
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.down('sm'));
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
 
     // if there is a match, return 12, if not, return 4
     let cols = 3
