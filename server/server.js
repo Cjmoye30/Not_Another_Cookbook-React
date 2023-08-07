@@ -26,9 +26,14 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/auth', function (req, res) {
-    var result = imagekit.getAuthenticationParameters();
-    res.send(result);
+app.get('/auth', async function (req, res) {
+    try {
+        const result = await imagekit.getAuthenticationParameters();
+        res.send(result);
+    } catch (err) {
+        console.error('Error fetching authentication parameters:', err);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 app.use(
