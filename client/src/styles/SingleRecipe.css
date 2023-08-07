@@ -10,21 +10,68 @@
     border-radius: 10px;
     box-shadow: 0 10px 8px -7px black;
     border: 1px solid linear-gradient(#191c1e, var(--a1));
+}
 
+.recipeTitle {
+    padding: 0;
 }
 
 .ingAndMeasureWrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 750px;
-    /* background-color: var(--a4); */
-    color: var(--a2);
     margin: 0 auto;
     width: 100%;
-    background-color: yellow;
+    background-image: linear-gradient(#191c1e, var(--a1), #191c1e);
+    color: black;
+    padding: 30px 0;
 }
 
+.ingAndMeasureContainer {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 8px -7px black;
+    border: 1px solid linear-gradient(#191c1e, var(--a1));
+    color: var(--a2);
+    text-align: center;
+}
+
+.ingAndMeasureHeader {
+    background-color: white;
+    border-bottom: 1px solid var(--a2);
+    font-weight: bold;
+}
+
+.ingAndMeasureItem {
+    border-bottom: 1px solid black;
+    padding: 10px 0;
+}
+
+.gridItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gridInstruction {
+    justify-content: flex-start;
+}
+
+.outerWrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.sectionTitle {
+    text-align: center;
+    padding: 10px ;
+    color: var(--a3);
+}
+
+.instructionTitle {
+    color: var(--a1);
+}
 
 .ingRow {
     display: flex;
@@ -38,6 +85,10 @@
 }
 
 /* --------------------- Update Recipe Modal ---------------------*/
+.recipeEditbuttons {
+    text-align: center;
+}
+
 .updateRecipeModal {
     text-align: center;
 }

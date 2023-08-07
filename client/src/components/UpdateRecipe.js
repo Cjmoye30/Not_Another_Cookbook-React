@@ -216,7 +216,9 @@ const UpdateRecipe = () => {
 
                     <hr />
 
-                    <h2>Upload New Image:</h2>
+                    <h2>Upload Additional Image:</h2>
+                    <small>We can only load 1 at a time for now</small>
+                    
                 </form>
 
                 <Button onClick={saveUpdates} variant='contained'>Save!</Button>

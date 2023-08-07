@@ -70,7 +70,7 @@ const SingleRecipe = () => {
     return (
         <Box>
             <div className='headerWrapper'>
-                <h1>{recipeData.name}</h1>
+                <h1 className='recipeTitle'>{recipeData.name}</h1>
                 <div>
                     <img
                         src={recipeData.image}
@@ -79,40 +79,57 @@ const SingleRecipe = () => {
                 </div>
             </div>
 
-            {/* will probably need to use the grid system on this in order to line everything up better */}
             <Box className='ingAndMeasureWrapper'>
-                <Grid container>
-                    <Grid className='ingAndMeasureHeader' item xs={1}>
-                        <p>Step</p>
-                    </Grid>
-                    <Grid className='ingAndMeasureHeader' item xs={8}>
-                        <p>Ingredient</p>
-                    </Grid>
-                    <Grid className='ingAndMeasureHeader' item xs={3}>
-                        <p>Measure</p>
-                    </Grid>
-
-                    {ingredients.map((ingredient, index) => (
-                        <Grid container>
-                            <Grid item xs={1}>
-                                <p>{index}</p>
-                            </Grid>
-                            <Grid item xs={8}>
-                                <p>{ingredient}</p>
-                            </Grid>
-                            <Grid item xs={3}>
-                                <p>{measure[index]}</p>
-                            </Grid>
+                <h2 className='sectionTitle'>Ingredients & Measurements</h2>
+                <div className='outerWrapper'>
+                    <Grid className='ingAndMeasureContainer' container >
+                        <Grid className='ingAndMeasureHeader ingHeader' item xs={6}>
+                            <p>Ingredient</p>
                         </Grid>
-                    ))}
-                </Grid>
+                        <Grid className='ingAndMeasureHeader measureHeader' item xs={6}>
+                            <p>Measure</p>
+                        </Grid>
+
+                        {ingredients.map((ingredient, index) => (
+                            <Grid container key={index}>
+                                <Grid className='ingAndMeasureItem gridIng gridItem' item xs={6}>
+                                    <p>{ingredient}</p>
+                                </Grid>
+                                <Grid className='ingAndMeasureItem gridMeas gridItem' item xs={6}>
+                                    <p>{measure[index]}</p>
+                                </Grid>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </div>
             </Box>
 
-            <div className='instructionsWrapper'>
-                {instructions.map((instruction, index) => (
-                    <p key={`inst${index}`}> {instruction} </p>
-                ))}
-            </div>
+            <Box className='instructionsWrapper'>
+                <h2 className='sectionTitle instructionTitle'>Instructions</h2>
+                <div className='outerWrapper'>
+                    <Grid className='instructionsContainer' container>
+                        {instructions.map((instruction, index) => (
+                            <Grid container key={index}>
+                                <Grid className='gridItem' item xs={2}>
+                                    <p>{`Step ${index + 1}:`}</p>
+                                </Grid>
+                                <Grid className='gridItem gridInstruction' item xs={10}>
+                                    <p>{instruction}</p>
+                                </Grid>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </div>
+            </Box>
+
+            <Box
+                sx={{ textAlign: 'center' }}
+            >
+                <h3>Future Developments:</h3>
+                <p>Notes Section</p>
+                <p>Recipe inspiration links</p>
+
+            </Box>
 
             {loggedInUser === chef ? (
                 <div className='recipeEditbuttons'>

@@ -5,7 +5,7 @@ footer {
     align-items: center;
     text-align: center;
     color: var(--a3);
-    background-color: var(--a1);
+    background-image: linear-gradient(var(--a1), #191c1e);
     height: 100px;
     padding: 20px;
 }

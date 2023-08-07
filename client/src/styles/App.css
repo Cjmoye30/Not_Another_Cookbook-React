@@ -1,9 +1,9 @@
 /* ----------- MAIN STYLE PAGE ----------- */
 /* ----------- All semantic elements should be styled here */
 
-* {
+/* * {
     border: 1px solid black;
-}
+} */
 
 :root {
 
@@ -19,7 +19,7 @@
 
 body {
     margin: 0;
-    /* background-color: var(--a2); */
+    background-color: var(--a3);
     color: var(--a1);
 }
 
