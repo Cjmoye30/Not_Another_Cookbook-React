@@ -21,12 +21,12 @@ const imagekit = new ImageKit({
 });
 
 // allow cross-origin requests
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", 
-      "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+// app.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", 
+//       "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+//   });
 
 app.get('/auth', async function (req, res) {
     try {
@@ -39,7 +39,8 @@ app.get('/auth', async function (req, res) {
 });
 
 const corsOptions = {
-    origin: 'https://git.heroku.com/sleepy-beach-12267.git',
+    origin: 'https://sleepy-beach-12267-a5c989dbbda6.herokuapp.com',
+    // https://sleepy-beach-12267-a5c989dbbda6.herokuapp.com
 };
 
 app.use(

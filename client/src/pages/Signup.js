@@ -11,7 +11,6 @@ import { IKContext, IKUpload } from 'imagekitio-react';
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
 
-// test test
 const isProduction = process.env.NODE_ENV === 'production';
 const authenticationEndpoint = isProduction
   ? 'https://git.heroku.com/sleepy-beach-12267.git/auth'
