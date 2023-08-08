@@ -4,6 +4,7 @@ const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
+const cors = require('cors')
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -37,9 +38,14 @@ app.get('/auth', async function (req, res) {
     }
 });
 
+const corsOptions = {
+    origin: 'https://git.heroku.com/sleepy-beach-12267.git',
+};
+
 app.use(
     express.urlencoded({ extended: true }),
-    express.json()
+    express.json(),
+    cors(corsOptions)
 );
 
 if (process.env.NODE_ENV === 'production') {
