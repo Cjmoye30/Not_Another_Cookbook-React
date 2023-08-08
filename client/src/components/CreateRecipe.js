@@ -10,10 +10,12 @@ import { ADD_RECIPE } from '../utils/mutations';
 import { useRef } from 'react';
 import '../styles/CreateRecipe.css'
 
-import { IKImage, IKContext, IKUpload } from 'imagekitio-react';
+import { IKContext, IKUpload } from 'imagekitio-react';
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
-const authenticationEndpoint = 'http://localhost:3001/auth';
+const authenticationEndpoint = isProduction
+    ? 'https://sleepy-beach-12267-a5c989dbbda6.herokuapp.com/auth'
+    : 'http://localhost:3001/auth';
 
 // update the folder to whatever is needed
 const folderDestination = '/react-cookbook-food-pics';
