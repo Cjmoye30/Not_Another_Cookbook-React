@@ -13,7 +13,7 @@ const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const authenticationEndpoint = isProduction
-  ? 'https://git.heroku.com/sleepy-beach-12267.git/auth'
+  ? 'https://sleepy-beach-12267-a5c989dbbda6.herokuapp.com/auth'
   : 'http://localhost:3001/auth';
 
 // update the folder to whatever is needed

@@ -7,10 +7,8 @@ const db = require('./config/connection');
 const cors = require('cors')
 const app = express();
 const PORT = process.env.PORT || 3001;
-
 const herokuliveURL = null;
 const HOST = herokuliveURL || 'https://localhost:3000';
-
 const server = new ApolloServer({ typeDefs, resolvers, context: authMiddleware });
 
 const ImageKit = require('imagekit');
@@ -19,14 +17,6 @@ const imagekit = new ImageKit({
     publicKey: 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=',
     privateKey: 'private_NREjqTEzNwaan/fSR2WMQDT10VU='
 });
-
-// allow cross-origin requests
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", 
-//       "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-//   });
 
 app.get('/auth', async function (req, res) {
     try {
@@ -38,15 +28,17 @@ app.get('/auth', async function (req, res) {
     }
 });
 
-const corsOptions = {
-    origin: 'https://sleepy-beach-12267-a5c989dbbda6.herokuapp.com',
-    // https://sleepy-beach-12267-a5c989dbbda6.herokuapp.com
-};
+// allow cross-origin requests
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", 
+      "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 app.use(
     express.urlencoded({ extended: true }),
     express.json(),
-    cors(corsOptions)
 );
 
 if (process.env.NODE_ENV === 'production') {
