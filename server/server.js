@@ -20,11 +20,12 @@ const imagekit = new ImageKit({
 });
 
 // allow cross-origin requests
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://sleepy-beach-12267-a5c989dbbda6.herokuapp.com");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", 
+      "Origin, X-Requested-With, Content-Type, Accept");
     next();
-});
+  });
 
 app.get('/auth', async function (req, res) {
     try {
