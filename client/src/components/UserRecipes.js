@@ -8,9 +8,20 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { Link } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { DELETE_RECIPE } from '../utils/mutations';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import '../styles/Home.css'
 
 const UserRecipes = () => {
+
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
+
+    // if there is a match, return 12, if not, return 4
+    let cols = 3
+    if(matches) {
+        cols = 1;
+    }
 
     const [deleteRecipeMutation] = useMutation(DELETE_RECIPE)
 
@@ -56,11 +67,13 @@ const UserRecipes = () => {
             <div>
                 <ImageList
                     variant='masonry'
-                    cols={3}
+                    cols={cols}
                     gap={8}
+                    sx={{ px: 1, py: 3 }}
+                    className='recipeListInner'
                 >
                     {userData.recipes.map((recipe, index) => (
-                        <div>
+                        <div key={recipe._id}>
                             <Link key={index} to={`/singleRecipe/${recipe._id}`}>
                                 <ImageListItem>
                                     {recipe.image.map((image) => (

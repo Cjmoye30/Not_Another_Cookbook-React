@@ -5,10 +5,14 @@
     flex-direction: column;
 }
 
+.singleRecipeImg {
+    padding: 10px;
+}
+
 .headerImg {
-    max-height: 600px;
-    width: auto;
-    margin: 20px;
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
     border-radius: 10px;
     box-shadow: 0 10px 8px -7px black;
     border: 1px solid linear-gradient(#191c1e, var(--a1));
@@ -37,7 +41,7 @@
     border: 1px solid linear-gradient(#191c1e, var(--a1));
     color: var(--a2);
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .instructionsContainer {
@@ -46,7 +50,7 @@
     box-shadow: 0 10px 8px -7px black;
     border: 1px solid linear-gradient(#191c1e, var(--a1));
     border-radius: 10px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .ingAndMeasureHeader {

@@ -31,7 +31,6 @@ const ProfilesList = () => {
                                 <Grid
                                     item sm={4} xs={12}
                                 >
-
                                     <Grid
                                         sx={{ m: 1, border: 1 }}
                                         className='homeUserProfile'

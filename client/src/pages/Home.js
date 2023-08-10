@@ -18,18 +18,18 @@ const Home = () => {
 
                 {Auth.loggedIn() ?
                     (
-                        <button className='homepagebutton'>
+                        <button className='homepagebutton button1'>
                             <Link to={`/me`}>Dashboard</Link>
                         </button>
                     )
                     :
                     (
                         <div className='homeCTA'>
-                            <button className='homepagebutton'>
+                            <button className='homepagebutton button1'>
                                 <Link to={`/login`}>Login</Link>
                             </button>
 
-                            <button className='homepagebutton'>
+                            <button className='homepagebutton button1'>
                                 <Link to={`/signup`}>Signup</Link>
                             </button>
                         </div>
@@ -49,22 +49,29 @@ const Home = () => {
 
             {/* 
                 TODO List:
-                Add in a list of all recipes 
-                Add in a list of all users 
-                Add in bio/explanation of website 
-                Add links for login/signup if nobody is logged in 
-                Add avatar image to top right of screen 
-                Move menu to left side of screen (like youtube) 
-                Delete Recipe 
-                Add bio field for user profiles - add it into the model just as a string 
-                Add in inspiration links for each recipe - array of links to navigate to so I can refer back to what site I got the recipe from 
-                Add notes section for each recipe. 
+                - Add bio field for user profiles - add it into the model just as a string 
 
-                Convert the recipe image list into a component and import that on the homepage and then the profile page - all of the code is the same excpet for a query - could possibly do that
+                - Add in inspiration links for each recipe - array of links to navigate to so I can refer back to what site I got the recipe from 
 
-                Loading buttons?
-                Style 
-                Deploy  
+                - Add notes section for each recipe. 
+
+                - have a separate sections just for spices when creating the recipe? not too important
+
+                - Convert the recipe image list into a component and import that on the homepage and then the profile page - all of the code is the same excpet for a query - could possibly do that.
+
+                - Add up/down buttons on the create recipe page
+
+                - increase the height of the instructions fields on create recipe page
+
+                - figure out how to upload multiple images using multer - i think the destination would be the urlEndpoint?
+
+                - Loading buttons?
+
+                - Prevent the user from creating an account before their image is ready and loaded - otherwise an account will be created without an image.
+
+                - add in default avatar selections like you did with project 3
+
+                - Style 
             */}
         </>
     )

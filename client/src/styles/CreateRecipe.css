@@ -1,5 +1,5 @@
 .instructionField, .ingredientField, .measureField, .nameField, .descriptionField {
-    background-color: rgb(232, 232, 232);
+    background-color: white
 }
 
 .instructionField {

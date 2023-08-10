@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import '../styles/Login.css'
 
 const Login = () => {
     const [loginUser] = useMutation(LOGIN_USER);
@@ -50,36 +51,40 @@ const Login = () => {
 
     return (
         <React.Fragment>
-            <form autoComplete="off" onSubmit={handleSubmit}>
-                <h2>Login Form</h2>
-                <TextField
-                    label="Email"
-                    onChange={e => setEmail(e.target.value)}
-                    required
-                    variant="outlined"
-                    color="secondary"
-                    type="email"
-                    sx={{ mb: 3 }}
-                    fullWidth
-                    value={email}
-                    error={emailError}
-                />
-                <TextField
-                    label="Password"
-                    onChange={e => setPassword(e.target.value)}
-                    required
-                    variant="outlined"
-                    color="secondary"
-                    type="password"
-                    value={password}
-                    error={passwordError}
-                    fullWidth
-                    sx={{ mb: 3 }}
-                />
-                <Button variant="outlined" color="secondary" type="submit">Login</Button>
+            <div className='outerForm'>
+                <form className='loginForm' autoComplete="off" onSubmit={handleSubmit}>
+                    <h2>Login to your Account: </h2>
+                    <TextField
+                        label="Email"
+                        className='loginField'
+                        fullWidth
+                        onChange={e => setEmail(e.target.value)}
+                        required
+                        variant="filled"
+                        color="secondary"
+                        type="email"
+                        sx={{ mb: 3, color: 'white' }}
+                        value={email}
+                        error={emailError}
+                    />
+                    <TextField
+                        label="Password"
+                        className='loginField'
+                        fullWidth
+                        onChange={e => setPassword(e.target.value)}
+                        required
+                        variant="filled"
+                        color="secondary"
+                        type="password"
+                        value={password}
+                        error={passwordError}
+                        sx={{ mb: 3 }}
+                    />
+                    <button className='button1' type="submit">Login</button>
 
-            </form>
-            <small>Need an account? <Link to="/">Register here</Link></small>
+                    <small className='ctaLogin'>Need an account? <Link to="/signup">Register here</Link></small>
+                </form>
+            </div>
         </React.Fragment>
     );
 }

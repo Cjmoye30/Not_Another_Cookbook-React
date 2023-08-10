@@ -71,7 +71,7 @@ const SingleRecipe = () => {
         <Box>
             <div className='headerWrapper'>
                 <h1 className='recipeTitle'>{recipeData.name}</h1>
-                <div>
+                <div className='singleRecipeImg'>
                     <img
                         src={recipeData.image}
                         className='headerImg'
@@ -110,10 +110,10 @@ const SingleRecipe = () => {
                     <Grid className='instructionsContainer' container>
                         {instructions.map((instruction, index) => (
                             <Grid container key={index}>
-                                <Grid className='gridItem' item xs={2}>
+                                <Grid className='gridItem' item xs={3}>
                                     <p>{`Step ${index + 1}:`}</p>
                                 </Grid>
-                                <Grid className='gridItem gridInstruction' item xs={10}>
+                                <Grid className='gridItem gridInstruction' item xs={9}>
                                     <p>{instruction}</p>
                                 </Grid>
                             </Grid>
@@ -125,9 +125,10 @@ const SingleRecipe = () => {
             <Box
                 sx={{ textAlign: 'center' }}
             >
-                <h3>Future Developments:</h3>
+                <h3>Coming soon:</h3>
                 <p>Notes Section</p>
                 <p>Recipe inspiration links</p>
+                <p>Upload more than 1 image at a time - imagekit.io only allows for 1 image and I have to use multer to upload multiform data</p>
 
             </Box>
 

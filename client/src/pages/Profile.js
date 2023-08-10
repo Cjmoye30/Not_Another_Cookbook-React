@@ -42,6 +42,7 @@ const Profile = () => {
                     <h4>Total Recipes: {user.recipes.length} </h4>
                 </div>
             </div>
+
             <Tabs />
         </>
     )

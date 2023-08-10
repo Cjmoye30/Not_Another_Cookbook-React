@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_RECIPE } from '../utils/mutations';
 import { useRef } from 'react';
+import Grid from '@mui/material/Grid';
 import '../styles/CreateRecipe.css'
 
 import { IKContext, IKUpload } from 'imagekitio-react';
@@ -16,7 +17,7 @@ const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
 const isProduction = process.env.NODE_ENV === 'production';
 const authenticationEndpoint = isProduction
   ? 'https://sleepy-beach-12267-a5c989dbbda6.herokuapp.com/auth'
-  : 'http://localhost:3001/auth';
+  : 'http://localhost:3000/auth';
 
 // update the folder to whatever is needed
 const folderDestination = '/react-cookbook-food-pics';
