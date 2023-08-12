@@ -41,10 +41,13 @@ type Query {
 type Mutation {
     signup(username: String!, email: String!, firstName: String!, lastName: String!, password: String!, avatar: String): Auth
     login(email: String!, password: String!): Auth
+
+    # edit username, email, and avatar only - 
+    updateProfile(userId: ID!, username: String, email: String, avatar: String): User
+
     addImage(userId: ID!, imageURL: String!): User
     addRecipe(name: String!, description: String, ingredients: [String], measure: [String], instructions: [String], image: [String]): Recipe
     updateRecipe(recipeId: ID!, name: String!, description: String, ingredients: [String], measure: [String], instructions: [String], image: [String]): Recipe
-
     deleteRecipe(recipeId: ID!): Recipe
 }
 `;

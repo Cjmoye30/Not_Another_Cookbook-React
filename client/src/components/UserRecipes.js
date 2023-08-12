@@ -10,6 +10,7 @@ import { useMutation } from '@apollo/client';
 import { DELETE_RECIPE } from '../utils/mutations';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Box from '@mui/material/Box';
 import '../styles/Home.css'
 
 const UserRecipes = () => {
@@ -19,7 +20,7 @@ const UserRecipes = () => {
 
     // if there is a match, return 12, if not, return 4
     let cols = 3
-    if(matches) {
+    if (matches) {
         cols = 1;
     }
 
@@ -55,46 +56,49 @@ const UserRecipes = () => {
     const userData = data.getUser;
     console.log(userData)
 
-    if(userData.recipes.length === 0) {
+    if (userData.recipes.length === 0) {
         return <div>
             <h1>No recipes created yet </h1>
             <p>Navigate over to the "Create New Recipe" tab to create your first one!</p>
         </div>
     }
-    
+
     return (
-        <>
-            <div>
-                <ImageList
-                    variant='masonry'
-                    cols={cols}
-                    gap={8}
-                    sx={{ px: 1, py: 3 }}
-                    className='recipeListInner'
-                >
-                    {userData.recipes.map((recipe, index) => (
-                        <div key={recipe._id}>
-                            <Link key={index} to={`/singleRecipe/${recipe._id}`}>
-                                <ImageListItem>
-                                    {recipe.image.map((image) => (
-                                        <img
-                                            key={image}
-                                            className='recipeImg'
-                                            src={image}
-                                            loading='lazy'
-                                        />
-                                    ))}
-                                    <ImageListItemBar
-                                        title={recipe.name}
-                                        subtitle={recipe.description}
-                                    />
-                                </ImageListItem>
-                            </Link>
-                        </div>
-                    ))}
-                </ImageList>
-            </div>
-        </>
+        <Box>
+            <ImageList
+                variant='masonry'
+                cols={cols}
+                gap={20}
+                sx={{ px: 1, py: 3 }}
+                className='recipeListInner'
+            >
+                {userData.recipes.map((recipe, index) => (
+                    <Link
+                        key={index}
+                        to={`/singleRecipe/${recipe._id}`}
+                    >
+                        <ImageListItem
+                            key={index}
+                            className='homeImageListItem'
+                        >
+                            {recipe.image.map((image) => (
+                                <img
+                                    key={image}
+                                    className='homeRecipeImage'
+                                    src={image}
+                                    loading='lazy'
+                                />
+                            ))}
+                            <ImageListItemBar
+                                title={recipe.name}
+                                subtitle={recipe.description}
+                                className='homeRecipeInfoBar'
+                            />
+                        </ImageListItem>
+                    </Link>
+                ))}
+            </ImageList>
+        </Box>
     )
 }
 

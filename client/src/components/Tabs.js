@@ -13,7 +13,7 @@ import UserRecipes from './UserRecipes';
 
 const theme = createTheme({
   components: {
-    
+
 
 
     MuiTab: {
@@ -64,9 +64,8 @@ export default function LabTabs() {
           </ThemeProvider>
         </Box>
 
-        {/* within each of the tabs - import a different componet */}
-        <TabPanel value="recipeList"> <UserRecipes /> </TabPanel>
-        <TabPanel value="createRecipe"> <CreateRecipe /> </TabPanel>
+        <TabPanel className='recipeListWrapper' value="recipeList"> <UserRecipes /> </TabPanel>
+        <TabPanel className='createRecipeWrapper' value="createRecipe"> <CreateRecipe /> </TabPanel>
       </TabContext>
     </Box>
   );

@@ -78,3 +78,15 @@ export const DELETE_RECIPE = gql`
         }
     }
 `;
+
+export const UPDATE_PROFILE = gql`
+    mutation UpdateProfile($userId: ID!, $username: String, $email: String, $avatar: String) {
+        updateProfile(userId: $userId, username: $username, email: $email, avatar: $avatar) {
+            _id
+            username
+            firstName
+            lastName
+            email
+        }
+    }
+`;

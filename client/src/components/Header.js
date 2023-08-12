@@ -56,10 +56,6 @@ export default function TemporaryDrawer() {
                             </ListItemButton>
 
                             <ListItemButton>
-                                <Link to="/upload" className="navlink">Upload</Link>
-                            </ListItemButton>
-
-                            <ListItemButton>
                                 <Link to="/createRecipe" className="navlink">Create Recipe</Link>
                             </ListItemButton>
 

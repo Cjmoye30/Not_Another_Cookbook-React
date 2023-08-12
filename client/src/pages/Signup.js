@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client';
 import { SIGNUP_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { useRef } from 'react';
+import { Link } from "react-router-dom"
 import '../styles/Signup.css'
 
 import { IKContext, IKUpload } from 'imagekitio-react';
@@ -25,7 +26,7 @@ const Signup = () => {
     const avatar2 = 'https://ik.imagekit.io/ofawn8dpgq/Project3_Avatars/defaultAvatar4.png?updatedAt=1688305286455';
     const avatar3 = 'https://ik.imagekit.io/ofawn8dpgq/Project3_Avatars/defaultAvatar5.png?updatedAt=1688305286440';
 
-    const [signupUser] = useMutation(SIGNUP_USER);
+    const [signupUser, { error, data }] = useMutation(SIGNUP_USER);
 
     // all of this needs to be consolidated
     const [email, setEmail] = useState("");
@@ -139,6 +140,14 @@ const Signup = () => {
                             value={username}
                             onChange={e => setUsername(e.target.value)}
                         />
+
+                        {/* Throw error if email is already in our database */}
+                        {error && (
+                            <div>
+                                <p className='errorMessage'>{error.message}</p>
+                                <p className='errorMessage'>Please navigate to the <Link to={'/login'}>Login Page</Link> to sign in.</p>
+                            </div>
+                        )}
 
                         <IKContext
                             publicKey={publicKey}

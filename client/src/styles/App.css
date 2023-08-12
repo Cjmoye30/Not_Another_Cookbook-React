@@ -1,15 +1,15 @@
 /* ----------- MAIN STYLE PAGE ----------- */
 /* ----------- All semantic elements should be styled here */
 
-* {
+/* * {
     border: 1px solid black;
-}
+} */
 
 :root {
 
     --a1: #323b32;
     --a2: #4A5859;
-    --a3: #e9ffe5;
+    --a3: #eeffe5;
     --a4: #F4B860;
     --a5: #C83E4D;
     
@@ -28,6 +28,7 @@ body {
     min-height: 100vh;
     margin: 0 auto;
     background-color: var(--a3);
+    padding: 0 5px;
 }
 
 a:visited, a:hover, a:link, a:active {

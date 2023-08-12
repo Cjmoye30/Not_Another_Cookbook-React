@@ -18,20 +18,20 @@ const Home = () => {
 
                 {Auth.loggedIn() ?
                     (
-                        <button className='homepagebutton button1'>
-                            <Link to={`/me`}>Dashboard</Link>
-                        </button>
+                        <Link to={`/me`}>
+                            <button className='homepagebutton button1'>Dashboard</button>
+                        </Link>
                     )
                     :
                     (
                         <div className='homeCTA'>
-                            <button className='homepagebutton button1'>
-                                <Link to={`/login`}>Login</Link>
-                            </button>
+                        <Link to={`/login`}>
+                            <button className='homepagebutton button1'>Login</button>
+                        </Link>
 
-                            <button className='homepagebutton button1'>
-                                <Link to={`/signup`}>Signup</Link>
-                            </button>
+                        <Link to={`/signup`}>
+                            <button className='homepagebutton button1'>Signup</button>
+                        </Link>
                         </div>
                     )}
             </div>

@@ -44,6 +44,14 @@ const resolvers = {
 
     Mutation: {
         signup: async (parent, { username, email, firstName, lastName, password, avatar }) => {
+
+            // if their email already exists - redirect to the login page
+            const checkUser = await User.findOne({ email: email })
+            if (checkUser) {
+                console.log(`${checkUser.email} is already in the database! redirect to login`);
+                throw new AuthenticationError('Email already exists.')
+            }
+
             const newUser = await User.create({ username, email, firstName, lastName, password, avatar });
             console.log("New User Info: ", newUser)
 
@@ -56,14 +64,14 @@ const resolvers = {
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email })
 
-            if (!email) {
-                throw new AuthenticationError(`ERROR: ${email} was not found in the database.`)
+            if (!user) {
+                throw new AuthenticationError(`Email not found`)
             }
 
             const checkPassword = await user.isCorrectPassword(password);
 
             if (!checkPassword) {
-                throw new AuthenticationError(`ERROR: Invalid password.`)
+                throw new AuthenticationError(`Incorrect password`)
             }
 
             console.log(`Loggin in : ${email}`)
@@ -73,6 +81,7 @@ const resolvers = {
 
             return { token, user }
         },
+
 
         addImage: async (parent, { userId, imageURL }, context) => {
             const newImage = await User.findOneAndUpdate(
@@ -109,6 +118,34 @@ const resolvers = {
             } catch (err) {
                 console.log("ERROR. New recipe not created", err)
             }
+        },
+
+
+        updateProfile: async (parent, { userId, username, email, avatar }, context) => {
+            // only able to edit username, email, and avatar
+            try {
+                console.log("request from update profile resolver.")
+                console.log("User to be updated: ", userId)
+
+                const updateProfile = await User.findOneAndUpdate(
+                    { _id: userId },
+                    {
+                        $set: {
+                            email: email,
+                            username: username,
+                            avatar: avatar
+                        }
+                    },
+                    { new: true, runValidators: true }
+                )
+
+                console.log("SUCCESS! Updated profile: ", updateProfile)
+                return updateProfile
+
+            } catch (err) {
+                console.log("ERROR from update profile resolver", err)
+            }
+
         },
 
         // update recipe - find one and update based on the ID and then pass in all of the variables

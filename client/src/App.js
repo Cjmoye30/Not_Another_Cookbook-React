@@ -7,7 +7,6 @@ import '../src/styles/App.css';
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import Profiles from './pages/ProfilesList'
-import Upload from './pages/Upload'
 import Login from './pages/Login'
 import Signup from './pages/Signup';
 import SingleRecipe from './pages/SingleRecipe';
@@ -37,7 +36,6 @@ function App() {
               <Route path="/me" element={<Profile />} />
               <Route path="/profile/:userId" element={<Profile />} />
               <Route path="/profiles" element={<Profiles />} />
-              <Route path="/upload" element={<Upload />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="singleRecipe/:recipeId" element={<SingleRecipe />} />

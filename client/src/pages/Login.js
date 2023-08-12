@@ -1,6 +1,5 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import { Link } from "react-router-dom"
 
 import { useState } from 'react';
@@ -10,7 +9,7 @@ import Auth from '../utils/auth';
 import '../styles/Login.css'
 
 const Login = () => {
-    const [loginUser] = useMutation(LOGIN_USER);
+    const [loginUser, { error, data }] = useMutation(LOGIN_USER);
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -45,6 +44,7 @@ const Login = () => {
             Auth.login(token)
 
         } catch (err) {
+            console.error(err)
             console.log("ERROR Logging in: ", err)
         }
     }
@@ -82,8 +82,23 @@ const Login = () => {
                     />
                     <button className='button1' type="submit">Login</button>
 
+
+                    {error && (
+                        <div>
+                            <p className='errorMessage'>
+                                {error.message.includes('Email not found') ? 'Email not found. Please try again or signup' : ''}
+                            </p>
+
+                            <p className='errorMessage'>
+                                {error.message.includes('Incorrect password') ? 'Incorrect password.' : ''}
+                            </p>
+                        </div>
+                    )}
+
                     <small className='ctaLogin'>Need an account? <Link to="/signup">Register here</Link></small>
+                    
                 </form>
+
             </div>
         </React.Fragment>
     );

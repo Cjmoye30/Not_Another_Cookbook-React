@@ -1,4 +1,5 @@
 .profileHeader {
+    position: relative;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -22,7 +23,17 @@
     /* border: 1px solid black; */
     border-radius: 20px;
     box-shadow: 0 10px 8px -7px black;
+}
 
+.profileEditIcons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+}
+
+.editIcon, .deleteIcon {
+    color: var(--a3);
 }
 
 .recipeImg {
@@ -30,7 +41,6 @@
 }
 
 /* ----------- CREATE RECIPE FORM ----------- */
-
 .createRecipeForm {
     padding: 20px;
     text-align: center;
@@ -66,4 +76,11 @@
 
 .measureField {
     width: 30%;
+}
+
+/* --------------- USER RECIPES --------------- */
+.recipeListWrapper, .createRecipeWrapper {
+    background-image: linear-gradient(#191c1e, var(--a1));
+    border-radius: 20px;
+    margin-bottom: 20px;
 }

@@ -28,7 +28,7 @@
     padding: 20px 0;
 }
 
-.homeImageListItem, .recipeImg {
+.homeImageListItem {
     overflow: hidden;
     border-radius: 5px;
     box-shadow: 0 10px 8px -7px black;
@@ -72,6 +72,7 @@
     border-radius: 5px;
     cursor: pointer;
     margin: 10px 30px;
+    font-size: 1.2rem;
 }
 
 .homepagebutton:hover {
