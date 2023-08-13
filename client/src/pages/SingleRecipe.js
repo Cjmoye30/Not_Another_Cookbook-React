@@ -11,6 +11,7 @@ import { useMutation } from '@apollo/client';
 import { DELETE_RECIPE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import Grid from '@mui/material/Grid';
+import Carousel from 'react-material-ui-carousel'
 
 const style = {
     position: 'absolute',
@@ -55,6 +56,9 @@ const SingleRecipe = () => {
     const ingredients = recipeData.ingredients
     const measure = recipeData.measure
     const instructions = recipeData.instructions
+    const images = recipeData.image;
+
+    console.log(images)
 
     const chef = data?.getRecipe.chef._id
     const loggedInUser = Auth.getProfile().data._id
@@ -71,12 +75,23 @@ const SingleRecipe = () => {
         <Box>
             <div className='headerWrapper'>
                 <h1 className='recipeTitle'>{recipeData.name}</h1>
-                <div className='singleRecipeImg'>
+                {/* <div className='singleRecipeImg'>
                     <img
                         src={recipeData.image}
                         className='headerImg'
                     />
-                </div>
+                </div> */}
+
+                <Carousel>
+                    {images.map((image) => (
+                        <div>
+                            <img className='singleRecipeHeroImage' src={image} />
+                        </div>
+                    ))}
+                </Carousel>
+
+
+
             </div>
 
             <Box className='ingAndMeasureWrapper'>

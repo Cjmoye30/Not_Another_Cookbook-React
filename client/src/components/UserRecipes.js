@@ -81,14 +81,20 @@ const UserRecipes = () => {
                             key={index}
                             className='homeImageListItem'
                         >
-                            {recipe.image.map((image) => (
+                            {/* {recipe.image.map((image) => (
                                 <img
                                     key={image}
                                     className='homeRecipeImage'
                                     src={image}
                                     loading='lazy'
                                 />
-                            ))}
+                            ))} */}
+                            <img
+                                key={recipe.image[0]}
+                                className='homeRecipeImage'
+                                src={recipe.image[0]}
+                                loading='lazy'
+                            />
                             <ImageListItemBar
                                 title={recipe.name}
                                 subtitle={recipe.description}

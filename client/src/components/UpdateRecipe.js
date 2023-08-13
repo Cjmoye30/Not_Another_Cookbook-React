@@ -8,10 +8,23 @@ import { Button } from '@mui/material';
 import { Link } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { UPDATE_RECIPE } from '../utils/mutations';
+import { useRef } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import { IKContext, IKUpload } from 'imagekitio-react';
+const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
+const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
+const isProduction = process.env.NODE_ENV === 'production';
+const authenticationEndpoint = isProduction
+    ? 'https://sleepy-beach-12267-a5c989dbbda6.herokuapp.com/auth'
+    : 'http://localhost:3000/auth';
+
+// update the folder to whatever is needed
+const folderDestination = '/react-cookbook-food-pics';
 
 const UpdateRecipe = () => {
 
-    const[updateRecipe] = useMutation(UPDATE_RECIPE)
+    const [updateRecipe] = useMutation(UPDATE_RECIPE)
 
     const { recipeId } = useParams();
 
@@ -21,19 +34,34 @@ const UpdateRecipe = () => {
     const recipeData = data?.getRecipe || {}
     console.log("RECIPE DATA: ", recipeData);
 
+    const recipeImages = recipeData.image
+
     const [updateData, setUpdateData] = useState({
         name: recipeData.name,
         description: recipeData.description,
         ingredients: recipeData.ingredients,
         measure: recipeData.measure,
-        instructions: recipeData.instructions
+        instructions: recipeData.instructions,
+        image: recipeData.image
     });
+
+    const onSuccess = res => {
+        console.log("New image URL to add to the array of images: ", res.url);
+        const updatedImages = [...updateData.image, res.url]
+
+        setUpdateData({
+            ...updateData,
+            image: updatedImages
+        });
+
+        console.log(updateData)
+    }
 
     const handleChange = (event, index, type) => {
         const { name, value } = event.target;
 
         /*
-        Ingredients, Measures, and Instructions are all arrays - which means we have to handle those differently
+        Ingredients, Measures, Images and Instructions are all arrays - which means we have to handle those differently
         */
 
         if (type === 'ingredients') {
@@ -108,18 +136,36 @@ const UpdateRecipe = () => {
         })
     }
 
-    const saveUpdates = async () => {
+    const [clickedImage, setClickedImage] = useState(false)
+    const toggleClass = () => {
+        setClickedImage(!clickedImage);
+    }
+
+    // onClick - give the image clicked an opactiy or something to indicate it is going to be removed
+    const removeImage = (index) => {
+        const updateImages = [...updateData.image]
+        updateImages.splice(index, 1);
+
+        setUpdateData({
+            ...updateData,
+            image: updateImages
+        })
+    }
+
+    const saveUpdates = async (e) => {
+        e.preventDefault();
         console.log("Updated Data: ", updateData)
-        
+
         try {
-            const {data} = await updateRecipe({
+            const { data } = await updateRecipe({
                 variables: {
                     recipeId: recipeId,
                     name: updateData.name,
                     description: updateData.description,
                     ingredients: updateData.ingredients,
                     measure: updateData.measure,
-                    instructions: updateData.instructions
+                    instructions: updateData.instructions,
+                    image: updateData.image
                 }
             })
 
@@ -132,6 +178,9 @@ const UpdateRecipe = () => {
             console.log(err)
         }
     }
+
+    const inputRefTest = useRef(null);
+    const ikUploadRefTest = useRef(null);
 
     if (loading) {
         return <>Loading...</>
@@ -148,7 +197,7 @@ const UpdateRecipe = () => {
     return (
         <>
             <React.Fragment>
-                <form className='updateRecipeModal'>
+                <form className='updateRecipeModal' onSubmit={saveUpdates}>
 
                     <h1>Edit Recipe:</h1>
 
@@ -209,16 +258,54 @@ const UpdateRecipe = () => {
                                 sx={{ m: 1 }}
                                 key={`ins${index}`}
                             />
-                            <Button onClick={() => removeInstruction(index)}>Remove</Button>
+                            <Button
+                                onClick={() => removeInstruction(index)}
+                            >
+                                Remove
+                            </Button>
                         </div>
                     ))}
                     <Button onClick={addInstructions} variant='outlined'>Add Field</Button>
 
                     <hr />
 
-                    <h2>Upload Additional Image:</h2>
-                    <small>We can only load 1 at a time for now</small>
-                    
+                    <h2>Upload Images:</h2>
+
+                    <IKContext
+                        publicKey={publicKey}
+                        urlEndpoint={urlEndpoint}
+                        authenticationEndpoint={authenticationEndpoint}
+                    >
+                        <IKUpload
+                            className='uploadImage'
+                            fileName="test-upload.png"
+                            useUniqueFileName={true}
+                            folder={folderDestination}
+                            inputRef={inputRefTest}
+                            ref={ikUploadRefTest}
+                            onSuccess={onSuccess}
+                        // style={{ display: 'none' }}
+                        />
+
+                        {/* {inputRefTest && <button className='customUploadButton button1' onClick={() => inputRefTest.current.click()}>Upload</button>} */}
+                    </IKContext>
+
+                    <h2>Delete Images:</h2>
+
+                    <div className='editImagesWrapper'>
+                        {recipeImages.map((image, index) => (
+                            <div className='editImagesWrapper'>
+                                <img className='editImages' src={image} />
+                                <DeleteIcon
+                                    onClick={() => removeImage(index)}
+                                    className='deleteIcon'
+                                />
+                            </div>
+
+                        ))}
+                    </div>
+
+
                 </form>
 
                 <Button onClick={saveUpdates} variant='contained'>Save!</Button>

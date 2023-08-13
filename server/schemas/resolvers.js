@@ -82,17 +82,6 @@ const resolvers = {
             return { token, user }
         },
 
-
-        addImage: async (parent, { userId, imageURL }, context) => {
-            const newImage = await User.findOneAndUpdate(
-                { _id: userId },
-                { $addToSet: { images: imageURL } },
-                { new: true, runValidators: true }
-            )
-
-            return newImage;
-        },
-
         addRecipe: async (parent, { name, description, ingredients, measure, instructions, image }, context) => {
 
             try {
@@ -139,7 +128,12 @@ const resolvers = {
                     { new: true, runValidators: true }
                 )
 
-                console.log("SUCCESS! Updated profile: ", updateProfile)
+                //update the token with the new info
+
+                console.log("SUCCESS! Updated profile: ", updateProfile);
+                const token = signToken(updateProfile)
+                console.log("update token: ", token)
+
                 return updateProfile
 
             } catch (err) {
@@ -163,15 +157,13 @@ const resolvers = {
                             ingredients: ingredients,
                             measure: measure,
                             instructions: instructions,
+                            image: image
                         }
                     },
                     { $addToSet: { image: image } },
                     { new: true, runValidators: true }
                 )
-
                 return updateRecipe
-
-
             } catch (err) {
                 console.log("ERROR. Recipe not updated: ", err)
             }

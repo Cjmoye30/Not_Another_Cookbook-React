@@ -24,20 +24,6 @@ export const SIGNUP_USER = gql`
     }
 `;
 
-export const ADD_IMAGE = gql`
-    mutation AddImage($userId: ID!, $imageURL: String!) {
-        addImage(userId: $userId, imageURL: $imageURL) {
-            _id
-            username
-            firstName
-            lastName
-            avatar
-            email
-            images
-        }
-    }
-`;
-
 export const ADD_RECIPE = gql`
     mutation Mutation($name: String!, $description: String, $ingredients: [String], $measure: [String], $instructions: [String], $image: [String]){
         addRecipe(name: $name, description: $description, ingredients: $ingredients, measure: $measure, instructions: $instructions, image: $image) {

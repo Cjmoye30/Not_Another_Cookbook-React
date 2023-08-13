@@ -5,8 +5,8 @@
     flex-direction: column;
 }
 
-.singleRecipeImg {
-    padding: 10px;
+.singleRecipeHeroImage {
+    height: 800px;
 }
 
 .headerImg {
@@ -121,3 +121,31 @@
 .ingAndMeasureRow, .instructionRow {
     display: flex;
 }
+
+.editImagesWrapper {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.editImages {
+    height: 200px;
+    width: auto;
+    margin: 2px;
+    border-radius: 5px;
+}
+
+.deleteIcon {
+    position: absolute;
+    right: 0;
+    color: var(--a3);
+    padding: 5px;
+}
+
+.stageDelete {
+    opacity: .5;
+}
+
+/* when I clicke on the delte button for an image, I want to have an opacity displayed to indicate that the image is now staged for delete since there is no indication at the moment that the button has been clicked */

@@ -53,7 +53,7 @@ const RecipesList = () => {
                                 <img
                                     key={recipe._id}
                                     className='homeRecipeImage'
-                                    src={recipe.image}
+                                    src={recipe.image[0]}
                                     loading='lazy'
                                 />
                                 <ImageListItemBar
