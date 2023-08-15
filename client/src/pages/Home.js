@@ -5,11 +5,13 @@ import RecipesList from '../components/RecipesList'
 import { Link } from "react-router-dom";
 import Auth from '../utils/auth'
 import '../styles/Home.css'
+import NavIcons from '../components/NavIcons';
 
 const Home = () => {
 
     return (
         <>
+        <NavIcons />
             <div className='homeHeader'>
                 <h1 className='homeTitle'>Welcome, to Not Another Cookbook</h1>
                 <p className='homeBio'>Step into a culinary paradise like no other – a haven free from the chaos of ads and tiresome bios. Our mission is to bring you a seamless, limited-user biography site that celebrates the art of cooking. Say farewell to distractions and welcome a focused experience that takes you straight to the heart of what matters: delicious recipes!</p>
@@ -25,13 +27,13 @@ const Home = () => {
                     :
                     (
                         <div className='homeCTA'>
-                        <Link to={`/login`}>
-                            <button className='homepagebutton button1'>Login</button>
-                        </Link>
+                            <Link to={`/login`}>
+                                <button className='homepagebutton button1'>Login</button>
+                            </Link>
 
-                        <Link to={`/signup`}>
-                            <button className='homepagebutton button1'>Signup</button>
-                        </Link>
+                            <Link to={`/signup`}>
+                                <button className='homepagebutton button1'>Signup</button>
+                            </Link>
                         </div>
                     )}
             </div>

@@ -8,6 +8,7 @@ import Auth from '../utils/auth';
 import { useRef } from 'react';
 import { Link } from "react-router-dom"
 import '../styles/Signup.css'
+import NavIcons from '../components/NavIcons';
 
 import { IKContext, IKUpload } from 'imagekitio-react';
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
@@ -82,6 +83,7 @@ const Signup = () => {
 
     return (
         <>
+        <NavIcons />
             <React.Fragment>
                 <div className='outerForm'>
                     <form className='signupForm' autoComplete='off' onSubmit={handleSubmit}>

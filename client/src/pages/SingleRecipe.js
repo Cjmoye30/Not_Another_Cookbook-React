@@ -11,7 +11,8 @@ import { useMutation } from '@apollo/client';
 import { DELETE_RECIPE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import Grid from '@mui/material/Grid';
-import Carousel from 'react-material-ui-carousel'
+import Carousel from 'react-material-ui-carousel';
+import NavIcons from '../components/NavIcons';
 
 const style = {
     position: 'absolute',
@@ -72,107 +73,95 @@ const SingleRecipe = () => {
     }
 
     return (
-        <Box>
-            <div className='headerWrapper'>
-                <h1 className='recipeTitle'>{recipeData.name}</h1>
-                {/* <div className='singleRecipeImg'>
-                    <img
-                        src={recipeData.image}
-                        className='headerImg'
-                    />
-                </div> */}
+        <>
+            <NavIcons />
+            <Box>
+                <div className='headerWrapper'>
+                    <div className='headerTitleDesc'>
+                        <h1 className='recipeTitle'>{recipeData.name}</h1>
 
-                <Carousel>
-                    {images.map((image) => (
-                        <div>
-                            <img className='singleRecipeHeroImage' src={image} />
-                        </div>
-                    ))}
-                </Carousel>
+                        <hr />
 
-
-
-            </div>
-
-            <Box className='ingAndMeasureWrapper'>
-                <h2 className='sectionTitle'>Ingredients & Measurements</h2>
-                <div className='outerWrapper'>
-                    <Grid className='ingAndMeasureContainer' container >
-                        <Grid className='ingAndMeasureHeader ingHeader' item xs={6}>
-                            <h2>Ingredient</h2>
-                        </Grid>
-                        <Grid className='ingAndMeasureHeader measureHeader' item xs={6}>
-                            <h2>Measure</h2>
-                        </Grid>
-
-                        {ingredients.map((ingredient, index) => (
-                            <Grid container key={index}>
-                                <Grid className='ingAndMeasureItem gridIng gridItem' item xs={6}>
-                                    <p>{ingredient}</p>
-                                </Grid>
-                                <Grid className='ingAndMeasureItem gridMeas gridItem' item xs={6}>
-                                    <p>{measure[index]}</p>
-                                </Grid>
-                            </Grid>
+                        <h3 className='recipeDesc'>{recipeData.description}</h3>
+                    </div>
+                    <Carousel>
+                        {images.map((image) => (
+                            <div>
+                                <img className='singleRecipeHeroImage' src={image} />
+                            </div>
                         ))}
-                    </Grid>
+                    </Carousel>
                 </div>
-            </Box>
 
-            <Box className='instructionsWrapper'>
-                <h2 className='sectionTitle instructionTitle'>Instructions</h2>
-                <div className='outerWrapper'>
-                    <Grid className='instructionsContainer' container>
-                        {instructions.map((instruction, index) => (
-                            <Grid container key={index}>
-                                <Grid className='gridItem' item xs={3}>
-                                    <p>{`Step ${index + 1}:`}</p>
-                                </Grid>
-                                <Grid className='gridItem gridInstruction' item xs={9}>
-                                    <p>{instruction}</p>
-                                </Grid>
+                <Box className='ingAndMeasureWrapper'>
+                    <h2 className='sectionTitle'>Ingredients & Measurements</h2>
+                    <div className='outerWrapper'>
+                        <Grid className='ingAndMeasureContainer' container >
+                            <Grid className='ingAndMeasureHeader ingHeader' item xs={6}>
+                                <h2>Ingredient</h2>
                             </Grid>
-                        ))}
-                    </Grid>
-                </div>
-            </Box>
+                            <Grid className='ingAndMeasureHeader measureHeader' item xs={6}>
+                                <h2>Measure</h2>
+                            </Grid>
 
-            <Box
-                sx={{ textAlign: 'center' }}
-            >
-                <h3>Coming soon:</h3>
-                <p>Notes Section</p>
-                <p>Recipe inspiration links</p>
-                <p>Upload more than 1 image at a time - imagekit.io only allows for 1 image and I have to use multer to upload multiform data</p>
-
-            </Box>
-
-            {loggedInUser === chef ? (
-                <div className='recipeEditbuttons'>
-                    <Button variant='outlined' onClick={handleOpen}>Edit</Button>
-                    <Button variant='contained' color='error' onClick={deleteRecipe}>DELETE</Button>
-                </div>
-            ) : (
-                <></>
-            )}
-
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-                className='updateRecipeModal'
-            >
-                <Box
-                    className='modal-body'
-                    sx={style}
-                >
-                    <UpdateRecipe />
-
+                            {ingredients.map((ingredient, index) => (
+                                <Grid container key={index}>
+                                    <Grid className='ingAndMeasureItem gridIng gridItem' item xs={6}>
+                                        <p>{ingredient}</p>
+                                    </Grid>
+                                    <Grid className='ingAndMeasureItem gridMeas gridItem' item xs={6}>
+                                        <p>{measure[index]}</p>
+                                    </Grid>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </div>
                 </Box>
-            </Modal>
 
-        </Box>
+                <Box className='instructionsWrapper'>
+                    <h2 className='sectionTitle instructionTitle'>Instructions</h2>
+                    <div className='outerWrapper'>
+                        <Grid className='instructionsContainer' container>
+                            {instructions.map((instruction, index) => (
+                                <Grid container key={index}>
+                                    <Grid className='gridItem' item xs={3}>
+                                        <p>{`Step ${index + 1}:`}</p>
+                                    </Grid>
+                                    <Grid className='gridItem gridInstruction' item xs={9}>
+                                        <p>{instruction}</p>
+                                    </Grid>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </div>
+                </Box>
+
+                {loggedInUser === chef ? (
+                    <div className='recipeEditbuttons'>
+                        <button className='button1' onClick={handleOpen}>Edit</button>
+                        <button className='button2' onClick={deleteRecipe}>DELETE</button>
+                    </div>
+                ) : (
+                    <></>
+                )}
+
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                    className='updateRecipeModal'
+                >
+                    <Box
+                        className='modal-body'
+                        sx={style}
+                    >
+                        <UpdateRecipe />
+
+                    </Box>
+                </Modal>
+            </Box>
+        </>
     )
 }
 

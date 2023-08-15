@@ -31,7 +31,6 @@ function App() {
           <Header />
           <div className="container">
             <Routes>
-
               <Route path="/" element={<Home />} />
               <Route path="/me" element={<Profile />} />
               <Route path="/profile/:userId" element={<Profile />} />
@@ -39,7 +38,6 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="singleRecipe/:recipeId" element={<SingleRecipe />} />
-
             </Routes>
           </div>
           <Footer />

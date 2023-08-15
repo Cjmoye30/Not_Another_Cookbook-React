@@ -136,10 +136,8 @@ const UpdateRecipe = () => {
         })
     }
 
-    const [clickedImage, setClickedImage] = useState(false)
-    const toggleClass = () => {
-        setClickedImage(!clickedImage);
-    }
+    const [clickedImage, setClickedImage] = useState({})
+
 
     // onClick - give the image clicked an opactiy or something to indicate it is going to be removed
     const removeImage = (index) => {
@@ -150,6 +148,8 @@ const UpdateRecipe = () => {
             ...updateData,
             image: updateImages
         })
+
+        setClickedImage({ ...clickedImage, [index]: true })
     }
 
     const saveUpdates = async (e) => {
@@ -199,116 +199,126 @@ const UpdateRecipe = () => {
             <React.Fragment>
                 <form className='updateRecipeModal' onSubmit={saveUpdates}>
 
-                    <h1>Edit Recipe:</h1>
+                    <h1 className='modalTitle'>Edit Recipe:</h1>
 
                     <hr />
 
-                    <h2>Name and Description:</h2>
-                    <TextField
-                        name='name'
-                        value={updateData.name}
-                        fullWidth
-                        onChange={handleChange}
-                        sx={{ m: 1 }}
-                    />
-                    <TextField
-                        name='description'
-                        value={updateData.description}
-                        fullWidth
-                        onChange={handleChange}
-                        sx={{ m: 1 }}
-                    />
-
-                    <hr />
-
-                    <h2>Ingredients and Measurements:</h2>
-                    {/* map out ingredients and measures */}
-                    {updateData.ingredients.map((ingredient, index) => (
-                        <div key={`ingMeaRow${index}`} className='ingAndMeasureRow'>
-                            <TextField
-                                value={ingredient}
-                                fullWidth
-                                onChange={(e) => handleChange(e, index, 'ingredients')}
-                                sx={{ m: 1 }}
-                                key={`ing${index}`}
-                            />
-                            <TextField
-                                value={updateData.measure[index]}
-                                fullWidth
-                                onChange={(e) => handleChange(e, index, 'measure')}
-                                sx={{ m: 1 }}
-                                key={`mea${index}`}
-                            />
-
-                            <Button onClick={() => removeIngredientsAndMeasure(index)}>Remove</Button>
-                        </div>
-                    ))}
-
-                    <Button onClick={addIngredients} variant='outlined'>Add Field</Button>
-
-                    <hr />
-
-                    <h2>Instructions:</h2>
-                    {updateData.instructions.map((instruction, index) => (
-                        <div key={`instRow${index}`} className='instructionRow'>
-                            <TextField
-                                value={instruction}
-                                fullWidth
-                                onChange={(e) => handleChange(e, index, 'instructions')}
-                                sx={{ m: 1 }}
-                                key={`ins${index}`}
-                            />
-                            <Button
-                                onClick={() => removeInstruction(index)}
-                            >
-                                Remove
-                            </Button>
-                        </div>
-                    ))}
-                    <Button onClick={addInstructions} variant='outlined'>Add Field</Button>
-
-                    <hr />
-
-                    <h2>Upload Images:</h2>
-
-                    <IKContext
-                        publicKey={publicKey}
-                        urlEndpoint={urlEndpoint}
-                        authenticationEndpoint={authenticationEndpoint}
-                    >
-                        <IKUpload
-                            className='uploadImage'
-                            fileName="test-upload.png"
-                            useUniqueFileName={true}
-                            folder={folderDestination}
-                            inputRef={inputRefTest}
-                            ref={ikUploadRefTest}
-                            onSuccess={onSuccess}
-                        // style={{ display: 'none' }}
+                    <div className='modalSection'>
+                        <h2 className='modalSectionTitle'>Name and Description:</h2>
+                        <TextField
+                            name='name'
+                            value={updateData.name}
+                            fullWidth
+                            onChange={handleChange}
+                            sx={{ m: 1 }}
                         />
-
-                        {/* {inputRefTest && <button className='customUploadButton button1' onClick={() => inputRefTest.current.click()}>Upload</button>} */}
-                    </IKContext>
-
-                    <h2>Delete Images:</h2>
-
-                    <div className='editImagesWrapper'>
-                        {recipeImages.map((image, index) => (
-                            <div className='editImagesWrapper'>
-                                <img className='editImages' src={image} />
-                                <DeleteIcon
-                                    onClick={() => removeImage(index)}
-                                    className='deleteIcon'
-                                />
-                            </div>
-
-                        ))}
+                        <TextField
+                            name='description'
+                            value={updateData.description}
+                            fullWidth
+                            onChange={handleChange}
+                            sx={{ m: 1 }}
+                        />
                     </div>
 
+                    <div className='modalSection'>
+                        <h2 className='modalSectionTitle'>Ingredients and Measurements:</h2>
+                        {/* map out ingredients and measures */}
+                        {updateData.ingredients.map((ingredient, index) => (
+                            <div key={`ingMeaRow${index}`} className='ingAndMeasureRow'>
+                                <TextField
+                                    value={ingredient}
+                                    fullWidth
+                                    onChange={(e) => handleChange(e, index, 'ingredients')}
+                                    sx={{ m: 1 }}
+                                    key={`ing${index}`}
+                                />
+                                <TextField
+                                    value={updateData.measure[index]}
+                                    fullWidth
+                                    onChange={(e) => handleChange(e, index, 'measure')}
+                                    sx={{ m: 1 }}
+                                    key={`mea${index}`}
+                                />
 
+                                <Button onClick={() => removeIngredientsAndMeasure(index)}>Remove</Button>
+                            </div>
+                        ))}
+
+                        <Button onClick={addIngredients} variant='outlined'>Add Field</Button>
+                    </div>
+
+                    <div className='modalSection'>
+                        <h2 className='modalSectionTitle'>Instructions:</h2>
+                        {updateData.instructions.map((instruction, index) => (
+                            <div key={`instRow${index}`} className='instructionRow'>
+                                <TextField
+                                    value={instruction}
+                                    fullWidth
+                                    onChange={(e) => handleChange(e, index, 'instructions')}
+                                    sx={{ m: 1 }}
+                                    key={`ins${index}`}
+                                />
+                                <Button
+                                    onClick={() => removeInstruction(index)}
+                                >
+                                    Remove
+                                </Button>
+                            </div>
+                        ))}
+                        <Button onClick={addInstructions} variant='outlined'>Add Field</Button>
+                    </div>
+
+                    <div className='modalSection'>
+                        <h2 className='modalSectionTitle'>Upload Images:</h2>
+
+                        <IKContext
+                            publicKey={publicKey}
+                            urlEndpoint={urlEndpoint}
+                            authenticationEndpoint={authenticationEndpoint}
+                        >
+                            <IKUpload
+                                className='uploadImage'
+                                fileName="test-upload.png"
+                                useUniqueFileName={true}
+                                folder={folderDestination}
+                                inputRef={inputRefTest}
+                                ref={ikUploadRefTest}
+                                onSuccess={onSuccess}
+                            // style={{ display: 'none' }}
+                            />
+
+                            {/* {inputRefTest && <button className='customUploadButton button1' onClick={() => inputRefTest.current.click()}>Upload</button>} */}
+                        </IKContext>
+                    </div>
+
+                    <div className='modalSection'>
+
+                        <h2 className='modalSectionTitle'>Delete Images:</h2>
+
+                        <div className='editImagesWrapper'>
+                            {recipeImages.map((image, index) => (
+
+                                // here we are calling our stateful variable 'clickedImage', and updating the state whenever the deleteIcon/removeImage function is clicked. Within the removeImage function we are updating the state of clickedImage, which gives it a className of 'hidden' that is styled in CSS
+                                <div className={`editImagesWrapper ${clickedImage[index] ? 'hidden' : ''}`}>
+                                    <img
+                                        className='editImages'
+                                        src={image}
+                                    />
+                                    <DeleteIcon
+                                        onClick={() => removeImage(index)}
+                                        className='deleteIcon'
+                                    />
+                                </div>
+
+                            ))}
+                        </div>
+
+
+                    </div>
                 </form>
 
-                <Button onClick={saveUpdates} variant='contained'>Save!</Button>
+                <button className='button1 modalSubmitButton' onClick={saveUpdates} >Save!</button>
 
             </React.Fragment>
 

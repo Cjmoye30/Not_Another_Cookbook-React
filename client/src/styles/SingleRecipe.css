@@ -1,12 +1,31 @@
 .headerWrapper {
     display: flex;
     text-align: center;
-    width: 100%;
     flex-direction: column;
+    /* background-color: whitesmoke; */
+    background-image: linear-gradient(white, var(--a3), white);
+    /* background-image: linear-gradient(var(--a3), white, var(--a3)); */
+    border: 1px solid black;
+    max-width: 1250px;
+    margin: 20px auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 8px -7px black;
+    overflow: hidden;
+}
+
+.headerTitleDesc {
+    background-color: var(--a2);
+    color: var(--a3);
+    padding: 30px;
+    border-bottom: 3px solid var(--a4);
+    font-family: var(--fontHeaders);
 }
 
 .singleRecipeHeroImage {
-    height: 800px;
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: 0 10px 8px -7px black;
+    margin: 20px;
 }
 
 .headerImg {
@@ -18,8 +37,9 @@
     border: 1px solid linear-gradient(#191c1e, var(--a1));
 }
 
-.recipeTitle {
+.recipeTitle, .recipeDesc {
     padding: 0;
+    margin: 0 auto;
 }
 
 .ingAndMeasureWrapper {
@@ -42,13 +62,14 @@
     color: var(--a2);
     text-align: center;
     font-size: 1.2rem;
+    border: 1px solid var(--a4);
 }
 
 .instructionsContainer {
     background-color: white;
+    border: 1px solid var(--a4);
     padding: 30px;
     box-shadow: 0 10px 8px -7px black;
-    border: 1px solid linear-gradient(#191c1e, var(--a1));
     border-radius: 10px;
     font-size: 1.2rem;
 }
@@ -101,8 +122,28 @@
 }
 
 /* --------------------- Update Recipe Modal ---------------------*/
+.modalSection {
+    border: 1px solid var(--a1);
+    border-radius: 10px;
+    box-shadow: 0 10px 8px -7px black;
+    padding: 15px;
+    margin: 30px auto;
+    background-color: whitesmoke;
+}
+
+.modalTitle {
+    font-family: var(--fontTitle);
+}
+
+.modalSectionTitle {
+    font-family: var(--fontHeaders);
+}
+
 .recipeEditbuttons {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 40px;
 }
 
 .updateRecipeModal {
@@ -131,21 +172,27 @@
 }
 
 .editImages {
-    height: 200px;
+    height: 175px;
     width: auto;
-    margin: 2px;
+    margin: 10px;
     border-radius: 5px;
+    border: 1px solid var(--a1);
 }
 
 .deleteIcon {
     position: absolute;
     right: 0;
     color: var(--a3);
-    padding: 5px;
+    padding: 10px;
+    cursor: pointer;
 }
 
-.stageDelete {
+.hidden {
     opacity: .5;
+}
+
+.modalSubmitButton {
+    width: 90%;
 }
 
 /* when I clicke on the delte button for an image, I want to have an opacity displayed to indicate that the image is now staged for delete since there is no indication at the moment that the button has been clicked */

@@ -2,14 +2,15 @@ import React from 'react';
 import Tabs from '../components/Tabs'
 import { useQuery } from '@apollo/client';
 import { GET_USER, GET_ME } from '../utils/queries';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/Profile.css'
 import { Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from '@mui/material/Modal';
 import UpdateProfile from '../components/UpdateProfile';
 import Box from '@mui/material/Box';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const style = {
     position: 'absolute',
@@ -26,6 +27,15 @@ const style = {
 
 
 const Profile = () => {
+
+    const navigate = useNavigate();
+    const goBack = () => {
+        navigate(-1);
+    }
+    const goForward = () => {
+        navigate(1);
+    }
+
     const { userId } = useParams();
     // console.log("ID from params: ", userId);
 
@@ -51,6 +61,17 @@ const Profile = () => {
     // console.log("Data for the user: ", user);
     return (
         <>
+
+            <div className='navIcons'>
+                <div onClick={goBack}>
+                    <ArrowBackIcon className='navIcon' />
+                </div>
+
+                <div onClick={goForward}>
+                    <ArrowForwardIcon className='navIcon' />
+                </div>
+            </div>
+
             <div className='profileHeader'>
                 <img className='profileAvatar' src={user.avatar} />
 
