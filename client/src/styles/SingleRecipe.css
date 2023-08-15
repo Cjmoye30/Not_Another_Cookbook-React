@@ -22,7 +22,8 @@
 }
 
 .singleRecipeHeroImage {
-    height: 500px;
+    height: auto;
+    width: 90%;
     border-radius: 20px;
     box-shadow: 0 10px 8px -7px black;
     margin: 20px;
