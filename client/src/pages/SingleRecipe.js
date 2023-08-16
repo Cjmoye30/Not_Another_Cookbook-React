@@ -19,10 +19,10 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
-    height: '80vh',
+    // width: '90%',
+    // height: '80vh',
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '1px solid #000',
     boxShadow: 24,
     p: 4,
 };
@@ -74,6 +74,8 @@ const SingleRecipe = () => {
 
     return (
         <>
+
+            {/* use the grid to scale it down? */}
             <NavIcons />
             <Box>
                 <div className='headerWrapper'>
@@ -84,24 +86,28 @@ const SingleRecipe = () => {
 
                         <h3 className='recipeDesc'>{recipeData.description}</h3>
                     </div>
-                    <Carousel>
-                        {images.map((image) => (
-                            <div>
-                                <img className='singleRecipeHeroImage' src={image} />
-                            </div>
-                        ))}
-                    </Carousel>
+                    <div className='testWrapper'>
+                        <Carousel className='carousel'>
+                            {images.map((image) => (
+                                <div className='testDiv'>
+                                    <img className='singleRecipeHeroImage' src={image} />
+                                </div>
+                            ))}
+                        </Carousel>
+                    </div>
                 </div>
 
                 <Box className='ingAndMeasureWrapper'>
                     <h2 className='sectionTitle'>Ingredients & Measurements</h2>
-                    <div className='outerWrapper'>
-                        <Grid className='ingAndMeasureContainer' container >
-                            <Grid className='ingAndMeasureHeader ingHeader' item xs={6}>
-                                <h2>Ingredient</h2>
-                            </Grid>
-                            <Grid className='ingAndMeasureHeader measureHeader' item xs={6}>
-                                <h2>Measure</h2>
+                    <Grid container className='outerWrapper'>
+                        <Grid className='ingAndMeasureContainer' item xs={12}>
+                            <Grid sx={{display: 'flex'}} item xs={12}>
+                                <Grid className='ingAndMeasureHeader ingHeader' item xs={6}>
+                                    <h2>Ingredient</h2>
+                                </Grid>
+                                <Grid className='ingAndMeasureHeader measureHeader' item xs={6}>
+                                    <h2>Measure</h2>
+                                </Grid>
                             </Grid>
 
                             {ingredients.map((ingredient, index) => (
@@ -115,7 +121,7 @@ const SingleRecipe = () => {
                                 </Grid>
                             ))}
                         </Grid>
-                    </div>
+                    </Grid>
                 </Box>
 
                 <Box className='instructionsWrapper'>
@@ -150,7 +156,6 @@ const SingleRecipe = () => {
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
-                    className='updateRecipeModal'
                 >
                     <Box
                         className='modal-body'

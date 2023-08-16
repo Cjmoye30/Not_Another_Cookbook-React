@@ -57,7 +57,7 @@ const Login = () => {
             <React.Fragment>
                 <div className='outerForm'>
                     <form className='loginForm' autoComplete="off" onSubmit={handleSubmit}>
-                        <h2>Login to your Account: </h2>
+                        <h1 className='formTitle'>Login to your Account: </h1>
                         <TextField
                             label="Email"
                             className='loginField'

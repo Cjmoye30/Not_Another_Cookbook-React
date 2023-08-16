@@ -10,8 +10,9 @@ import { useMutation } from '@apollo/client';
 import { UPDATE_RECIPE } from '../utils/mutations';
 import { useRef } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Grid from '@mui/material/Grid';
 
-import { IKContext, IKUpload } from 'imagekitio-react';
+import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
 const isProduction = process.env.NODE_ENV === 'production';
@@ -42,7 +43,8 @@ const UpdateRecipe = () => {
         ingredients: recipeData.ingredients,
         measure: recipeData.measure,
         instructions: recipeData.instructions,
-        image: recipeData.image
+        image: recipeData.image,
+        uploadImagePreview: ''
     });
 
     const onSuccess = res => {
@@ -51,13 +53,15 @@ const UpdateRecipe = () => {
 
         setUpdateData({
             ...updateData,
-            image: updatedImages
+            image: updatedImages,
+            uploadImagePreview: res.url
         });
 
         console.log(updateData)
     }
 
     const handleChange = (event, index, type) => {
+        event.preventDefault();
         const { name, value } = event.target;
 
         /*
@@ -211,6 +215,7 @@ const UpdateRecipe = () => {
                             fullWidth
                             onChange={handleChange}
                             sx={{ m: 1 }}
+                            size='small'
                         />
                         <TextField
                             name='description'
@@ -218,6 +223,7 @@ const UpdateRecipe = () => {
                             fullWidth
                             onChange={handleChange}
                             sx={{ m: 1 }}
+                            size='small'
                         />
                     </div>
 
@@ -226,22 +232,32 @@ const UpdateRecipe = () => {
                         {/* map out ingredients and measures */}
                         {updateData.ingredients.map((ingredient, index) => (
                             <div key={`ingMeaRow${index}`} className='ingAndMeasureRow'>
-                                <TextField
-                                    value={ingredient}
-                                    fullWidth
-                                    onChange={(e) => handleChange(e, index, 'ingredients')}
-                                    sx={{ m: 1 }}
-                                    key={`ing${index}`}
-                                />
-                                <TextField
-                                    value={updateData.measure[index]}
-                                    fullWidth
-                                    onChange={(e) => handleChange(e, index, 'measure')}
-                                    sx={{ m: 1 }}
-                                    key={`mea${index}`}
-                                />
+                                <Grid container>
 
-                                <Button onClick={() => removeIngredientsAndMeasure(index)}>Remove</Button>
+                                    <Grid item sm={5} xs={12}>
+                                        <TextField
+                                            value={ingredient}
+                                            onChange={(e) => handleChange(e, index, 'ingredients')}
+                                            sx={{ m: 1, width: '90%' }}
+                                            key={`ing${index}`}
+                                            size='small'
+                                        />
+                                    </Grid>
+
+                                    <Grid item sm={5} xs={12}>
+                                        <TextField
+                                            value={updateData.measure[index]}
+                                            onChange={(e) => handleChange(e, index, 'measure')}
+                                            sx={{ m: 1, width: '90%' }}
+                                            key={`mea${index}`}
+                                            size='small'
+                                        />
+                                    </Grid>
+
+                                    <Grid item sm={2} xs={12} className='removeButtonWrapper'>
+                                        <Button onClick={() => removeIngredientsAndMeasure(index)}>Remove</Button>
+                                    </Grid>
+                                </Grid>
                             </div>
                         ))}
 
@@ -258,6 +274,8 @@ const UpdateRecipe = () => {
                                     onChange={(e) => handleChange(e, index, 'instructions')}
                                     sx={{ m: 1 }}
                                     key={`ins${index}`}
+                                    multiline={true}
+                                    rows={2}
                                 />
                                 <Button
                                     onClick={() => removeInstruction(index)}
@@ -289,7 +307,21 @@ const UpdateRecipe = () => {
                             />
 
                             {/* {inputRefTest && <button className='customUploadButton button1' onClick={() => inputRefTest.current.click()}>Upload</button>} */}
+
                         </IKContext>
+
+                        {updateData.uploadImagePreview !== '' ? (
+                            <div>
+                                <p>Preview:</p>
+                                <div>
+                                    <img src={updateData.uploadImagePreview} className='imagePreview' />
+                                </div>
+                            </div>
+                        ) : (
+                            <></>
+                        )}
+
+
                     </div>
 
                     <div className='modalSection'>

@@ -6,11 +6,11 @@
     background-image: linear-gradient(white, var(--a3), white);
     /* background-image: linear-gradient(var(--a3), white, var(--a3)); */
     border: 1px solid black;
-    max-width: 1250px;
     margin: 20px auto;
     border-radius: 20px;
     box-shadow: 0 10px 8px -7px black;
     overflow: hidden;
+    max-width: 1500px;
 }
 
 .headerTitleDesc {
@@ -21,12 +21,30 @@
     font-family: var(--fontHeaders);
 }
 
+.testWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.carousel {
+    height: 100%;
+    width: 100%; /* Adjust width to fit the content */
+    max-width: 800px;
+}
+
 .singleRecipeHeroImage {
-    height: auto;
-    width: 90%;
+    max-width: 98%;
+    max-height: 600px;
+    width: auto; /* Make sure the image doesn't exceed the container's width */
     border-radius: 20px;
     box-shadow: 0 10px 8px -7px black;
-    margin: 20px;
+    margin: 20px auto; /* Center the image horizontally */
+    object-fit: cover;
+    object-position: center;
 }
 
 .headerImg {
@@ -52,6 +70,7 @@
     background-image: linear-gradient(#191c1e, var(--a1), #191c1e);
     color: black;
     padding: 30px 0;
+    border-radius: 10px;
 }
 
 .ingAndMeasureContainer {
@@ -62,7 +81,6 @@
     border: 1px solid linear-gradient(#191c1e, var(--a1));
     color: var(--a2);
     text-align: center;
-    font-size: 1.2rem;
     border: 1px solid var(--a4);
 }
 
@@ -72,8 +90,9 @@
     padding: 30px;
     box-shadow: 0 10px 8px -7px black;
     border-radius: 10px;
-    font-size: 1.2rem;
+    width: 100%;
 }
+
 
 .ingAndMeasureHeader {
     background-color: white;
@@ -99,6 +118,7 @@
 .outerWrapper {
     max-width: 1000px;
     margin: 0 auto;
+    padding: 5px;
 }
 
 .sectionTitle {
@@ -123,6 +143,11 @@
 }
 
 /* --------------------- Update Recipe Modal ---------------------*/
+.modal-body {
+    width: 90%;
+}
+
+
 .modalSection {
     border: 1px solid var(--a1);
     border-radius: 10px;
@@ -156,12 +181,22 @@
 }
 
 .modal-body {
-    height: 80vh;
+    height: 95vh;
     overflow-y: auto;
 }
 
 .ingAndMeasureRow, .instructionRow {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(133, 133, 133);
+    margin: 10px auto;
+}
+
+.removeButtonWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .editImagesWrapper {
@@ -196,4 +231,9 @@
     width: 90%;
 }
 
-/* when I clicke on the delte button for an image, I want to have an opacity displayed to indicate that the image is now staged for delete since there is no indication at the moment that the button has been clicked */
+.imagePreview {
+    height: 250px;
+    width: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 8px -7px black;
+}

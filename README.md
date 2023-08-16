@@ -2,7 +2,7 @@
 
 ## Left To Do:
 - DONE - Add go back and go forward button to each of the components.
-- Add some kind of effect to the images which are staged to be delted in the update recipe modal.
+- DONE - Add some kind of effect to the images which are staged to be deleted in the update recipe modal.
 - Add in an image preview when images are being uploaded when creating a new user, creating a new recipe, updating a recipe, or updating a profile. The image is already uploaded once you click on it, so it should be pretty easy to display.
 - Do some different styling for the users list - looks a little bland right now.
 - Create an actual read-me, and convert this to a .md page called to-do which can be all of your development items. You can also hide it if you want.
@@ -10,6 +10,8 @@
 - add in a font to use for the rest of the site other than the headers and titles
 - when updating a profile, update the token with the new avatar image whenever that changes.
 - add loading buttons or something to prevent creating a recipe or profile without the image being fully uploaded
+- Update recipe modal is too big on smaller screen sizes
+- Update the ingredients&measure and instructions wrappers to rows/cols so they are all consistent sizes
 - Add bio on github.
 - Add to resume and portfolio.
 

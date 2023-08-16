@@ -23,6 +23,7 @@ body {
     margin: 0;
     background-color: var(--a3);
     color: var(--a1);
+    font-family: var(--fontHeaders);
 }
 
 

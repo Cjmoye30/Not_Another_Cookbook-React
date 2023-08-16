@@ -87,7 +87,7 @@ const Signup = () => {
             <React.Fragment>
                 <div className='outerForm'>
                     <form className='signupForm' autoComplete='off' onSubmit={handleSubmit}>
-                        <h1>Signup:</h1>
+                        <h1 className='formTitle'>Signup:</h1>
 
                         <TextField
                             label="FirstName"
