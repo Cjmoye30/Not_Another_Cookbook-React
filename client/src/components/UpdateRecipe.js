@@ -4,7 +4,6 @@ import { useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { GET_RECIPE } from '../utils/queries';
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
 import { Link } from "react-router-dom";
 import { useMutation } from '@apollo/client';
 import { UPDATE_RECIPE } from '../utils/mutations';

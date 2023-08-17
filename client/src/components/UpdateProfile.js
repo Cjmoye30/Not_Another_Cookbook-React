@@ -16,6 +16,7 @@ const authenticationEndpoint = isProduction
     : 'http://localhost:3000/auth';
 const folderDestination = '/react-cookbook-avatars';
 
+
 const UpdateProfile = () => {
 
     const userId = Auth.getProfile().data._id

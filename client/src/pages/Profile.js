@@ -11,6 +11,7 @@ import UpdateProfile from '../components/UpdateProfile';
 import Box from '@mui/material/Box';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
     position: 'absolute',
@@ -111,6 +112,7 @@ const Profile = () => {
                     className='modal-body'
                     sx={style}
                 >
+                    <CloseIcon className='modalCloseIcon' onClick={handleClose}/>
                     <UpdateProfile />
 
                 </Box>

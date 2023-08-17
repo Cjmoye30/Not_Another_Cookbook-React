@@ -11,6 +11,7 @@ import { useRef } from 'react';
 import '../styles/CreateRecipe.css'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { IKContext, IKUpload } from 'imagekitio-react';
+import Grid from '@mui/material/Grid';
 
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
@@ -266,35 +267,40 @@ const CreateRecipe = () => {
                             <List className='recipeGroup'>
                                 {inputFields.map((input, index) => {
                                     return (
-                                        <div className='listRow' key={index}>
-                                            <ListItem>
+                                        <Grid container className='ingAndMeasureRow' key={index}>
+                                            <Grid item sm={7} xs={12}>
                                                 <TextField
                                                     name='ingredient'
                                                     label='Ingredient'
-                                                    sx={{ m: 1 }}
+                                                    sx={{ m: 1, width: '90%' }}
                                                     value={input.ingredient}
                                                     onChange={event => handleFormChange(index, event)}
                                                     className='ingredientField'
                                                     variant='filled'
+                                                    fullWidth
                                                 />
+                                            </Grid>
+
+                                            <Grid item sm={5} xs={12}>
                                                 <TextField
                                                     name='measure'
                                                     label='Measure'
-                                                    sx={{ m: 1 }}
+                                                    sx={{ m: 1, width: '90%' }}
                                                     value={input.measure}
                                                     onChange={event => handleFormChange(index, event)}
                                                     className='measureField'
                                                     variant='filled'
+                                                    fullWidth
                                                 />
-                                            </ListItem>
-                                        </div>
+                                            </Grid>
+                                        </Grid>
                                     )
                                 })}
                             </List>
 
                             <div className='addFieldsGroup'>
-                                <Button variant='outlined' onClick={addField}>Add 1x Field</Button>
-                                <Button variant='outlined' onClick={add5Field}>Add 5x Field</Button>
+                                <button className='button3' onClick={addField}>Add 1x Field</button>
+                                <button className='button3' onClick={add5Field}>Add 5x Field</button>
                             </div>
 
                         </div>
@@ -324,7 +330,7 @@ const CreateRecipe = () => {
                                     )
                                 })}
                             </List>
-                            <Button variant='outlined' onClick={addInstructionField}>Add 1x Field</Button>
+                            <button className='button3'  onClick={addInstructionField}>Add 1x Field</button>
                         </div>
 
                         <div className='formSection'>

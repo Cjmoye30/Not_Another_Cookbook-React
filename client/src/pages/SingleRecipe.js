@@ -13,14 +13,13 @@ import Auth from '../utils/auth';
 import Grid from '@mui/material/Grid';
 import Carousel from 'react-material-ui-carousel';
 import NavIcons from '../components/NavIcons';
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    // width: '90%',
-    // height: '80vh',
     bgcolor: 'background.paper',
     border: '1px solid #000',
     boxShadow: 24,
@@ -101,7 +100,7 @@ const SingleRecipe = () => {
                     <h2 className='sectionTitle'>Ingredients & Measurements</h2>
                     <Grid container className='outerWrapper'>
                         <Grid className='ingAndMeasureContainer' item xs={12}>
-                            <Grid sx={{display: 'flex'}} item xs={12}>
+                            <Grid sx={{ display: 'flex' }} item xs={12}>
                                 <Grid className='ingAndMeasureHeader ingHeader' item xs={6}>
                                     <h2>Ingredient</h2>
                                 </Grid>
@@ -161,6 +160,8 @@ const SingleRecipe = () => {
                         className='modal-body'
                         sx={style}
                     >
+                        
+                        <CloseIcon className='modalCloseIcon' onClick={handleClose} />
                         <UpdateRecipe />
 
                     </Box>

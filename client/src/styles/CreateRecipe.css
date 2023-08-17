@@ -1,6 +1,4 @@
-.instructionField, .ingredientField, .measureField, .nameField, .descriptionField {
-    background-color: white
-}
+/* */
 
 .instructionField {
     width: 90%;
@@ -19,5 +17,6 @@
 }
 
 .createRecipeSubmit {
-    width: 90%;
+    width: 100%;
+    margin: 0 auto;
 }

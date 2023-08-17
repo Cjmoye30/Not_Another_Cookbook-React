@@ -142,6 +142,11 @@
     font-weight: bold;
 }
 
+.modalCloseIcon {
+    float: right;
+    cursor: pointer;
+}
+
 /* --------------------- Update Recipe Modal ---------------------*/
 .modal-body {
     width: 90%;
