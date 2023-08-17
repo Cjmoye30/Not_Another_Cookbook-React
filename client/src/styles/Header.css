@@ -45,6 +45,11 @@ header {
     font-size: 40px;
 }
 
+.avatarContainer {
+    display: flex;
+    align-items: center;
+}
+
 @media screen and (max-width: 600px) {
     header {
         justify-content: center;

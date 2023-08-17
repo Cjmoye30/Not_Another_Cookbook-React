@@ -8,19 +8,59 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_RECIPE } from '../utils/mutations';
 import { useRef } from 'react';
-import Grid from '@mui/material/Grid';
 import '../styles/CreateRecipe.css'
-
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { IKContext, IKUpload } from 'imagekitio-react';
+
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
 const isProduction = process.env.NODE_ENV === 'production';
 const authenticationEndpoint = isProduction
-  ? 'https://sleepy-beach-12267-a5c989dbbda6.herokuapp.com/auth'
-  : 'http://localhost:3000/auth';
+    ? 'https://sleepy-beach-12267-a5c989dbbda6.herokuapp.com/auth'
+    : 'http://localhost:3000/auth';
 
 // update the folder to whatever is needed
 const folderDestination = '/react-cookbook-food-pics';
+
+const theme = createTheme({
+    components: {
+        MuiFilledInput: {
+            styleOverrides: {
+                root: {
+                    '&:before': {
+                        borderBottom: '3px solid var(--a4)',
+                    },
+                    '&:hover:not(.Mui-disabled, .Mui-error):before': {
+                        borderBottom: '3px solid var(--a4)',
+                    },
+                    '&.Mui-focused:after': {
+                        borderBottom: '3px solid var(--a4)',
+                    },
+                },
+            }
+        },
+
+        MuiFormLabel: {
+            styleOverrides: {
+                root: {
+                    color: 'var(--a1)'
+                },
+            }
+        },
+
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    "&.Mui-focused": {
+                        "color": "var(--a1)"
+                    }
+                }
+            }
+        },
+
+
+    }
+})
 
 const CreateRecipe = () => {
 
@@ -31,7 +71,8 @@ const CreateRecipe = () => {
         {
             name: '',
             description: '',
-            imageURL: ''
+            imageURL: '',
+            imagePreview: ''
         }
     )
 
@@ -68,7 +109,9 @@ const CreateRecipe = () => {
         */
 
         setNameDesc({
-            ...nameDesc, imageURL: res.url
+            ...nameDesc,
+            imageURL: res.url,
+            imagePreview: res.url
         })
 
     };
@@ -191,120 +234,138 @@ const CreateRecipe = () => {
         <>
             <React.Fragment>
                 <form className='createRecipeForm'>
+                    <ThemeProvider theme={theme}>
+                        <div className='titleAndDescription formSection'>
+                            <h3>Title & Description</h3>
+                            <TextField
+                                name='name'
+                                label="Recipe Name"
+                                placeholder='Chicken Parm'
+                                onChange={handleChange}
+                                className='nameField'
+                                sx={{ mb: 3 }}
+                                fullWidth
+                                variant='filled'
+                            />
 
-                    <div className='titleAndDescription'>
-                        <h3>Title & Description</h3>
-                        <TextField
-                            name='name'
-                            label="Recipe Name"
-                            placeholder='Chicken Parm'
-                            onChange={handleChange}
-                            className='nameField'
-                            sx={{ mb: 3 }}
-                            fullWidth
-                        />
-
-                        <TextField
-                            name='description'
-                            label="Recipe Description"
-                            onChange={handleChange}
-                            className='descriptionField'
-                            sx={{ mb: 3 }}
-                            fullWidth
-                        />
-                    </div>
-
-                    <hr />
-
-                    <div className='ingredientsAndMeasure'>
-                        <h3>Ingredients & Measurements:</h3>
-                        <List className='recipeGroup'>
-                            {inputFields.map((input, index) => {
-                                return (
-                                    <div className='listRow' key={index}>
-                                        <ListItem>
-                                            <TextField
-                                                name='ingredient'
-                                                label='Ingredient'
-                                                sx={{ m: 1 }}
-                                                value={input.ingredient}
-                                                onChange={event => handleFormChange(index, event)}
-                                                className='ingredientField'
-                                            />
-                                            <TextField
-                                                name='measure'
-                                                label='Measure'
-                                                sx={{ m: 1 }}
-                                                value={input.measure}
-                                                onChange={event => handleFormChange(index, event)}
-                                                className='measureField'
-                                            />
-                                        </ListItem>
-                                    </div>
-                                )
-                            })}
-                        </List>
-
-                        <div className='addFieldsGroup'>
-                            <Button variant='outlined' onClick={addField}>Add 1x Field</Button>
-                            <Button variant='outlined' onClick={add5Field}>Add 5x Field</Button>
+                            <TextField
+                                name='description'
+                                label="Recipe Description"
+                                onChange={handleChange}
+                                className='descriptionField'
+                                sx={{ mb: 3 }}
+                                fullWidth
+                                variant='filled'
+                            />
                         </div>
 
-                    </div>
+                        <hr />
 
-                    <hr />
+                        <div className='ingredientsAndMeasure formSection'>
+                            <h3>Ingredients & Measurements:</h3>
+                            <List className='recipeGroup'>
+                                {inputFields.map((input, index) => {
+                                    return (
+                                        <div className='listRow' key={index}>
+                                            <ListItem>
+                                                <TextField
+                                                    name='ingredient'
+                                                    label='Ingredient'
+                                                    sx={{ m: 1 }}
+                                                    value={input.ingredient}
+                                                    onChange={event => handleFormChange(index, event)}
+                                                    className='ingredientField'
+                                                    variant='filled'
+                                                />
+                                                <TextField
+                                                    name='measure'
+                                                    label='Measure'
+                                                    sx={{ m: 1 }}
+                                                    value={input.measure}
+                                                    onChange={event => handleFormChange(index, event)}
+                                                    className='measureField'
+                                                    variant='filled'
+                                                />
+                                            </ListItem>
+                                        </div>
+                                    )
+                                })}
+                            </List>
 
-                    <div className='instructionsWrapper'>
-                        <h3>Instructions:</h3>
+                            <div className='addFieldsGroup'>
+                                <Button variant='outlined' onClick={addField}>Add 1x Field</Button>
+                                <Button variant='outlined' onClick={add5Field}>Add 5x Field</Button>
+                            </div>
 
-                        {/* change the height of the textboxes */}
-                        {/* add back in the hover and focus CSS effects for the textboxes - those look super cool */}
-                        <List>
-                            {formInstructions.map((input, index) => {
-                                return (
+                        </div>
+
+                        <hr />
+
+                        <div className='instructionsWrapper formSection'>
+                            <h3>Instructions:</h3>
+
+                            {/* change the height of the textboxes */}
+                            {/* add back in the hover and focus CSS effects for the textboxes - those look super cool */}
+                            <List>
+                                {formInstructions.map((input, index) => {
+                                    return (
+                                        <div>
+                                            <ListItem>
+                                                <TextareaAutosize
+                                                    className='instructionField'
+                                                    name='instruction'
+                                                    minRows={3}
+                                                    value={input.instruction}
+                                                    onChange={event => handleInstructionChange(index, event)}
+
+                                                />
+                                            </ListItem>
+                                        </div>
+                                    )
+                                })}
+                            </List>
+                            <Button variant='outlined' onClick={addInstructionField}>Add 1x Field</Button>
+                        </div>
+
+                        <div className='formSection'>
+                            <h3>Image Upload</h3>
+                            <IKContext
+                                publicKey={publicKey}
+                                urlEndpoint={urlEndpoint}
+                                authenticationEndpoint={authenticationEndpoint}
+                            >
+                                <IKUpload
+                                    fileName="test-upload.png"
+                                    name='imageURL'
+                                    onChange={handleChange}
+                                    onError={onError}
+                                    onSuccess={onSuccess}
+                                    useUniqueFileName={true}
+                                    folder={folderDestination}
+                                    onUploadStart={onUploadStart}
+                                    onUploadProgress={onUploadProgress}
+                                    inputRef={inputRefTest}
+                                    ref={ikUploadRefTest}
+                                // style={{ display: 'none' }}
+                                />
+                            </IKContext>
+
+                            {nameDesc.imagePreview !== '' ? (
+                                <div>
+                                    <p>Preview:</p>
                                     <div>
-                                        <ListItem>
-                                            <TextareaAutosize
-                                                className='instructionField'
-                                                name='instruction'
-                                                value={input.instruction}
-                                                onChange={event => handleInstructionChange(index, event)}
-                                            />
-                                        </ListItem>
+                                        <img src={nameDesc.imagePreview} className='imagePreview' />
                                     </div>
-                                )
-                            })}
-                        </List>
-                        <Button variant='outlined' onClick={addInstructionField}>Add 1x Field</Button>
+                                </div>
+                            ) : (
+                                <></>
+                            )}
 
-                        <h3>Image Upload</h3>
-                        <IKContext
-                            publicKey={publicKey}
-                            urlEndpoint={urlEndpoint}
-                            authenticationEndpoint={authenticationEndpoint}
-                        >
-                            <p>Upload an image</p>
-                            <IKUpload
-                                fileName="test-upload.png"
-                                name='imageURL'
-                                onChange={handleChange}
-                                onError={onError}
-                                onSuccess={onSuccess}
-                                useUniqueFileName={true}
-                                folder={folderDestination}
-                                onUploadStart={onUploadStart}
-                                onUploadProgress={onUploadProgress}
-                                inputRef={inputRefTest}
-                                ref={ikUploadRefTest}
-                            // style={{ display: 'none' }}
-                            />
-                        </IKContext>
-                    </div>
+                        </div>
 
+                        <button onClick={handleSubmit} className='button1 createRecipeSubmit'>Submit</button>
+                    </ThemeProvider>
                 </form>
-
-                <Button onClick={handleSubmit} variant='outlined'>Submit</Button>
-
             </React.Fragment>
         </>
     )

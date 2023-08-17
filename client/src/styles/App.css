@@ -1,5 +1,4 @@
-/* ----------- MAIN STYLE PAGE ----------- */
-/* ----------- All semantic elements should be styled here */
+
 
 /* * {
     border: 1px solid black;
@@ -72,6 +71,9 @@ a:visited, a:hover, a:link, a:active {
 .button2:hover {
     background-color: var(--button1Hover);
 }
+.button3:hover {
+    background-color: var(--a3);
+}
 
 .button2 {
     background-color: var(--a3);
@@ -83,4 +85,19 @@ a:visited, a:hover, a:link, a:active {
     cursor: pointer;
     margin: 10px 30px;
     font-size: 1.2rem;
+}
+.button3 {
+    color: var(--a1);
+    font-weight: bold;
+    padding: 10px 30px;
+    border: 2px solid var(--a1);
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 30px;
+}
+.button4 {
+    color: var(--a5);
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
 }

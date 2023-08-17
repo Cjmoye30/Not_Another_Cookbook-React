@@ -9,8 +9,9 @@ import { useRef } from 'react';
 import { Link } from "react-router-dom"
 import '../styles/Signup.css'
 import NavIcons from '../components/NavIcons';
-
 import { IKContext, IKUpload } from 'imagekitio-react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
 const isProduction = process.env.NODE_ENV === 'production';
@@ -20,6 +21,44 @@ const authenticationEndpoint = isProduction
 
 // update the folder to whatever is needed
 const folderDestination = '/react-cookbook-avatars';
+
+const theme = createTheme({
+    components: {
+        MuiFilledInput: {
+            styleOverrides: {
+                root: {
+                    '&:before': {
+                        borderBottom: '3px solid var(--a4)',
+                    },
+                    '&:hover:not(.Mui-disabled, .Mui-error):before': {
+                        borderBottom: '3px solid var(--a4)',
+                    },
+                    '&.Mui-focused:after': {
+                        borderBottom: '3px solid var(--a4)',
+                    },
+                },
+            }
+        },
+
+        MuiFormLabel: {
+            styleOverrides: {
+                root: {
+                    color: 'var(--a1)'
+                },
+            }
+        },
+
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    "&.Mui-focused": {
+                        "color": "var(--a1)"
+                    }
+                }
+            }
+        }
+    }
+})
 
 const Signup = () => {
 
@@ -83,65 +122,67 @@ const Signup = () => {
 
     return (
         <>
-        <NavIcons />
+            <NavIcons />
             <React.Fragment>
                 <div className='outerForm'>
                     <form className='signupForm' autoComplete='off' onSubmit={handleSubmit}>
                         <h1 className='formTitle'>Signup:</h1>
 
-                        <TextField
-                            label="FirstName"
-                            variant='filled'
-                            sx={{ mb: 3 }}
-                            fullWidth
-                            type='text'
-                            placeholder={firstName}
-                            value={firstName}
-                            onChange={e => setFirstName(e.target.value)}
-                        />
+                        <ThemeProvider theme={theme}>
+                            <TextField
+                                label="FirstName"
+                                variant='filled'
+                                sx={{ mb: 3 }}
+                                fullWidth
+                                type='text'
+                                placeholder={firstName}
+                                value={firstName}
+                                onChange={e => setFirstName(e.target.value)}
+                            />
 
-                        <TextField
-                            label="LastName"
-                            variant='filled'
-                            sx={{ mb: 3 }}
-                            fullWidth
-                            type='text'
-                            placeholder={lastName}
-                            value={lastName}
-                            onChange={e => setLastName(e.target.value)}
-                        />
+                            <TextField
+                                label="LastName"
+                                variant='filled'
+                                sx={{ mb: 3 }}
+                                fullWidth
+                                type='text'
+                                placeholder={lastName}
+                                value={lastName}
+                                onChange={e => setLastName(e.target.value)}
+                            />
 
-                        <TextField
-                            label="Email"
-                            variant='filled'
-                            sx={{ mb: 3 }}
-                            fullWidth
-                            type='email'
-                            placeholder={email}
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                        />
+                            <TextField
+                                label="Email"
+                                variant='filled'
+                                sx={{ mb: 3 }}
+                                fullWidth
+                                type='email'
+                                placeholder={email}
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                            />
 
-                        <TextField
-                            label="Password"
-                            variant='filled'
-                            sx={{ mb: 3 }}
-                            fullWidth
-                            type='password'
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                        />
+                            <TextField
+                                label="Password"
+                                variant='filled'
+                                sx={{ mb: 3 }}
+                                fullWidth
+                                type='password'
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                            />
 
-                        <TextField
-                            label="Username"
-                            variant='filled'
-                            sx={{ mb: 3 }}
-                            fullWidth
-                            type='text'
-                            placeholder={username}
-                            value={username}
-                            onChange={e => setUsername(e.target.value)}
-                        />
+                            <TextField
+                                label="Username"
+                                variant='filled'
+                                sx={{ mb: 3 }}
+                                fullWidth
+                                type='text'
+                                placeholder={username}
+                                value={username}
+                                onChange={e => setUsername(e.target.value)}
+                            />
+                        </ThemeProvider>
 
                         {/* Throw error if email is already in our database */}
                         {error && (
@@ -151,46 +192,50 @@ const Signup = () => {
                             </div>
                         )}
 
-                        <IKContext
-                            publicKey={publicKey}
-                            urlEndpoint={urlEndpoint}
-                            authenticationEndpoint={authenticationEndpoint}
-                        >
-                            <h2>Upload Custom Avatar:</h2>
-                            <IKUpload
-                                // user the username or someID as part of the filename
-                                className='uploadImage'
-                                fileName="test-upload.png"
-                                useUniqueFileName={true}
-                                folder={folderDestination}
-                                inputRef={inputRefTest}
-                                ref={ikUploadRefTest}
-                                onSuccess={onSuccess}
-                                style={{ display: 'none' }}
-                            />
-
-                            {inputRefTest && <button className='customUploadButton button1' onClick={() => inputRefTest.current.click()}>Upload</button>}
-                        </IKContext>
-
-                        <h2>Or, select a default avatar:</h2>
-                        <div className='avatarGroup'>
-                            <div className='avatarWrapper'>
-                                <div onClick={(e) => handleAvatarClick(avatar1, e)}>
-                                    <img className='avatarSelect Avatar1' src={avatar1} />
-                                </div>
-
-                                <div onClick={(e) => handleAvatarClick(avatar2, e)}>
-                                    <img className='avatarSelect Avatar2' src={avatar2} />
-                                </div>
-
-                                <div onClick={(e) => handleAvatarClick(avatar3, e)}>
-                                    <img className='avatarSelect Avatar3' src={avatar3} />
-                                </div>
-
-                            </div>
+                        <div className='signupWrapper'>
+                            <IKContext
+                                publicKey={publicKey}
+                                urlEndpoint={urlEndpoint}
+                                authenticationEndpoint={authenticationEndpoint}
+                            >
+                                <h2>Upload Custom Avatar:</h2>
+                                <IKUpload
+                                    // user the username or someID as part of the filename
+                                    className='uploadImage'
+                                    fileName="test-upload.png"
+                                    useUniqueFileName={true}
+                                    folder={folderDestination}
+                                    inputRef={inputRefTest}
+                                    ref={ikUploadRefTest}
+                                    onSuccess={onSuccess}
+                                // style={{ display: 'none' }}
+                                />
+                                {/* 
+                            {inputRefTest && <button className='customUploadButton button1' onClick={() => inputRefTest.current.click()}>Upload</button>} */}
+                            </IKContext>
                         </div>
 
-                        <p className='selectedAvatar'></p>
+                        <div className='signupWrapper'>
+                            <h2>Or, select a default avatar:</h2>
+                            <div className='avatarGroup'>
+                                <div className='avatarWrapper'>
+                                    <div onClick={(e) => handleAvatarClick(avatar1, e)}>
+                                        <img className='avatarSelect Avatar1' src={avatar1} />
+                                    </div>
+
+                                    <div onClick={(e) => handleAvatarClick(avatar2, e)}>
+                                        <img className='avatarSelect Avatar2' src={avatar2} />
+                                    </div>
+
+                                    <div onClick={(e) => handleAvatarClick(avatar3, e)}>
+                                        <img className='avatarSelect Avatar3' src={avatar3} />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <p className='selectedAvatar'></p>
+                        </div>
 
                         {/* Submit Info */}
                         <button className='signupSubmitButton button1' type='submit'>Signup</button>

@@ -148,7 +148,7 @@
 }
 
 
-.modalSection {
+.modalSection, .formSection {
     border: 1px solid var(--a1);
     border-radius: 10px;
     box-shadow: 0 10px 8px -7px black;
@@ -190,7 +190,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgb(133, 133, 133);
+    border-bottom: 1px solid rgb(193, 193, 193);
+    /* border-radius: 5px; */
     margin: 10px auto;
 }
 

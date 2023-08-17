@@ -7,9 +7,47 @@ import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import '../styles/Login.css'
 import NavIcons from '../components/NavIcons';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+    components: {
+        MuiFilledInput: {
+            styleOverrides: {
+                root: {
+                    '&:before': {
+                        borderBottom: '3px solid var(--a4)',
+                    },
+                    '&:hover:not(.Mui-disabled, .Mui-error):before': {
+                        borderBottom: '3px solid var(--a4)',
+                    },
+                    '&.Mui-focused:after': {
+                        borderBottom: '3px solid var(--a4)',
+                    },
+                },
+            }
+        },
+
+        MuiFormLabel: {
+            styleOverrides: {
+                root: {
+                    color: 'var(--a1)'
+                },
+            }
+        },
+
+        MuiInputLabel: {
+            styleOverrides: {
+                root: {
+                    "&.Mui-focused": {
+                        "color": "var(--a1)"
+                    }
+                }
+            }
+        }
+    }
+})
 
 const Login = () => {
-
 
     const [loginUser, { error, data }] = useMutation(LOGIN_USER);
 
@@ -58,32 +96,35 @@ const Login = () => {
                 <div className='outerForm'>
                     <form className='loginForm' autoComplete="off" onSubmit={handleSubmit}>
                         <h1 className='formTitle'>Login to your Account: </h1>
-                        <TextField
-                            label="Email"
-                            className='loginField'
-                            fullWidth
-                            onChange={e => setEmail(e.target.value)}
-                            required
-                            variant="filled"
-                            color="secondary"
-                            type="email"
-                            sx={{ mb: 3, color: 'white' }}
-                            value={email}
-                            error={emailError}
-                        />
-                        <TextField
-                            label="Password"
-                            className='loginField'
-                            fullWidth
-                            onChange={e => setPassword(e.target.value)}
-                            required
-                            variant="filled"
-                            color="secondary"
-                            type="password"
-                            value={password}
-                            error={passwordError}
-                            sx={{ mb: 3 }}
-                        />
+                        <ThemeProvider theme={theme}>
+
+                            <TextField
+                                label="Email"
+                                className='loginField'
+                                name='email'
+                                fullWidth
+                                onChange={e => setEmail(e.target.value)}
+                                required
+                                variant="filled"
+                                type="email"
+                                sx={{ mb: 3 }}
+                                value={email}
+                                error={emailError}
+                            />
+
+                            <TextField
+                                label="Password"
+                                className='loginField'
+                                fullWidth
+                                onChange={e => setPassword(e.target.value)}
+                                required
+                                variant="filled"
+                                type="password"
+                                value={password}
+                                error={passwordError}
+                                sx={{ mb: 3 }}
+                            />
+                        </ThemeProvider>
                         <button className='button1' type="submit">Login</button>
 
 

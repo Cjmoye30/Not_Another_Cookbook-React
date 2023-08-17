@@ -13,27 +13,15 @@ import UserRecipes from './UserRecipes';
 
 const theme = createTheme({
   components: {
-
-
-
     MuiTab: {
       styleOverrides: {
         root: {
           '&.Mui-selected': {
             backgroundColor: 'var(--a1)',
+            backgroundImage: 'linear-gradient(var(--a1), #191c1e)',
             color: 'var(--a3)',
-            opacity: '.7'
           },
         },
-        // MuiTabIndicator: {
-        //   styleOverrides: {
-        //     root: {
-        //       '&.Mui-selected' : {
-        //         backgroundColor: 'red', // Change this to your desired color for the indicator line
-        //       }
-        //     }
-        //   }
-        // },
       },
     },
   },
@@ -57,6 +45,11 @@ export default function LabTabs() {
               onChange={handleChange}
               aria-label="lab API tabs example"
               centered selectionFollowsFocus
+              TabIndicatorProps={{
+                style: {
+                  backgroundColor: 'var(--a4)'
+                }
+              }}
             >
               <Tab label="Your Recipes" value="recipeList" />
               <Tab label="Create New Recipe" value="createRecipe" />

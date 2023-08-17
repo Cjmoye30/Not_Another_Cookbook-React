@@ -15,6 +15,7 @@
 
 .profileHeaderText {
     padding: 30px;
+    text-align: center;
  }
 
 .profileAvatar {
@@ -29,7 +30,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    padding: 5px;
+    padding: 1px;
 }
 
 .editIcon, .deleteIcon {
@@ -42,7 +43,7 @@
 
 /* ----------- CREATE RECIPE FORM ----------- */
 .createRecipeForm {
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     max-width: 1000px;
     margin: 0 auto;

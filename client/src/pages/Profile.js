@@ -89,8 +89,11 @@ const Profile = () => {
                     </div>
 
                     <h1> {user.firstName} {user.lastName} </h1>
-                    <h2> {user.username} </h2>
-                    <h4>Member Since: </h4>
+
+                    <hr />
+
+                    <h3>Username: {user.username} </h3>
+                    <h4>Member Since: tbd </h4>
                     <h4>Total Recipes: {user.recipes.length} </h4>
                 </div>
             </div>

@@ -19,7 +19,7 @@ const logout = (event) => {
 export default function TemporaryDrawer() {
 
     const [state, setState] = React.useState({
-        top: false,
+        right: false,
     });
 
     const toggleDrawer = (anchor, open) => (event) => {
@@ -93,9 +93,15 @@ export default function TemporaryDrawer() {
 
     return (
         <header>
+            <div className='headerTitle'>
+                <Link to='/'>
+                    <h1 className='titleLink'>Not Another Cookbook</h1>
+                </Link>
+            </div>
+
             <div className='headerLeft'>
                 <div className='headerNav'>
-                    {['top'].map((anchor) => (
+                    {['right'].map((anchor) => (
                         <React.Fragment key={anchor}>
                             <Button className='menuButton' onClick={toggleDrawer(anchor, true)}>
                                 <MenuIcon />
@@ -111,37 +117,31 @@ export default function TemporaryDrawer() {
                     ))}
                 </div>
 
-                <div className='headerTitle'>
-                    <Link to='/'>
-                        <h1 className='titleLink'>Not Another Cookbook</h1>
-                    </Link>
-                </div>
+                {Auth.loggedIn() ?
+                    (
+                        <Stack direction="row" spacing={2} className='avatarContainer' >
+                            <Link to="/me">
+                                <Avatar
+                                    className='headerAvatar'
+                                    src={Auth.getProfile().data.avatar}
+                                    sx={{ width: 75, height: 75 }}
+                                />
+                            </Link>
+                        </Stack>
+                    )
+                    :
+                    (
+                        <Stack direction="row" spacing={2} className='avatarContainer' >
+                            <Link to='login'>
+                                <Avatar
+                                    className='headerAvatar'
+                                    src="/broken-image.jpg"
+                                />
+                            </Link>
+                        </Stack>
+                    )
+                }
             </div>
-
-            {Auth.loggedIn() ?
-                (
-                    <Stack direction="row" spacing={2} >
-                        <Link to="/me">
-                            <Avatar 
-                            className='headerAvatar' 
-                            src={Auth.getProfile().data.avatar}
-                            sx={{width: 75, height: 75}}
-                            />
-                        </Link>
-                    </Stack>
-                )
-                :
-                (
-                    <Stack direction="row" spacing={2} >
-                        <Link to='login'>
-                            <Avatar 
-                            className='headerAvatar' 
-                            src="/broken-image.jpg"
-                            />
-                        </Link>
-                    </Stack>
-                )
-            }
         </header >
     );
 }

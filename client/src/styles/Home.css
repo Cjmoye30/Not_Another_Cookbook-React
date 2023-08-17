@@ -73,3 +73,10 @@
     color: var(--a3);
 }
 
+/* Media Queires */
+@media screen and (max-width: 576px) { 
+    .homeHeader {
+        padding: 5px;
+
+    }
+}
