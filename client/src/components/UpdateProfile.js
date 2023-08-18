@@ -46,13 +46,13 @@ const UpdateProfile = () => {
     }
 
     const onSuccess = res => {
-        console.log("new avatar URL: ",res.url);
+        console.log("new avatar URL: ", res.url);
         const updatedFormData = {
             ...formData,
             avatar: res.url
         };
 
-        console.log("new avatar URL",updatedFormData)
+        console.log("new avatar URL", updatedFormData)
         setFormData(updatedFormData);
         console.log(updatedFormData.avatar)
         // console.log("new data with updated avatarURL", updatedFormData)
@@ -78,7 +78,7 @@ const UpdateProfile = () => {
             window.location.assign('/me');
 
         } catch (err) {
-            console.log("Frontend error updating profile: ",err)
+            console.log("Frontend error updating profile: ", err)
         }
 
     }
@@ -138,35 +138,37 @@ const UpdateProfile = () => {
                         onChange={handleChange}
                     />
 
-                    <h3>Upload New Avatar:</h3>
+                    <div className='modalSection'>
 
-                    <IKContext
-                        publicKey={publicKey}
-                        urlEndpoint={urlEndpoint}
-                        authenticationEndpoint={authenticationEndpoint}
-                    >
-                        <h2>Upload Custom Avatar:</h2>
-                        <IKUpload
-                            className='uploadImage'
-                            fileName="test-upload.png"
-                            useUniqueFileName={true}
-                            folder={folderDestination}
-                            inputRef={inputRefTest}
-                            ref={ikUploadRefTest}
-                            onSuccess={onSuccess}
+                        <h2>Upload New Avatar:</h2>
+
+                        <IKContext
+                            publicKey={publicKey}
+                            urlEndpoint={urlEndpoint}
+                            authenticationEndpoint={authenticationEndpoint}
+                        >
+                            <IKUpload
+                                className='uploadImage'
+                                fileName="test-upload.png"
+                                useUniqueFileName={true}
+                                folder={folderDestination}
+                                inputRef={inputRefTest}
+                                ref={ikUploadRefTest}
+                                onSuccess={onSuccess}
                             // style={{ display: 'none' }}
-                        />
+                            />
 
-                        {/* {inputRefTest && <button className='customUploadButton button1' onClick={() => inputRefTest.current.click()}>Upload</button>} */}
-                    </IKContext>
+                            {/* {inputRefTest && <button className='customUploadButton button1' onClick={() => inputRefTest.current.click()}>Upload</button>} */}
+                        </IKContext>
+                    </div>
 
                     <hr />
 
-                    <button onClick={handleSubmit}>Update!</button>
 
                 </form>
 
-                <button>Delete Profile</button>
+                <button className='button1' onClick={handleSubmit}>Update!</button>
+                <button className='button2'>Delete Profile</button>
             </React.Fragment>
         </>
     )
