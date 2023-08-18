@@ -41,6 +41,16 @@
     height: 300px;
 }
 
+/* ----------- Update Profile -------------- */
+@media screen and (max-width: 600px) {
+    .updateProfileButton {
+        width: 100%;
+        margin: 0;
+        margin-top: 10px;
+    }
+
+}
+
 /* ----------- CREATE RECIPE FORM ----------- */
 .createRecipeForm {
     padding: 10px;

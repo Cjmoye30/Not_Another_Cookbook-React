@@ -31,10 +31,9 @@ const UpdateProfile = () => {
     const [formData, setFormData] = useState({
         username: userData.username,
         email: userData.email,
-        avatar: userData.avatar
+        avatar: userData.avatar,
+        uploadImagePreview: ''
     })
-
-    // console.log("initial state: ", formData);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,13 +48,13 @@ const UpdateProfile = () => {
         console.log("new avatar URL: ", res.url);
         const updatedFormData = {
             ...formData,
-            avatar: res.url
+            avatar: res.url,
+            uploadImagePreview: res.url
         };
 
         console.log("new avatar URL", updatedFormData)
         setFormData(updatedFormData);
         console.log(updatedFormData.avatar)
-        // console.log("new data with updated avatarURL", updatedFormData)
     }
 
     const handleSubmit = async (e) => {
@@ -160,6 +159,17 @@ const UpdateProfile = () => {
 
                             {/* {inputRefTest && <button className='customUploadButton button1' onClick={() => inputRefTest.current.click()}>Upload</button>} */}
                         </IKContext>
+
+                        {formData.uploadImagePreview !== '' ? (
+                                <div>
+                                    <p>Preview:</p>
+                                    <div>
+                                        <img src={formData.uploadImagePreview} className='imagePreview' />
+                                    </div>
+                                </div>
+                            ) : (
+                                <></>
+                            )}
                     </div>
 
                     <hr />
@@ -167,8 +177,8 @@ const UpdateProfile = () => {
 
                 </form>
 
-                <button className='button1' onClick={handleSubmit}>Update!</button>
-                <button className='button2'>Delete Profile</button>
+                <button className='button1 updateProfileButton' onClick={handleSubmit}>Update!</button>
+                <button className='button2 updateProfileButton'>Delete Profile</button>
             </React.Fragment>
         </>
     )

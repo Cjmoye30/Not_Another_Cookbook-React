@@ -20,19 +20,19 @@ const Home = () => {
 
                 {Auth.loggedIn() ?
                     (
-                        <Link to={`/me`}>
+                        <Link className='buttonWrapper' to={`/me`}>
                             <button className='homepagebutton button1'>Dashboard</button>
                         </Link>
                     )
                     :
                     (
                         <div className='homeCTA'>
-                            <Link to={`/login`}>
+                            <Link className='buttonWrapper' to={`/login`}>
                                 <button className='homepagebutton button1'>Login</button>
                             </Link>
 
-                            <Link to={`/signup`}>
-                                <button className='homepagebutton button1'>Signup</button>
+                            <Link className='buttonWrapper' to={`/signup`}>
+                                <button className='homepagebutton button2'>Signup</button>
                             </Link>
                         </div>
                     )}
@@ -47,34 +47,6 @@ const Home = () => {
                 <h1>Our Users & Early Endorsers:</h1>
                 <ProfilesList />
             </div>
-
-
-            {/* 
-                TODO List:
-                - Add bio field for user profiles - add it into the model just as a string 
-
-                - Add in inspiration links for each recipe - array of links to navigate to so I can refer back to what site I got the recipe from 
-
-                - Add notes section for each recipe. 
-
-                - have a separate sections just for spices when creating the recipe? not too important
-
-                - Convert the recipe image list into a component and import that on the homepage and then the profile page - all of the code is the same excpet for a query - could possibly do that.
-
-                - Add up/down buttons on the create recipe page
-
-                - increase the height of the instructions fields on create recipe page
-
-                - figure out how to upload multiple images using multer - i think the destination would be the urlEndpoint?
-
-                - Loading buttons?
-
-                - Prevent the user from creating an account before their image is ready and loaded - otherwise an account will be created without an image.
-
-                - add in default avatar selections like you did with project 3
-
-                - Style 
-            */}
         </>
     )
 }

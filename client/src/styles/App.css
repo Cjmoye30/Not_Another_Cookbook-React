@@ -99,3 +99,12 @@ a:visited, a:hover, a:link, a:active {
     cursor: pointer;
     border: none;
 }
+
+/* body - reduce the font size on mobile */
+@media screen and (max-width: 400px) {
+    body {
+        font-size: .8rem;
+    }
+
+
+}

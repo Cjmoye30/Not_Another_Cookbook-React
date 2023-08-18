@@ -256,7 +256,7 @@ const UpdateRecipe = () => {
                                 value={updateData.name}
                                 fullWidth
                                 onChange={handleChange}
-                                sx={{ m: 1 }}
+                                sx={{ mb: 1 }}
                                 size='small'
                                 variant='filled'
                             />
@@ -265,7 +265,7 @@ const UpdateRecipe = () => {
                                 value={updateData.description}
                                 fullWidth
                                 onChange={handleChange}
-                                sx={{ m: 1 }}
+                                sx={{ mb: 1 }}
                                 size='small'
                                 variant='filled'
                             />
@@ -282,7 +282,8 @@ const UpdateRecipe = () => {
                                             <TextField
                                                 value={ingredient}
                                                 onChange={(e) => handleChange(e, index, 'ingredients')}
-                                                sx={{ m: 1, width: '90%' }}
+                                                sx={{ mb: 1 }}
+                                                fullWidth
                                                 key={`ing${index}`}
                                                 size='small'
                                                 variant='filled'
@@ -293,7 +294,8 @@ const UpdateRecipe = () => {
                                             <TextField
                                                 value={updateData.measure[index]}
                                                 onChange={(e) => handleChange(e, index, 'measure')}
-                                                sx={{ m: 1, width: '90%' }}
+                                                sx={{ mb: 1 }}
+                                                fullWidth
                                                 key={`mea${index}`}
                                                 size='small'
                                                 variant='filled'
@@ -395,7 +397,9 @@ const UpdateRecipe = () => {
                         </div>
                     </ThemeProvider>
                 </form>
-                <button className='button1 modalSubmitButton' onClick={saveUpdates} >Save!</button>
+                <div className='buttonWrapper'>
+                    <button className='button1 modalSubmitButton' onClick={saveUpdates} >Save!</button>
+                </div>
             </React.Fragment>
         </>
     )

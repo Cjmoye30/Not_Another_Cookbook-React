@@ -174,7 +174,6 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 40px;
 }
 
 .updateRecipeModal {
@@ -198,6 +197,8 @@
     border-bottom: 1px solid rgb(193, 193, 193);
     /* border-radius: 5px; */
     margin: 10px auto;
+    padding: 10px 0;
+    flex-wrap: wrap;
 }
 
 .removeButtonWrapper {
@@ -215,8 +216,8 @@
 }
 
 .editImages {
-    height: 175px;
-    width: auto;
+    height: auto;
+    width: 100%;
     margin: 10px;
     border-radius: 5px;
     border: 1px solid var(--a1);
@@ -226,7 +227,7 @@
     position: absolute;
     right: 0;
     color: var(--a3);
-    padding: 10px;
+    padding-top: 15px;
     cursor: pointer;
 }
 
@@ -235,12 +236,20 @@
 }
 
 .modalSubmitButton {
-    width: 90%;
+    width: 100%;
+    margin: 0;
 }
 
 .imagePreview {
-    height: 250px;
-    width: auto;
+    height: auto;
+    width: 90%;
     border-radius: 10px;
     box-shadow: 0 10px 8px -7px black;
 }
+
+@media screen and (max-width: 600px) {
+    .recipeEditButton {
+        width: 100%;
+    }
+}
+

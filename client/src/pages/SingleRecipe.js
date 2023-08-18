@@ -143,8 +143,8 @@ const SingleRecipe = () => {
 
                 {loggedInUser === chef ? (
                     <div className='recipeEditbuttons'>
-                        <button className='button1' onClick={handleOpen}>Edit</button>
-                        <button className='button2' onClick={deleteRecipe}>DELETE</button>
+                        <button className='button1 recipeEditButton' onClick={handleOpen}>Edit</button>
+                        <button className='button2 recipeEditButton' onClick={deleteRecipe}>DELETE</button>
                     </div>
                 ) : (
                     <></>

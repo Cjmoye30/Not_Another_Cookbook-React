@@ -12,13 +12,35 @@
     display: flex;
     flex-wrap: wrap;
     background-color: var(--a4);
-    justify-content: space-around;
+    justify-content: space-between;
     text-align: center;
     align-items: center;
+    opacity: .9;
+    max-width: 600px;
 }
 
-.profileListAvatar {
-    height: 200px;
+.gridContainer {
+    justify-content: center;
+}
+
+.gridWrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.profileCard {
+    padding: 10px;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+
+.cardMedia {
+    border: 1px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 10px 8px -7px black;
 }
 
 .homePageImageList {
@@ -73,10 +95,25 @@
     color: var(--a3);
 }
 
+.buttonWrapper {
+    width: 100%;
+    margin: 0;
+    margin-top: 5px;
+}
+
 /* Media Queires */
 @media screen and (max-width: 576px) { 
     .homeHeader {
         padding: 5px;
+    }
 
+    .homeBio {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    .homepagebutton {
+        width: 100%;
+        margin: 0;
     }
 }
