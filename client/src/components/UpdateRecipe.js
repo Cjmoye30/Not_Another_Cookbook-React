@@ -140,7 +140,8 @@ const UpdateRecipe = () => {
         }
     };
 
-    const addIngredients = () => {
+    const addIngredients = (e) => {
+        e.preventDefault();
         setUpdateData({
             ...updateData,
             ingredients: [...updateData.ingredients, ''],
@@ -148,7 +149,8 @@ const UpdateRecipe = () => {
         })
     }
 
-    const addInstructions = () => {
+    const addInstructions = (e) => {
+        e.preventDefault();
         setUpdateData({
             ...updateData,
             instructions: [...updateData.instructions, '']

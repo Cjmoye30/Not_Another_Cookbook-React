@@ -149,14 +149,16 @@ const CreateRecipe = () => {
         setFormInstructions(data);
     }
 
-    const addInstructionField = () => {
+    const addInstructionField = (e) => {
+        e.preventDefault();
         setFormInstructions((prevFormInstructions) => {
             let newField = { instruction: '' };
             return [...prevFormInstructions, newField]
         })
     }
 
-    const addField = () => {
+    const addField = (e) => {
+        e.preventDefault();
 
         /*
         setInputFields = function we defined above with useState
@@ -172,9 +174,10 @@ const CreateRecipe = () => {
 
 
     // executing the addField function 5x
-    function add5Field() {
+    const add5Field = (e) => {
+
         for (let i = 0; i < 5; i++) {
-            addField();
+            addField(e);
         }
     }
 
@@ -330,7 +333,7 @@ const CreateRecipe = () => {
                                     )
                                 })}
                             </List>
-                            <button className='button3'  onClick={addInstructionField}>Add 1x Field</button>
+                            <button className='button3' onClick={addInstructionField}>Add 1x Field</button>
                         </div>
 
                         <div className='formSection'>

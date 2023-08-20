@@ -218,6 +218,7 @@
 .editImages {
     height: auto;
     width: 100%;
+    max-width: 300px;
     margin: 10px;
     border-radius: 5px;
     border: 1px solid var(--a1);
@@ -227,7 +228,7 @@
     position: absolute;
     right: 0;
     color: var(--a3);
-    padding-top: 15px;
+    padding: 20px;
     cursor: pointer;
 }
 
@@ -243,6 +244,7 @@
 .imagePreview {
     height: auto;
     width: 90%;
+    max-width: 300px;
     border-radius: 10px;
     box-shadow: 0 10px 8px -7px black;
 }
