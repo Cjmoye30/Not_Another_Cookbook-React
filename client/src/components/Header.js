@@ -9,12 +9,17 @@ import { Link } from "react-router-dom";
 import Auth from '../utils/auth'
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import '../styles/Header.css'
+import '../styles/Header.css';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Divider from '@mui/material/Divider';
+
 
 const logout = (event) => {
     event.preventDefault();
     Auth.logout();
 }
+
+
 
 export default function TemporaryDrawer() {
 
@@ -42,24 +47,57 @@ export default function TemporaryDrawer() {
             {Auth.loggedIn() ?
                 (
                     <>
+
+                        <Stack direction="row" spacing={2} className='avatarContainer' >
+                            <Link to="/me">
+                                <Avatar
+                                    className='headerAvatar'
+                                    src={Auth.getProfile().data.avatar}
+                                    sx={{ width: 150, height: 150 }}
+                                />
+                            </Link>
+                        </Stack>
+
                         <List className='navList'>
-                            <ListItemButton>
-                                <Link to="/" className="navlink">Home</Link>
+                            <ListItemButton >
+                                <Link to="/" className="navlink" >Home</Link>
                             </ListItemButton>
+                            <Divider />
 
                             <ListItemButton>
                                 <Link to="/me" className="navlink">Profile</Link>
                             </ListItemButton>
+                            <Divider />
+
+
+                            <ListItemButton>
+                                <Link to="/me" className="navlink">Create Recipe</Link>
+                            </ListItemButton>
+                            <Divider />
+
 
                             <ListItemButton>
                                 <Link className="navlink" onClick={logout}>Logout</Link>
                             </ListItemButton>
+                            <Divider />
+
                         </List>
                     </>
                 )
                 :
                 (
                     <>
+
+                        <Stack direction="row" spacing={2} className='avatarContainer' >
+                            <Link to='login'>
+                                <Avatar
+                                    className='headerAvatar'
+                                    src="/broken-image.jpg"
+                                    sx={{ width: 150, height: 150 }}
+                                />
+                            </Link>
+                        </Stack>
+
                         <List className='navList'>
                             <ListItemButton>
                                 <Link to="/" className="navlink">Home</Link>
@@ -105,30 +143,7 @@ export default function TemporaryDrawer() {
                     ))}
                 </div>
 
-                {Auth.loggedIn() ?
-                    (
-                        <Stack direction="row" spacing={2} className='avatarContainer' >
-                            <Link to="/me">
-                                <Avatar
-                                    className='headerAvatar'
-                                    src={Auth.getProfile().data.avatar}
-                                    sx={{ width: 75, height: 75 }}
-                                />
-                            </Link>
-                        </Stack>
-                    )
-                    :
-                    (
-                        <Stack direction="row" spacing={2} className='avatarContainer' >
-                            <Link to='login'>
-                                <Avatar
-                                    className='headerAvatar'
-                                    src="/broken-image.jpg"
-                                />
-                            </Link>
-                        </Stack>
-                    )
-                }
+
             </div>
         </header >
     );

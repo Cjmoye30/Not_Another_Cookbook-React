@@ -258,7 +258,7 @@ const UpdateRecipe = () => {
                                 value={updateData.name}
                                 fullWidth
                                 onChange={handleChange}
-                                sx={{ mb: 1 }}
+                                sx={{ m: 1 }}
                                 size='small'
                                 variant='filled'
                             />
@@ -267,7 +267,7 @@ const UpdateRecipe = () => {
                                 value={updateData.description}
                                 fullWidth
                                 onChange={handleChange}
-                                sx={{ mb: 1 }}
+                                sx={{ m: 1 }}
                                 size='small'
                                 variant='filled'
                             />
@@ -280,11 +280,12 @@ const UpdateRecipe = () => {
                                 <div key={`ingMeaRow${index}`} className='ingAndMeasureRow'>
                                     <Grid container>
 
-                                        <Grid item sm={7} xs={12}>
+                                        <Grid item sm={6} xs={12} sx={{m:1}}>
                                             <TextField
                                                 value={ingredient}
+                                                label='Ingredient'
                                                 onChange={(e) => handleChange(e, index, 'ingredients')}
-                                                sx={{ mb: 1 }}
+                                                sx={{ m: 1 }}
                                                 fullWidth
                                                 key={`ing${index}`}
                                                 size='small'
@@ -292,11 +293,12 @@ const UpdateRecipe = () => {
                                             />
                                         </Grid>
 
-                                        <Grid item sm={4} xs={12}>
+                                        <Grid item sm={4} xs={12} sx={{m:1}}>
                                             <TextField
                                                 value={updateData.measure[index]}
+                                                label='Measure'
                                                 onChange={(e) => handleChange(e, index, 'measure')}
-                                                sx={{ mb: 1 }}
+                                                sx={{ m: 1 }}
                                                 fullWidth
                                                 key={`mea${index}`}
                                                 size='small'
