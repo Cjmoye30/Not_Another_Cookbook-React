@@ -9,6 +9,7 @@ export const GET_ME = gql`
             lastName
             email
             avatar
+            dateCreated
             recipes {
                 _id
                 name
@@ -32,6 +33,7 @@ export const GET_ALL_USERS = gql`
             lastName
             email
             avatar
+            dateCreated
             recipes {
                 _id
                 name
@@ -54,6 +56,7 @@ export const GET_USER = gql`
             lastName
             email
             avatar
+            dateCreated
             recipes {
                 _id
                 name

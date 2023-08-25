@@ -12,6 +12,7 @@ type User {
     password: String!
     image: [String]
     recipes: [Recipe]
+    dateCreated: String
 }
 
 type Auth {

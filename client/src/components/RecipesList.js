@@ -33,7 +33,7 @@ const RecipesList = () => {
 
     return (
         <>
-            <div>
+            <div className='testWrapper'>
                 <ImageList
                     variant='masonry'
                     cols={cols}

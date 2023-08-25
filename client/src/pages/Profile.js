@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CloseIcon from '@mui/icons-material/Close';
+import moment from 'moment'
 
 const style = {
     position: 'absolute',
@@ -57,7 +58,11 @@ const Profile = () => {
     }
 
     const user = data?.me || data?.getUser;
-    // console.log("Data for the user: ", user);
+    console.log("Data for the user: ", user);
+    console.log(user.dateCreated);
+    const userCreated = moment.unix(user.dateCreated / 1000).format("MMM Do YYYY");
+    console.log(userCreated)
+    
     return (
         <>
 
@@ -92,7 +97,7 @@ const Profile = () => {
                     <hr />
 
                     <h3>Username: {user.username} </h3>
-                    <h4>Member Since: tbd </h4>
+                    <h4>Member Since: {userCreated} </h4>
                     <h4>Total Recipes: {user.recipes.length} </h4>
                 </div>
             </div>

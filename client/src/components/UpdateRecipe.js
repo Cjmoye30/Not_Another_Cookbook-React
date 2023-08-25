@@ -157,7 +157,9 @@ const UpdateRecipe = () => {
         })
     }
 
-    const removeIngredientsAndMeasure = (index) => {
+    const removeIngredientsAndMeasure = (e, index) => {
+        e.preventDefault();
+
         // we are getting the current state of the data, getting the index, and then removing whichever index we passed in the parameter
         const updateIngredients = [...updateData.ingredients]
         updateIngredients.splice(index, 1);
@@ -172,7 +174,9 @@ const UpdateRecipe = () => {
         })
     }
 
-    const removeInstruction = (index) => {
+    const removeInstruction = (e, index) => {
+        e.preventDefault();
+
         const updateInstructions = [...updateData.instructions]
         updateInstructions.splice(index, 1);
 
@@ -186,7 +190,9 @@ const UpdateRecipe = () => {
 
 
     // onClick - give the image clicked an opactiy or something to indicate it is going to be removed
-    const removeImage = (index) => {
+    const removeImage = (e, index) => {
+        e.preventDefault();
+
         const updateImages = [...updateData.image]
         updateImages.splice(index, 1);
 
@@ -307,7 +313,7 @@ const UpdateRecipe = () => {
                                         </Grid>
 
                                         <Grid item sm={1} xs={12} className='removeButtonWrapper'>
-                                            <button className='button4' onClick={() => removeIngredientsAndMeasure(index)}>Remove</button>
+                                            <button className='button4' onClick={(e) => removeIngredientsAndMeasure(e, index)}>Remove</button>
                                         </Grid>
                                     </Grid>
                                 </div>
@@ -331,7 +337,7 @@ const UpdateRecipe = () => {
                                         variant='filled'
                                     />
                                     <button
-                                        onClick={() => removeInstruction(index)}
+                                        onClick={(e) => removeInstruction(e, index)}
                                         className='button4'
                                     >
                                         Remove
@@ -392,7 +398,7 @@ const UpdateRecipe = () => {
                                             src={image}
                                         />
                                         <DeleteIcon
-                                            onClick={() => removeImage(index)}
+                                            onClick={(e) => removeImage(e, index)}
                                             className='deleteIcon'
                                         />
                                     </div>

@@ -10,6 +10,12 @@ const userSchema = new Schema(
             unique: true,
         },
 
+        // add in a date for when this document was created
+        dateCreated: {
+            type: Date,
+            default: Date.now()
+        },
+
         firstName: {
             type: String,
             required: true,
