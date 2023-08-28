@@ -8,6 +8,7 @@ import { useMutation } from '@apollo/client';
 import { useRef } from 'react';
 import { UPDATE_PROFILE } from '../utils/mutations';
 import { IKContext, IKUpload } from 'imagekitio-react';
+import { TextareaAutosize } from '@mui/material';
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
 const isProduction = process.env.NODE_ENV === 'production';
@@ -32,6 +33,7 @@ const UpdateProfile = () => {
         username: userData.username,
         email: userData.email,
         avatar: userData.avatar,
+        userBio: userData.userBio,
         uploadImagePreview: ''
     })
 
@@ -52,9 +54,9 @@ const UpdateProfile = () => {
             uploadImagePreview: res.url
         };
 
-        console.log("new avatar URL", updatedFormData)
+        // console.log("new avatar URL", updatedFormData)
         setFormData(updatedFormData);
-        console.log(updatedFormData.avatar)
+        // console.log(updatedFormData.avatar)
     }
 
     const handleSubmit = async (e) => {
@@ -68,7 +70,8 @@ const UpdateProfile = () => {
                     userId: userId,
                     username: formData.username,
                     email: formData.email,
-                    avatar: formData.avatar
+                    avatar: formData.avatar,
+                    userBio: formData.userBio
                 }
             })
 
@@ -136,6 +139,19 @@ const UpdateProfile = () => {
                         sx={{ mb: 2 }}
                         onChange={handleChange}
                     />
+                    <div className='bioSection'>
+                        <TextareaAutosize
+                            label='Bio'
+                            name='userBio'
+                            variant='filled'
+                            minRows={3}
+                            value={formData.userBio}
+                            onChange={handleChange}
+                            className='userBio'
+                            maxLength={280}
+                        />
+                        <small className='charLimit'> {formData.userBio.length} /280 </small>
+                    </div>
 
                     <div className='modalSection'>
 
@@ -161,15 +177,15 @@ const UpdateProfile = () => {
                         </IKContext>
 
                         {formData.uploadImagePreview !== '' ? (
+                            <div>
+                                <p>Preview:</p>
                                 <div>
-                                    <p>Preview:</p>
-                                    <div>
-                                        <img src={formData.uploadImagePreview} className='imagePreview' />
-                                    </div>
+                                    <img src={formData.uploadImagePreview} className='imagePreview' />
                                 </div>
-                            ) : (
-                                <></>
-                            )}
+                            </div>
+                        ) : (
+                            <></>
+                        )}
                     </div>
 
                     <hr />

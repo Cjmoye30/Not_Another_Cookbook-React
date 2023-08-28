@@ -16,6 +16,12 @@ const userSchema = new Schema(
             default: Date.now()
         },
 
+        userBio: {
+            type: String,
+            minLength: 8,
+            maxLength: 280
+        },
+
         firstName: {
             type: String,
             required: true,

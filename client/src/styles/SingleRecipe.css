@@ -32,17 +32,20 @@
 
 .carousel {
     height: 100%;
-    width: 100%; /* Adjust width to fit the content */
+    width: 100%;
+    /* Adjust width to fit the content */
     max-width: 800px;
 }
 
 .singleRecipeHeroImage {
     max-width: 98%;
     max-height: 600px;
-    width: auto; /* Make sure the image doesn't exceed the container's width */
+    width: auto;
+    /* Make sure the image doesn't exceed the container's width */
     border-radius: 20px;
     box-shadow: 0 10px 8px -7px black;
-    margin: 20px auto; /* Center the image horizontally */
+    margin: 20px auto;
+    /* Center the image horizontally */
     object-fit: cover;
     object-position: center;
 }
@@ -56,7 +59,8 @@
     border: 1px solid linear-gradient(#191c1e, var(--a1));
 }
 
-.recipeTitle, .recipeDesc {
+.recipeTitle,
+.recipeDesc {
     padding: 0;
     margin: 0 auto;
 }
@@ -123,7 +127,7 @@
 
 .sectionTitle {
     text-align: center;
-    padding: 10px ;
+    padding: 10px;
     color: var(--a3);
 }
 
@@ -152,8 +156,19 @@
     width: 90%;
 }
 
+.userBio {
+    width: 98%;
+    margin: 0 auto;
+    font-family: var(--fontHeaders);
+    padding: 10px;
+}
 
-.modalSection, .formSection {
+.charLimit {
+    float: right;
+}
+
+.modalSection,
+.formSection {
     border: 1px solid var(--a1);
     border-radius: 10px;
     box-shadow: 0 10px 8px -7px black;
@@ -190,7 +205,8 @@
     max-width: 1000px;
 }
 
-.ingAndMeasureRow, .instructionRow {
+.ingAndMeasureRow,
+.instructionRow {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -254,4 +270,3 @@
         width: 100%;
     }
 }
-

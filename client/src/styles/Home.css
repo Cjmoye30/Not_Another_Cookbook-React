@@ -31,17 +31,43 @@
 }
 
 .profileCard {
-    padding: 10px;
     border: 1px solid black;
-    margin: 10px;
+    margin: 10px auto;
+    width: 90%;
 }
 
-
 .cardMedia {
-    border: 1px solid black;
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 10px 8px -7px black;
+    background-color: black;
+    width: 70%;
+    height: auto;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+.homeUserBio {
+    padding: 10px;
+    text-align: left;
+    line-height: 1.7rem;
+}
+
+.bioMetrics {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    padding: 5px 0;
+}
+
+.profileCardSection {
+    padding: 10px 5px;
+}
+
+.bioMetrics p {
+    padding: 0 10px;
+    margin: 0;
 }
 
 .homePageImageList {

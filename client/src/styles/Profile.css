@@ -41,6 +41,12 @@
     height: 300px;
 }
 
+.profileUserBio {
+    line-height: 2rem;
+    padding: 20px;
+    font-size: 1.3rem;
+}
+
 /* ----------- Update Profile -------------- */
 @media screen and (max-width: 600px) {
     .updateProfileButton {

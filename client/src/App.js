@@ -10,6 +10,7 @@ import Profiles from './pages/ProfilesList'
 import Login from './pages/Login'
 import Signup from './pages/Signup';
 import SingleRecipe from './pages/SingleRecipe';
+import CreateRecipePage from './pages/CreateRecipe';
 
 // Import Components
 import Header from './components/Header'
@@ -37,6 +38,7 @@ function App() {
               <Route path="/profiles" element={<Profiles />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/createRecipe" element={<CreateRecipePage />} />
               <Route path="singleRecipe/:recipeId" element={<SingleRecipe />} />
             </Routes>
           </div>

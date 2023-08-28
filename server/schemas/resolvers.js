@@ -43,7 +43,7 @@ const resolvers = {
     },
 
     Mutation: {
-        signup: async (parent, { username, email, firstName, lastName, password, avatar }) => {
+        signup: async (parent, { username, email, firstName, lastName, password, avatar, userBio }) => {
 
             // if their email already exists - redirect to the login page
             const checkUser = await User.findOne({ email: email })
@@ -52,7 +52,7 @@ const resolvers = {
                 throw new AuthenticationError('Email already exists.')
             }
 
-            const newUser = await User.create({ username, email, firstName, lastName, password, avatar });
+            const newUser = await User.create({ username, email, firstName, lastName, password, avatar, userBio });
             console.log("New User Info: ", newUser)
 
             const token = signToken(newUser);
@@ -110,7 +110,7 @@ const resolvers = {
         },
 
 
-        updateProfile: async (parent, { userId, username, email, avatar }, context) => {
+        updateProfile: async (parent, { userId, username, email, avatar, userBio }, context) => {
             // only able to edit username, email, and avatar
             try {
                 console.log("request from update profile resolver.")
@@ -122,14 +122,14 @@ const resolvers = {
                         $set: {
                             email: email,
                             username: username,
-                            avatar: avatar
+                            avatar: avatar,
+                            userBio: userBio
                         }
                     },
                     { new: true, runValidators: true }
                 )
 
                 //update the token with the new info
-
                 console.log("SUCCESS! Updated profile: ", updateProfile);
                 const token = signToken(updateProfile)
                 console.log("update token: ", token)

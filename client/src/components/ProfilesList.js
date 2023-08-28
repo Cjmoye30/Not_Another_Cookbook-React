@@ -9,6 +9,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Divider } from '@mui/material';
+import Chip from '@mui/material/Chip';
+import moment from 'moment'
 
 const ProfilesList = () => {
     const { loading, data } = useQuery(GET_ALL_USERS);
@@ -19,11 +22,13 @@ const ProfilesList = () => {
         return <p>Loading...</p>
     }
 
+    // date a profile was created
+    const userCreated = moment.unix(users.dateCreated / 1000).format("MMM Do YYYY")
+
     return (
         <>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid
-                    sx={{ p: 1 }}
                     container
                     className='gridContainer'
                 >
@@ -35,33 +40,107 @@ const ProfilesList = () => {
                         :
                         (
                             users.map((user) => (
-                                <div
-                                    className='gridWrapper'
+                                <Grid
+                                    item
+                                    sm={4}
+                                    xs={12}
                                 >
                                     <Card
-                                    sx={{ minWidth: 345 }}
-                                    className='profileCard'
+                                        className='profileCard'
+                                        sx={{ backgroundColor: 'var(--a1)', color: 'var(--a3)', borderRadius: '10px' }}
                                     >
                                         <CardMedia
-                                            sx={{ height: 400 }}
+                                            sx={{ height: 350, backgroundSize: 'cover' }}
                                             image={user.avatar}
                                             title={user.username}
                                             className='cardMedia'
                                         />
                                         <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div">
+
+                                            <Typography className="profileCardSection" gutterBottom variant="h4" component="div">
                                                 {user.username}
                                             </Typography>
-                                            <Typography variant="body2" color="text.secondary">
-                                                User bio - coming soon
+                                            <p>{user.firstName} {user.lastName}</p>
+
+                                            <Divider
+                                                textAlign='left'
+                                                sx={{
+                                                    "&::before, &::after": {
+                                                        borderColor: "var(--a3)",
+                                                    },
+                                                }}>
+                                                <Chip label='Bio' sx={{ backgroundColor: 'var(--a3)' }}></Chip>
+                                            </Divider>
+
+                                            {user.userBio === null ? (
+                                                <Typography className="profileCardSection" gutterBottom component='div'>
+                                                    <div className='homeUserBio'><small><em>No bio yet</em></small></div>
+                                                </Typography>
+                                            ) : (
+
+                                                <Typography className="profileCardSection" gutterBottom component='div'>
+                                                    <div className='homeUserBio'>
+                                                        {user.userBio}
+                                                    </div>
+                                                </Typography>
+
+                                            )}
+
+                                            <Divider
+                                                textAlign='right'
+                                                sx={{
+                                                    "&::before, &::after": {
+                                                        borderColor: "var(--a3)",
+                                                    },
+                                                }}>
+                                                <Chip label='Metrics' sx={{ backgroundColor: 'var(--a3)' }}></Chip>
+                                            </Divider>
+
+                                            <Typography className="profileCardSection" gutterBottom component='div'>
+                                                <div className='bioMetrics'>
+                                                    <p>Member Since: {moment.unix(user.dateCreated / 1000).format("MMM Do, YYYY")}</p>
+                                                    <p>Recipes: {user.recipes.length}</p>
+                                                    <p>Signature Recipe: </p>
+                                                    <p>Favorite cuisine: </p>
+                                                </div>
                                             </Typography>
+
+                                            <Divider
+                                                textAlign='left'
+                                                sx={{
+                                                    "&::before, &::after": {
+                                                        borderColor: "var(--a3)",
+                                                    },
+                                                }}>
+                                                <Chip label='Social' sx={{ backgroundColor: 'var(--a3)' }}></Chip>
+                                            </Divider>
+
                                         </CardContent>
                                         <CardActions>
-                                            <Button disabled size="small">View Profile</Button>
-                                            {/* <Button disabled size="small">Add Friend</Button> */}
+
+                                            <Button
+                                                
+                                                size="small"
+                                                sx={{ color: 'white' }}
+                                            >View Profile
+                                            </Button>
+
+                                            <Button
+                                                
+                                                size="small"
+                                                sx={{ color: 'white' }}
+                                            >Media Option 1
+                                            </Button>
+                                            <Button
+                                                
+                                                size="small"
+                                                sx={{ color: 'white' }}
+                                            >Media Option 2
+                                            </Button>
+
                                         </CardActions>
                                     </Card>
-                                </div>
+                                </Grid>
                             ))
                         )}
                 </Grid>
@@ -71,18 +150,3 @@ const ProfilesList = () => {
 }
 
 export default ProfilesList;
-
-/* <Grid
-sx={{ m: 1, border: 1 }}
-className='homeUserProfile'
->
-<img
-    className='profileListAvatar'
-    src={user.avatar}
-/>
-<div>
-    <h1>{user.username}</h1>
-    <h3>{user.firstName} {user.lastName}</h3>
-    <p>{user.email}</p>
-</div>
-</Grid> */

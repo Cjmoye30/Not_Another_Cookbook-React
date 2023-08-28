@@ -10,16 +10,12 @@ import Auth from '../utils/auth'
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import '../styles/Header.css';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
-
 
 const logout = (event) => {
     event.preventDefault();
     Auth.logout();
 }
-
-
 
 export default function TemporaryDrawer() {
 
@@ -71,7 +67,7 @@ export default function TemporaryDrawer() {
 
 
                             <ListItemButton>
-                                <Link to="/me" className="navlink">Create Recipe</Link>
+                                <Link to="/createRecipe" className="navlink">Create Recipe</Link>
                             </ListItemButton>
                             <Divider />
 
@@ -119,31 +115,31 @@ export default function TemporaryDrawer() {
 
     return (
         <header>
-            <div className='headerTitle'>
-                <Link to='/'>
-                    <h1 className='titleLink'>Not Another Cookbook</h1>
-                </Link>
-            </div>
-
-            <div className='headerLeft'>
-                <div className='headerNav'>
-                    {['right'].map((anchor) => (
-                        <React.Fragment key={anchor}>
-                            <Button className='menuButton' onClick={toggleDrawer(anchor, true)}>
-                                <MenuIcon />
-                            </Button>
-                            <Drawer
-                                anchor={anchor}
-                                open={state[anchor]}
-                                onClose={toggleDrawer(anchor, false)}
-                            >
-                                {list(anchor)}
-                            </Drawer>
-                        </React.Fragment>
-                    ))}
+            <div className='headerContent'>
+                <div className='headerTitle'>
+                    <Link to='/'>
+                        <h1 className='titleLink'>Not Another Cookbook</h1>
+                    </Link>
                 </div>
 
-
+                <div className='headerLeft'>
+                    <div className='headerNav'>
+                        {['right'].map((anchor) => (
+                            <React.Fragment key={anchor}>
+                                <Button className='menuButton' onClick={toggleDrawer(anchor, true)}>
+                                    <MenuIcon />
+                                </Button>
+                                <Drawer
+                                    anchor={anchor}
+                                    open={state[anchor]}
+                                    onClose={toggleDrawer(anchor, false)}
+                                >
+                                    {list(anchor)}
+                                </Drawer>
+                            </React.Fragment>
+                        ))}
+                    </div>
+                </div>
             </div>
         </header >
     );

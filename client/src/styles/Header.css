@@ -1,17 +1,22 @@
 header {
+    background-image: linear-gradient(#191c1e, var(--a1));
+}
+
+.headerContent {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     text-align: center;
     align-items: center;
-    padding: 20px;
     background-image: linear-gradient(#191c1e, var(--a1));
     color: var(--a3);
     flex-wrap: wrap-reverse;
+    max-width: 1500px;
+    margin: 0 auto;
 }
 
 .headerLeft {
-    display: flex
+    display: flex;
 }
 
 .titleLink {
@@ -69,7 +74,7 @@ header {
 }
 
 @media screen and (max-width: 600px) {
-    header {
+    .headerContent {
         justify-content: center;
     }
 

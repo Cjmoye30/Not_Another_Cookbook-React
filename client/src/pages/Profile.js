@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { GET_USER, GET_ME } from '../utils/queries';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/Profile.css'
-import { Button } from '@mui/material';
+import { Button, Divider } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import Modal from '@mui/material/Modal';
 import UpdateProfile from '../components/UpdateProfile';
@@ -62,7 +62,7 @@ const Profile = () => {
     console.log(user.dateCreated);
     const userCreated = moment.unix(user.dateCreated / 1000).format("MMM Do YYYY");
     console.log(userCreated)
-    
+
     return (
         <>
 
@@ -77,29 +77,31 @@ const Profile = () => {
             </div>
 
             <div className='profileHeader'>
-                <img className='profileAvatar' src={user.avatar} />
+                    <img className='profileAvatar' src={user.avatar} />
 
-                <div className='profileHeaderText'>
+                    <div className='profileHeaderText'>
 
-                    <div className='profileEditIcons'>
+                        <div className='profileEditIcons'>
 
-                        <Button
-                            onClick={handleOpen}
-                            className='profileEdit'
-                        >
-                            <EditIcon className='editIcon' />
-                        </Button>
+                            <Button
+                                onClick={handleOpen}
+                                className='profileEdit'
+                            >
+                                <EditIcon className='editIcon' />
+                            </Button>
 
+                        </div>
+
+                        <h1> {user.firstName} {user.lastName} </h1>
+
+                        <hr />
+
+                        <h3>Username: {user.username} </h3>
+                        <h4>Member Since: {userCreated} </h4>
+                        <h4>Total Recipes: {user.recipes.length} </h4>
                     </div>
 
-                    <h1> {user.firstName} {user.lastName} </h1>
-
-                    <hr />
-
-                    <h3>Username: {user.username} </h3>
-                    <h4>Member Since: {userCreated} </h4>
-                    <h4>Total Recipes: {user.recipes.length} </h4>
-                </div>
+                    <p className='profileUserBio'> {user.userBio} </p>
             </div>
 
             <Tabs />
@@ -115,7 +117,7 @@ const Profile = () => {
                     className='modal-body'
                     sx={style}
                 >
-                    <CloseIcon className='modalCloseIcon' onClick={handleClose}/>
+                    <CloseIcon className='modalCloseIcon' onClick={handleClose} />
                     <UpdateProfile />
 
                 </Box>
