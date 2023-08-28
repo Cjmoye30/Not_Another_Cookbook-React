@@ -50,7 +50,8 @@ const ProfilesList = () => {
                                         sx={{ backgroundColor: 'var(--a1)', color: 'var(--a3)', borderRadius: '10px' }}
                                     >
                                         <CardMedia
-                                            sx={{ height: 350, backgroundSize: 'cover' }}
+                                            component='img'
+                                            aspectRatio='16/9'
                                             image={user.avatar}
                                             title={user.username}
                                             className='cardMedia'
@@ -60,7 +61,7 @@ const ProfilesList = () => {
                                             <Typography className="profileCardSection" gutterBottom variant="h4" component="div">
                                                 {user.username}
                                             </Typography>
-                                            <p>{user.firstName} {user.lastName}</p>
+                                            <em>{user.firstName} {user.lastName}</em>
 
                                             <Divider
                                                 textAlign='left'
@@ -112,27 +113,27 @@ const ProfilesList = () => {
                                                         borderColor: "var(--a3)",
                                                     },
                                                 }}>
-                                                <Chip label='Social' sx={{ backgroundColor: 'var(--a3)' }}></Chip>
+                                                <Chip label='Socials' sx={{ backgroundColor: 'var(--a3)' }}></Chip>
                                             </Divider>
 
                                         </CardContent>
                                         <CardActions>
 
                                             <Button
-                                                
+
                                                 size="small"
                                                 sx={{ color: 'white' }}
                                             >View Profile
                                             </Button>
 
                                             <Button
-                                                
+
                                                 size="small"
                                                 sx={{ color: 'white' }}
                                             >Media Option 1
                                             </Button>
                                             <Button
-                                                
+
                                                 size="small"
                                                 sx={{ color: 'white' }}
                                             >Media Option 2
