@@ -22,7 +22,26 @@ const resolvers = {
 
         // GET all users
         getAllUsers: async () => {
-            const usersData = await User.find().populate('recipes');
+            const usersData = await User.find()
+                .populate({
+                    path: 'recipes',
+                    populate: {
+                        path: 'favorites',
+                        model: 'User'
+                    }
+                })
+                .populate({
+                    path: 'favoriteRecipe',
+                    populate: {
+                        path: 'favorites',
+                        model: 'User'
+                    },
+                    populate: {
+                        path: 'chef',
+                        model: 'User'
+                    }
+                })
+                .populate('signatureRecipe')
             console.log("getAllUsers Query: ", usersData)
             return usersData;
         },
@@ -182,7 +201,7 @@ const resolvers = {
                     { _id: userId },
                     { favoriteRecipe: recipeId },
                     { new: true, runValidators: true }
-                )
+                ).populate('favoriteRecipe')
                 console.log(`Added to ${userId}'s favorites: ${recipeId}`)
 
                 // add the userId to the favorites array for the recipe
@@ -190,7 +209,7 @@ const resolvers = {
                     { _id: recipeId },
                     { $addToSet: { favorites: userId } },
                     { new: true, runValidators: true }
-                )
+                ).populate('favorites')
                 console.log(`${userId} added to the array of favorites for: ${recipeId}`)
                 console.log(recipeData, userData)
                 return userData
@@ -209,7 +228,7 @@ const resolvers = {
                     { _id: userId },
                     { signatureRecipe: recipeId },
                     { new: true, runValidators: true }
-                )
+                ).populate('signatureRecipe')
                 console.log("New signature recipe: ", data)
                 return data
 
@@ -219,11 +238,11 @@ const resolvers = {
         },
 
         // add favorite cuisine to a user
-        addFavoriteCuisine: async(parent, {userId, favoriteCuisine}, context) => {
+        addFavoriteCuisine: async (parent, { userId, favoriteCuisine }, context) => {
             try {
                 const updateUserData = await User.findOneAndUpdate(
-                    {_id: userId},
-                    {favoriteCuisine: favoriteCuisine},
+                    { _id: userId },
+                    { favoriteCuisine: favoriteCuisine },
                     { new: true, runValidators: true }
                 )
                 console.log(`New favorite cuisine for ${userId} is now: ${favoriteCuisine}`)

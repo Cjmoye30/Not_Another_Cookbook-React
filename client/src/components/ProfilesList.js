@@ -11,7 +11,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Divider } from '@mui/material';
 import Chip from '@mui/material/Chip';
-import moment from 'moment'
+import moment from 'moment';
+import { Link } from "react-router-dom";
+
 
 const ProfilesList = () => {
     const { loading, data } = useQuery(GET_ALL_USERS);
@@ -21,9 +23,6 @@ const ProfilesList = () => {
     if (loading) {
         return <p>Loading...</p>
     }
-
-    // date a profile was created
-    const userCreated = moment.unix(users.dateCreated / 1000).format("MMM Do YYYY")
 
     return (
         <>
@@ -39,8 +38,9 @@ const ProfilesList = () => {
                         )
                         :
                         (
-                            users.map((user) => (
+                            users.map((user, index) => (
                                 <Grid
+                                    key={index}
                                     item
                                     sm={4}
                                     xs={12}
@@ -51,7 +51,7 @@ const ProfilesList = () => {
                                     >
                                         <CardMedia
                                             component='img'
-                                            aspectRatio='16/9'
+                                            aspectratio='16/9'
                                             image={user.avatar}
                                             title={user.username}
                                             className='cardMedia'
@@ -101,8 +101,17 @@ const ProfilesList = () => {
                                                 <div className='bioMetrics'>
                                                     <p>Member Since: {moment.unix(user.dateCreated / 1000).format("MMM Do, YYYY")}</p>
                                                     <p>Recipes: {user.recipes.length}</p>
-                                                    <p>Signature Recipe: </p>
-                                                    <p>Favorite cuisine: </p>
+
+                                                    {/* have to first check if one exists! otherwise, return none */}
+                                                    <p>Signature Recipe: {user.signatureRecipe ? 
+                                                    
+                                                    <Link to={`/singleRecipe/${user.signatureRecipe._id}`}>
+                                                    {user.signatureRecipe.name }
+                                                    </Link>
+                                                    : 
+                                                    'None'} </p>
+                                                    <p>Favorite Recipe: {user.favoriteRecipe ? user.favoriteRecipe.name : 'None'} </p>
+                                                    <p>Favorite Cuisine: </p>
                                                 </div>
                                             </Typography>
 

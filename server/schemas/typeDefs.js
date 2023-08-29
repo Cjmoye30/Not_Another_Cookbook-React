@@ -14,8 +14,8 @@ type User {
     recipes: [Recipe]
     dateCreated: String
     userBio: String
-    favoriteRecipe: String
-    signatureRecipe: String
+    favoriteRecipe: Recipe
+    signatureRecipe: Recipe
     favoriteCuisine: String
 }
 

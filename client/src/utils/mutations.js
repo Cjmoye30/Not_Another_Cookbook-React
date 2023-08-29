@@ -77,3 +77,45 @@ export const UPDATE_PROFILE = gql`
         }
     }
 `;
+
+export const ADD_FAVORITE_RECIPE = gql`
+    mutation AddFavoriteRecipe($userId: ID!, $recipeId: ID!) {
+        addFavoriteRecipe(userId: $userId, recipeId: $recipeId) {
+            _id
+            username
+            favoriteRecipe {
+            name
+            }
+        }
+    }
+`;
+
+export const ADD_SIGNATURE_RECIPE = gql`
+    mutation AddSignatureRecipe($userId: ID!, $recipeId: ID!) {
+    addSignatureRecipe(userId: $userId, recipeId: $recipeId) {
+        _id
+        username
+        firstName
+        lastName
+            signatureRecipe {
+            name
+            description
+            image
+                favorites {
+                    _id
+                    username
+                }
+            }
+        }
+    }
+`;
+
+export const ADD_FAVORITE_CUISINE = gql`
+    mutation AddFavoriteCuisine($userId: ID!, $favoriteCuisine: String!) {
+        addFavoriteCuisine(userId: $userId, favoriteCuisine: $favoriteCuisine) {
+            _id
+            username
+            favoriteCuisine
+        }
+    }   
+`;

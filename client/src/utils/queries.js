@@ -26,7 +26,7 @@ export const GET_ME = gql`
 `;
 
 export const GET_ALL_USERS = gql`
-    query getAllUsers {
+    query GetAllUsers {
         getAllUsers {
             _id
             username
@@ -36,15 +36,36 @@ export const GET_ALL_USERS = gql`
             avatar
             dateCreated
             userBio
-            recipes {
+                recipes {
                 _id
                 name
                 description
-                ingredients
-                measure
-                instructions
                 image
-            }
+                dateCreated
+                    favorites {
+                        _id
+                        username
+                        avatar
+                    }
+                }
+                favoriteRecipe {
+                _id
+                name
+                image
+                    chef {
+                        _id
+                        username
+                        firstName
+                        lastName
+                    }
+                }
+                signatureRecipe {
+                _id
+                name
+                description
+                image
+                }
+            favoriteCuisine
         }
     }
 `;

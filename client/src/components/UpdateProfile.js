@@ -14,6 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { TextareaAutosize } from '@mui/material';
+import { ADD_FAVORITE_CUISINE, ADD_FAVORITE_RECIPE, ADD_SIGNATURE_RECIPE } from '../utils/mutations';
+
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
 const isProduction = process.env.NODE_ENV === 'production';

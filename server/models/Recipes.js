@@ -39,17 +39,19 @@ const recipeSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User'
         },
-        
+
         dateCreated: {
             type: Date,
             default: Date.now()
         },
 
-        // returning all of the chefs who like a given recipe
-        favorites: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
+        // returning all of the chefs who like a given recipe - MUST be an array
+        favorites: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User'
+            }
+        ]
     }
 );
 
