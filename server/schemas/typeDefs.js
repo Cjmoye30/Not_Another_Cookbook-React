@@ -14,6 +14,9 @@ type User {
     recipes: [Recipe]
     dateCreated: String
     userBio: String
+    favoriteRecipe: String
+    signatureRecipe: String
+    favoriteCuisine: String
 }
 
 type Auth {
@@ -31,6 +34,7 @@ type Recipe {
     image: [String]
     chef: User
     dateCreated: String
+    favorites: [User]
 }
 
 type Query {
@@ -44,12 +48,14 @@ type Query {
 type Mutation {
     signup(username: String!, email: String!, firstName: String!, lastName: String!, password: String!, avatar: String, userBio: String): Auth
     login(email: String!, password: String!): Auth
-
-    # edit username, email, and avatar only - 
     updateProfile(userId: ID!, username: String, email: String, avatar: String, userBio: String): User
     addRecipe(name: String!, description: String, ingredients: [String], measure: [String], instructions: [String], image: [String]): Recipe
     updateRecipe(recipeId: ID!, name: String!, description: String, ingredients: [String], measure: [String], instructions: [String], image: [String]): Recipe
     deleteRecipe(recipeId: ID!): Recipe
+
+    addFavoriteRecipe(userId: ID!, recipeId: ID!): User
+    addSignatureRecipe(userId: ID!, recipeId: ID!): User
+    addFavoriteCuisine(userId: ID!, favoriteCuisine: String!): User
 }
 `;
 

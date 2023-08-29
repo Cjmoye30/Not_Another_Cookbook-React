@@ -44,6 +44,12 @@ const recipeSchema = new Schema(
             type: Date,
             default: Date.now()
         },
+
+        // returning all of the chefs who like a given recipe
+        favorites: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
     }
 );
 

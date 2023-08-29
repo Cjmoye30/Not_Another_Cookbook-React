@@ -14,6 +14,7 @@ import Grid from '@mui/material/Grid';
 import Carousel from 'react-material-ui-carousel';
 import NavIcons from '../components/NavIcons';
 import CloseIcon from '@mui/icons-material/Close';
+import moment from 'moment'
 
 const style = {
     position: 'absolute',
@@ -52,13 +53,12 @@ const SingleRecipe = () => {
     const { loading, data, error } = useQuery(GET_RECIPE,
         { variables: { recipeId: recipeId } })
 
+
     const recipeData = data?.getRecipe || {}
     const ingredients = recipeData.ingredients
     const measure = recipeData.measure
     const instructions = recipeData.instructions
     const images = recipeData.image;
-
-    console.log(images)
 
     const chef = data?.getRecipe.chef._id
     const loggedInUser = Auth.getProfile().data._id
@@ -84,6 +84,7 @@ const SingleRecipe = () => {
                         <hr />
 
                         <h3 className='recipeDesc'>{recipeData.description}</h3>
+                        <p>Created by: {recipeData.chef.username} on {moment.unix(recipeData.dateCreated / 1000).format("MMM Do YYYY")}</p>
                     </div>
                     <div className='testWrapper'>
                         <Carousel className='carousel'>

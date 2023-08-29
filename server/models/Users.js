@@ -60,7 +60,23 @@ const userSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: 'Recipe'
             }
-        ]
+        ],
+
+        // returning only a singular recipe - either their own or someone elses.
+        favoriteRecipe: {
+            type: Schema.Types.ObjectId,
+            ref: 'Recipe'
+        },
+
+        signatureRecipe: {
+            type: Schema.Types.ObjectId,
+            ref: 'Recipe'
+        },
+
+        // Using a dropdown with a pre-defined list of cuisines
+        favoriteCuisine: {
+            type: String
+        }
     }
 );
 

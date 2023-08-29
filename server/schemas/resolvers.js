@@ -171,6 +171,68 @@ const resolvers = {
 
         deleteRecipe: async (parent, { recipeId }, context) => {
             return Recipe.findOneAndDelete({ _id: recipeId })
+        },
+
+        // add favorite recipe to a user - any recipe in our DB
+        addFavoriteRecipe: async (parent, { userId, recipeId }, context) => {
+            try {
+
+                // add the recipe to the users profile as a favorite
+                const userData = await User.findOneAndUpdate(
+                    { _id: userId },
+                    { favoriteRecipe: recipeId },
+                    { new: true, runValidators: true }
+                )
+                console.log(`Added to ${userId}'s favorites: ${recipeId}`)
+
+                // add the userId to the favorites array for the recipe
+                const recipeData = await Recipe.findOneAndUpdate(
+                    { _id: recipeId },
+                    { $addToSet: { favorites: userId } },
+                    { new: true, runValidators: true }
+                )
+                console.log(`${userId} added to the array of favorites for: ${recipeId}`)
+                console.log(recipeData, userData)
+                return userData
+
+
+            } catch (err) {
+                console.log(err)
+                throw err
+            }
+        },
+
+        // add signature recipe to a user - only selection will be from the users recipes
+        addSignatureRecipe: async (parent, { userId, recipeId }, context) => {
+            try {
+                const data = await User.findOneAndUpdate(
+                    { _id: userId },
+                    { signatureRecipe: recipeId },
+                    { new: true, runValidators: true }
+                )
+                console.log("New signature recipe: ", data)
+                return data
+
+            } catch (err) {
+                console.log(err)
+            }
+        },
+
+        // add favorite cuisine to a user
+        addFavoriteCuisine: async(parent, {userId, favoriteCuisine}, context) => {
+            try {
+                const updateUserData = await User.findOneAndUpdate(
+                    {_id: userId},
+                    {favoriteCuisine: favoriteCuisine},
+                    { new: true, runValidators: true }
+                )
+                console.log(`New favorite cuisine for ${userId} is now: ${favoriteCuisine}`)
+                return updateUserData
+
+            } catch (err) {
+                console.log(err)
+                throw err
+            }
         }
     }
 }

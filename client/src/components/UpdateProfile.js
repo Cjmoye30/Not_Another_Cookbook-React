@@ -8,6 +8,11 @@ import { useMutation } from '@apollo/client';
 import { useRef } from 'react';
 import { UPDATE_PROFILE } from '../utils/mutations';
 import { IKContext, IKUpload } from 'imagekitio-react';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { TextareaAutosize } from '@mui/material';
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
@@ -17,6 +22,7 @@ const authenticationEndpoint = isProduction
     : 'http://localhost:3000/auth';
 const folderDestination = '/react-cookbook-avatars';
 
+const cuisineOptions = ["Italian", "Mexican", "German", "Who Cares"]
 
 const UpdateProfile = () => {
 
@@ -34,7 +40,8 @@ const UpdateProfile = () => {
         email: userData.email,
         avatar: userData.avatar,
         userBio: userData.userBio,
-        uploadImagePreview: ''
+        uploadImagePreview: '',
+        favoriteCuisine: userData.favoriteCuisine
     })
 
     const handleChange = (e) => {
@@ -45,6 +52,8 @@ const UpdateProfile = () => {
             [name]: value
         })
     }
+
+    // must have a different handleChange for the select components in any of my boxes
 
     const onSuccess = res => {
         console.log("new avatar URL: ", res.url);
@@ -71,7 +80,8 @@ const UpdateProfile = () => {
                     username: formData.username,
                     email: formData.email,
                     avatar: formData.avatar,
-                    userBio: formData.userBio
+                    userBio: formData.userBio,
+                    favoriteCuisine: formData.favoriteCuisine
                 }
             })
 
@@ -151,6 +161,29 @@ const UpdateProfile = () => {
                             maxLength={280}
                         />
                         <small className='charLimit'> {formData.userBio.length} /280 </small>
+                    </div>
+
+                    <div>
+                        <p>Update Favorite Cuisine: </p>
+                        <p>Update Signature Recipe: </p>
+
+                        <Box sx={{ maxWidth: 300 }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="favorite-cuisine-select">Favorite Cuisine</InputLabel>
+                                <Select
+                                    labelId="favorite-cuisine-select"
+                                    id="favorite-cuisine-select"
+                                    value={formData.favoriteCuisine}
+                                    label="Italian"
+                                    onChange={handleChange}
+                                >
+                                    {cuisineOptions.map((option) => (
+                                        <MenuItem>{option}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Box>
+
                     </div>
 
                     <div className='modalSection'>
