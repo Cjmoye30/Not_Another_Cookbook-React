@@ -84,7 +84,7 @@ const UpdateProfile = () => {
 
             console.log(data);
             console.log("SUCCESS! Profile Updated.");
-            // window.location.assign('/me');
+            window.location.assign('/me');
 
         } catch (err) {
             console.log("Frontend error updating profile: ", err)
@@ -159,7 +159,7 @@ const UpdateProfile = () => {
                             className='userBio'
                             maxLength={280}
                         />
-                        <small className='charLimit'> {formData.userBio.length} /280 </small>
+                        <small className='charLimit'> {formData.userBio ? formData.userBio.length : ' '} /280 </small>
                     </div>
 
                     <div>

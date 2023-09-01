@@ -27,11 +27,10 @@ export default function BasicSelect() {
     const [addFavoriteCuisine] = useMutation(ADD_FAVORITE_CUISINE);
     const [addSignatureRecipe] = useMutation(ADD_SIGNATURE_RECIPE);
 
-        console.log(userData.signatureRecipe.name)
 
     const [formData, setFormData] = React.useState({
         favoriteCuisine: userData.favoriteCuisine || '',
-        signatureRecipe: userData.signatureRecipe._id || ''
+        signatureRecipe: userData.signatureRecipe ? userData.signatureRecipe._id : '' || ''
     })
 
     const handleChange = async (e) => {
@@ -50,9 +49,9 @@ export default function BasicSelect() {
                         favoriteCuisine: value
                     }
                 })
-                console.log("CUISINE DATA FROM handleChange! ",cuisineData)
+                console.log("CUISINE DATA FROM handleChange! ", cuisineData)
             } catch (err) {
-                console.log("ERROR changing favorite cuisine: ",err)
+                console.log("ERROR changing favorite cuisine: ", err)
             }
         }
 
@@ -64,9 +63,9 @@ export default function BasicSelect() {
                         recipeId: value
                     }
                 })
-                console.log("SIGNATURE RECIPE DATA FROM handleChange! ",signatureRecipeData)
+                console.log("SIGNATURE RECIPE DATA FROM handleChange! ", signatureRecipeData)
             } catch (err) {
-                console.log("ERROR chaging signature recipe",err)
+                console.log("ERROR chaging signature recipe", err)
             }
         }
     };
@@ -88,47 +87,57 @@ export default function BasicSelect() {
     return (
         <Box>
             {/* Favorite Cusisine */}
-                <FormControl fullWidth>
-                    <InputLabel id="favorite-cuisine-label">Favorite Cuisine</InputLabel>
-                    <Select
-                        labelId="favorite-cuisine-label"
-                        id="cuisine-select"
-                        value={formData.favoriteCuisine}
-                        label="Favorite Cuisine"
-                        name='favoriteCuisine'
-                        onChange={handleChange}
-                        sx={{ mb: 2 }}
-                    >
-                        {cuisineOptions.map((option, index) => (
-                            <MenuItem key={index} value={option}> {option} </MenuItem>
-                        ))}
+            <FormControl fullWidth>
+                <InputLabel id="favorite-cuisine-label">Favorite Cuisine</InputLabel>
+                <Select
+                    labelId="favorite-cuisine-label"
+                    id="cuisine-select"
+                    value={formData.favoriteCuisine}
+                    label="Favorite Cuisine"
+                    name='favoriteCuisine'
+                    onChange={handleChange}
+                    sx={{ mb: 2 }}
+                >
+                    {cuisineOptions.map((option, index) => (
+                        <MenuItem key={index} value={option}> {option} </MenuItem>
+                    ))}
 
-                    </Select>
-                </FormControl>
+                </Select>
+            </FormControl>
 
-                {/* Signature Recipe the user has created */}
-                <FormControl fullWidth>
-                    <InputLabel id="signature-recipe-label">Your Signature Recipe</InputLabel>
-                    <Select
-                        labelId="signature-recipe-label"
-                        id="signature-recipe-select"
-                        value={formData.signatureRecipe}
-                        label="Your Signature Recipe"
-                        name='signatureRecipe'
-                        onChange={handleChange}
-                        sx={{ mb: 2 }}
-                    >
-                        <MenuItem value={""}>{""}</MenuItem>
-                        {userData.recipes.map((recipe, index) => (
-                            // add in a thumbnail image?
-                            <MenuItem key={index} value={recipe._id}> {recipe.name} </MenuItem>
-                        ))}
-                    </Select>
+            {/* Signature Recipe the user has created */}
+            <FormControl fullWidth>
+                <InputLabel id="signature-recipe-label">Your Signature Recipe</InputLabel>
+                <Select
+                    labelId="signature-recipe-label"
+                    id="signature-recipe-select"
+                    value={formData.signatureRecipe}
+                    label="Your Signature Recipe"
+                    name='signatureRecipe'
+                    onChange={handleChange}
+                    sx={{ mb: 2 }}
+                >
 
-                </FormControl>
+                    {userData.recipes.length === 0 ? (
+                        <p>You have no recipes to select from!</p>
+                    ) : (
+                        <>
+                            <MenuItem value={""}>{""}</MenuItem>
+                            {userData.recipes.map((recipe, index) => (
+                                // add in a thumbnail image?
+                                <MenuItem key={index} value={recipe._id}> {recipe.name} </MenuItem>
+                            ))}
+                        </>
+                    )}
 
-                {/*  Favorite recipes pulling from eveything in the database */}
-                {/* <FormControl fullWidth>
+
+
+                </Select>
+
+            </FormControl>
+
+            {/*  Favorite recipes pulling from eveything in the database */}
+            {/* <FormControl fullWidth>
                     <InputLabel id="favorite-recipe-label">Favorite Recipe</InputLabel>
                     <Select
                         labelId="favorite-recipe-label"

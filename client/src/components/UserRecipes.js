@@ -57,7 +57,7 @@ const UserRecipes = () => {
     // console.log(userData)
 
     if (userData.recipes.length === 0) {
-        return <div>
+        return <div style={{color: 'var(--a3)'}}>
             <h1>No recipes created yet </h1>
             <p>Navigate over to the "Create New Recipe" tab to create your first one!</p>
         </div>
