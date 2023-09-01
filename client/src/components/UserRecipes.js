@@ -54,7 +54,7 @@ const UserRecipes = () => {
     }
 
     const userData = data.getUser;
-    console.log(userData)
+    // console.log(userData)
 
     if (userData.recipes.length === 0) {
         return <div>
@@ -81,14 +81,6 @@ const UserRecipes = () => {
                             key={index}
                             className='homeImageListItem'
                         >
-                            {/* {recipe.image.map((image) => (
-                                <img
-                                    key={image}
-                                    className='homeRecipeImage'
-                                    src={image}
-                                    loading='lazy'
-                                />
-                            ))} */}
                             <img
                                 key={recipe.image[0]}
                                 className='homeRecipeImage'

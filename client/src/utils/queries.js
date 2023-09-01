@@ -71,26 +71,44 @@ export const GET_ALL_USERS = gql`
 `;
 
 export const GET_USER = gql`
-    query getUser($userId: ID!) {
-        getUser(userId: $userId) {
+    query GetUser($userId: ID!) {
+    getUser(userId: $userId) {
+        _id
+        username
+        firstName
+        lastName
+        email
+        avatar
+        recipes {
+        _id
+        name
+        description
+        image
+        }
+        dateCreated
+        userBio
+        favoriteRecipe {
+        _id
+        name
+        description
+        image
+        chef {
             _id
             username
-            firstName
-            lastName
-            email
-            avatar
-            dateCreated
-            userBio
-            recipes {
-                _id
-                name
-                description
-                ingredients
-                measure
-                instructions
-                image
-            }
-        }     
+        }
+        }
+        # signatureRecipe {
+        # _id
+        # name
+        # description
+        # image
+        # favorites {
+        #     _id
+        #     username
+        # }
+        # }
+        favoriteCuisine
+    }
     }
 `;
 

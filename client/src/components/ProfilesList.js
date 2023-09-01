@@ -103,14 +103,22 @@ const ProfilesList = () => {
                                                     <p>Recipes: {user.recipes.length}</p>
 
                                                     {/* have to first check if one exists! otherwise, return none */}
-                                                    <p>Signature Recipe: {user.signatureRecipe ? 
-                                                    
-                                                    <Link to={`/singleRecipe/${user.signatureRecipe._id}`}>
-                                                    {user.signatureRecipe.name }
-                                                    </Link>
-                                                    : 
-                                                    'None'} </p>
-                                                    <p>Favorite Recipe: {user.favoriteRecipe ? user.favoriteRecipe.name : 'None'} </p>
+                                                    <p>Signature Recipe: {user.signatureRecipe ?
+                                                        <Link className='profileCardLink' to={`/singleRecipe/${user.signatureRecipe._id}`}>
+                                                            {user.signatureRecipe.name}
+                                                        </Link>
+                                                        :
+                                                        'None'}
+                                                    </p>
+
+                                                    <p>Favorite Recipe: {user.favoriteRecipe ?
+                                                        <Link className='profileCardLink' to={`/singleRecipe/${user.favoriteRecipe._id}`}>
+                                                            {user.favoriteRecipe.name}
+                                                        </Link>
+
+                                                        :
+                                                        'None'}
+                                                    </p>
                                                     <p>Favorite Cuisine: </p>
                                                 </div>
                                             </Typography>

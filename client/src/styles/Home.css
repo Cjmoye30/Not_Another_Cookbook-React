@@ -63,6 +63,14 @@
     padding: 0 10px;
     margin: 0;
 }
+.profileCardLink {
+    color: var(--a2);
+    font-style: italic;
+}
+
+.profileCardLink:visited, .profileCardLink:active  {
+    color: var(--a4);
+}
 
 .homePageImageList {
     background-image: linear-gradient(#191c1e, var(--a1));

@@ -58,10 +58,10 @@ const Profile = () => {
     }
 
     const user = data?.me || data?.getUser;
-    console.log("Data for the user: ", user);
-    console.log(user.dateCreated);
+    // console.log("Data for the user: ", user);
+    // console.log(user.dateCreated);
     const userCreated = moment.unix(user.dateCreated / 1000).format("MMM Do YYYY");
-    console.log(userCreated)
+    // console.log(userCreated)
 
     return (
         <>

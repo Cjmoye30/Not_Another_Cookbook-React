@@ -224,7 +224,7 @@ const CreateRecipe = () => {
                 }
             })
 
-            console.log(data)
+            // console.log(data)
 
             // on success - redirect back to the profile page where you can see your recipe uploaded
             window.location.assign('/me');

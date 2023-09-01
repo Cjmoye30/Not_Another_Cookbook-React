@@ -66,14 +66,15 @@ export const DELETE_RECIPE = gql`
 `;
 
 export const UPDATE_PROFILE = gql`
-    mutation UpdateProfile($userId: ID!, $username: String, $email: String, $avatar: String, $userBio: String) {
-        updateProfile(userId: $userId, username: $username, email: $email, avatar: $avatar, userBio: $userBio) {
+    mutation UpdateProfile($userId: ID!, $username: String, $email: String, $avatar: String, $userBio: String, $favoriteCuisine: String) {
+        updateProfile(userId: $userId, username: $username, email: $email, avatar: $avatar, userBio: $userBio, favoriteCuisine: $favoriteCuisine) {
             _id
             username
             firstName
             lastName
             email
             userBio
+            favoriteCuisine
         }
     }
 `;
@@ -91,22 +92,17 @@ export const ADD_FAVORITE_RECIPE = gql`
 `;
 
 export const ADD_SIGNATURE_RECIPE = gql`
-    mutation AddSignatureRecipe($userId: ID!, $recipeId: ID!) {
+    mutation Mutation($userId: ID!, $recipeId: ID!) {
     addSignatureRecipe(userId: $userId, recipeId: $recipeId) {
         _id
         username
         firstName
         lastName
-            signatureRecipe {
-            name
-            description
-            image
-                favorites {
-                    _id
-                    username
-                }
-            }
+        signatureRecipe {
+        _id
+        name
         }
+    }
     }
 `;
 

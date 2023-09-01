@@ -8,15 +8,31 @@ const resolvers = {
 
         // GET the current user who is signed in
         me: async (parent, args, context) => {
-            console.log("Hello from resovlers");
-            console.log(context.user._id)
             return await User.findOne({ _id: context.user._id }).populate('recipes')
         },
 
         // GET single user
         getUser: async (parent, { userId }) => {
-            const user = await User.findOne({ _id: userId }).populate('recipes')
-            console.log("User for single user query: ", user);
+            const user = await User.findOne({ _id: userId })
+                .populate({
+                    path: 'recipes',
+                    populate: {
+                        path: 'favorites',
+                        model: 'User'
+                    }
+                })
+                .populate({
+                    path: 'favoriteRecipe',
+                    populate: {
+                        path: 'favorites',
+                        model: 'User'
+                    },
+                    populate: {
+                        path: 'chef',
+                        model: 'User'
+                    }
+                })
+                .populate('signatureRecipe')
             return user;
         },
 
@@ -42,21 +58,18 @@ const resolvers = {
                     }
                 })
                 .populate('signatureRecipe')
-            console.log("getAllUsers Query: ", usersData)
             return usersData;
         },
 
         // GET all recipes
         getAllRecipes: async () => {
             const recipeData = await Recipe.find().populate('chef')
-            console.log("RESOLVERS - All Recipe Data: ", recipeData);
             return recipeData;
         },
 
         // GET single recipe
         getRecipe: async (parent, { recipeId }) => {
             const recipe = Recipe.findOne({ _id: recipeId }).populate('chef')
-            console.log("RESOLVERS - Single Recipe Data: ", recipe);
             return recipe;
         }
     },
@@ -75,7 +88,6 @@ const resolvers = {
             console.log("New User Info: ", newUser)
 
             const token = signToken(newUser);
-            console.log("New User Token: ", token)
 
             return { token, newUser }
         },
@@ -93,11 +105,7 @@ const resolvers = {
                 throw new AuthenticationError(`Incorrect password`)
             }
 
-            console.log(`Loggin in : ${email}`)
-
             const token = signToken(user)
-            console.log("Logged in User Token: ", token)
-
             return { token, user }
         },
 
@@ -119,8 +127,6 @@ const resolvers = {
                     { $addToSet: { recipes: newRecipe._id } }
                 )
 
-                console.log("NEW RECIPE CREATED", newRecipe);
-                console.log("ADD TO USER?: ", addToUser);
                 return newRecipe;
 
             } catch (err) {
@@ -129,7 +135,7 @@ const resolvers = {
         },
 
 
-        updateProfile: async (parent, { userId, username, email, avatar, userBio }, context) => {
+        updateProfile: async (parent, { userId, username, email, avatar, userBio, favoriteCuisine }, context) => {
             // only able to edit username, email, and avatar
             try {
                 console.log("request from update profile resolver.")
@@ -142,7 +148,7 @@ const resolvers = {
                             email: email,
                             username: username,
                             avatar: avatar,
-                            userBio: userBio
+                            userBio: userBio,
                         }
                     },
                     { new: true, runValidators: true }
@@ -193,6 +199,7 @@ const resolvers = {
         },
 
         // add favorite recipe to a user - any recipe in our DB
+        // shouold be used when clicking a button on an existing recipe
         addFavoriteRecipe: async (parent, { userId, recipeId }, context) => {
             try {
 
@@ -237,7 +244,7 @@ const resolvers = {
             }
         },
 
-        // add favorite cuisine to a user
+        // add favorite cuisine to a user - DONE
         addFavoriteCuisine: async (parent, { userId, favoriteCuisine }, context) => {
             try {
                 const updateUserData = await User.findOneAndUpdate(
