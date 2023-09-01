@@ -96,8 +96,9 @@ const Profile = () => {
                         <h5>Member Since: {userCreated}</h5>
                         <h5>Recipes Created: {user.recipes.length} </h5>
 
+{/* if there is no favorite cuisine or signature recipe yet aka null, return none */}
                         <h5>Favorite Cuisine: {user.favoriteCuisine ? user.favoriteCuisine : 'None'}</h5>
-                        <h5>Signature Recipe: {user.signatureRecipe.name ? user.signatureRecipe.name : 'None'} </h5>
+                        <h5>Signature Recipe: {user.signatureRecipe ? user.signatureRecipe.name : 'None'} </h5>
                     </Grid>
 
                     <Grid item xs={12}>
