@@ -119,42 +119,17 @@ export default function BasicSelect() {
                 >
 
                     {userData.recipes.length === 0 ? (
-                        <p>You have no recipes to select from!</p>
+                        <MenuItem>No recipes created yet!</MenuItem>
                     ) : (
-                        <>
-                            <MenuItem value={""}>{""}</MenuItem>
-                            {userData.recipes.map((recipe, index) => (
-                                // add in a thumbnail image?
-                                <MenuItem key={index} value={recipe._id}> {recipe.name} </MenuItem>
-                            ))}
-                        </>
+                        userData.recipes.map((recipe, index) => (
+                            // add in a thumbnail image?
+                            <MenuItem key={index} value={recipe._id}> {recipe.name} </MenuItem>
+                        ))
                     )}
-
-
 
                 </Select>
 
             </FormControl>
-
-            {/*  Favorite recipes pulling from eveything in the database */}
-            {/* <FormControl fullWidth>
-                    <InputLabel id="favorite-recipe-label">Favorite Recipe</InputLabel>
-                    <Select
-                        labelId="favorite-recipe-label"
-                        id="signature-recipe-select"
-                        value={formData.favoriteRecipe}
-                        label="Your Favorite Recipe"
-                        name='favoriteRecipe'
-                        onChange={handleChange}
-                        sx={{ mb: 2 }}
-                    >
-                        <MenuItem value={""}>{""}</MenuItem>
-                        {allRecipeData.map((recipe, index) => (
-                            <MenuItem key={index} value={recipe.name}>{recipe.name}</MenuItem>
-                        ))}
-                    </Select>
-
-                </FormControl> */}
         </Box >
     );
 }
