@@ -140,6 +140,7 @@ const ProfilesList = () => {
 
                                                 size="small"
                                                 sx={{ color: 'white' }}
+                                                disabled
                                             >View Profile
                                             </Button>
 
@@ -147,12 +148,14 @@ const ProfilesList = () => {
 
                                                 size="small"
                                                 sx={{ color: 'white' }}
+                                                disabled
                                             >Media Option 1
                                             </Button>
                                             <Button
 
                                                 size="small"
                                                 sx={{ color: 'white' }}
+                                                disabled
                                             >Media Option 2
                                             </Button>
 

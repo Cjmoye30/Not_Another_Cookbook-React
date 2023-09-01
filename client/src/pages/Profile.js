@@ -48,19 +48,20 @@ const Profile = () => {
         userId ? GET_USER : GET_ME,
         { variables: { userId: userId } }
     )
-
+    const user = data?.me || data?.getUser;
+    
     console.log("user data", data)
 
+    
     if (loading) {
         return <div><p>Loading...</p></div>
     }
-
+    
     if (error) {
         console.log(error)
         return <div><p>Something went wrong...</p></div>
     }
-
-    const user = data?.me || data?.getUser;
+    
     const userCreated = moment.unix(user.dateCreated / 1000).format("MMM Do YYYY");
 
     return (
@@ -95,8 +96,8 @@ const Profile = () => {
                         <h5>Member Since: {userCreated}</h5>
                         <h5>Recipes Created: {user.recipes.length} </h5>
 
-                        <h5>Favorite Cuisine: {user.favoriteCuisine}</h5>
-                        <h5>Signature Recipe: {user.signatureRecipe.name} </h5>
+                        <h5>Favorite Cuisine: {user.favoriteCuisine ? user.favoriteCuisine : 'None'}</h5>
+                        <h5>Signature Recipe: {user.signatureRecipe.name ? user.signatureRecipe.name : 'None'} </h5>
                     </Grid>
 
                     <Grid item xs={12}>

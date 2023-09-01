@@ -8,7 +8,26 @@ const resolvers = {
 
         // GET the current user who is signed in
         me: async (parent, args, context) => {
-            return await User.findOne({ _id: context.user._id }).populate('recipes')
+            return await User.findOne({ _id: context.user._id })
+            .populate({
+                path: 'recipes',
+                populate: {
+                    path: 'favorites',
+                    model: 'User'
+                }
+            })
+            .populate({
+                path: 'favoriteRecipe',
+                populate: {
+                    path: 'favorites',
+                    model: 'User'
+                },
+                populate: {
+                    path: 'chef',
+                    model: 'User'
+                }
+            })
+            .populate('signatureRecipe')
         },
 
         // GET single user

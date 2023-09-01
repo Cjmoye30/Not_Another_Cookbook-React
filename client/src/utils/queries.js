@@ -20,22 +20,12 @@ export const GET_ME = gql`
                 instructions
                 image
             }
-            favoriteRecipe {
-        _id
-        name
-        description
-        image
-        chef {
-            _id
-            username
-        }
-        }
-        signatureRecipe {
-        _id
-        name
-        description
-        image
-        }
+
+            signatureRecipe {
+                _id
+                name
+                }
+  
         favoriteCuisine
         }
     }
