@@ -27,9 +27,11 @@ export default function BasicSelect() {
     const [addFavoriteCuisine] = useMutation(ADD_FAVORITE_CUISINE);
     const [addSignatureRecipe] = useMutation(ADD_SIGNATURE_RECIPE);
 
+        console.log(userData.signatureRecipe.name)
+
     const [formData, setFormData] = React.useState({
         favoriteCuisine: userData.favoriteCuisine || '',
-        signatureRecipe: userData.signatureRecipe || ''
+        signatureRecipe: userData.signatureRecipe._id || ''
     })
 
     const handleChange = async (e) => {
@@ -79,7 +81,7 @@ export default function BasicSelect() {
     if (userError || recipeError) {
         console.log(userError)
         return <>
-            <h1>Sorry, something went wrong. Return <Link to='/'>home</Link></h1>
+            <p>Sorry, something went wrong. Return <Link to='/'>home</Link></p>
         </>
     }
 

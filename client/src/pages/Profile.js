@@ -13,6 +13,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import CloseIcon from '@mui/icons-material/Close';
 import moment from 'moment'
+import Grid from '@mui/material/Grid';
 
 const style = {
     position: 'absolute',
@@ -48,6 +49,8 @@ const Profile = () => {
         { variables: { userId: userId } }
     )
 
+    console.log("user data", data)
+
     if (loading) {
         return <div><p>Loading...</p></div>
     }
@@ -58,10 +61,7 @@ const Profile = () => {
     }
 
     const user = data?.me || data?.getUser;
-    // console.log("Data for the user: ", user);
-    // console.log(user.dateCreated);
     const userCreated = moment.unix(user.dateCreated / 1000).format("MMM Do YYYY");
-    // console.log(userCreated)
 
     return (
         <>
@@ -75,34 +75,36 @@ const Profile = () => {
                     <ArrowForwardIcon className='navIcon' />
                 </div>
             </div>
+            <Box className='profileBox'>
+                <Grid container className='profileHeader'>
+                    <Grid item sm={4}>
+                        <img className='profileAvatar' src={user.avatar} />
+                    </Grid>
 
-            <div className='profileHeader'>
-                    <img className='profileAvatar' src={user.avatar} />
-
-                    <div className='profileHeaderText'>
-
+                    <Grid item sm={3}>
                         <div className='profileEditIcons'>
-
                             <Button
                                 onClick={handleOpen}
                                 className='profileEdit'
                             >
                                 <EditIcon className='editIcon' />
                             </Button>
-
                         </div>
 
                         <h1> {user.firstName} {user.lastName} </h1>
+                        <h5>Member Since: {userCreated}</h5>
+                        <h5>Recipes Created: {user.recipes.length} </h5>
 
-                        <hr />
+                        <h5>Favorite Cuisine: {user.favoriteCuisine}</h5>
+                        <h5>Signature Recipe: {user.signatureRecipe.name} </h5>
+                    </Grid>
 
-                        <h3>Username: {user.username} </h3>
-                        <h4>Member Since: {userCreated} </h4>
-                        <h4>Total Recipes: {user.recipes.length} </h4>
-                    </div>
+                    <Grid item xs={12}>
+                        <p className='profileUserBio'>{user.userBio}</p>
+                    </Grid>
+                </Grid>
+            </Box>
 
-                    <p className='profileUserBio'> {user.userBio} </p>
-            </div>
 
             <Tabs />
 

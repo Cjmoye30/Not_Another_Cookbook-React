@@ -111,15 +111,15 @@ const ProfilesList = () => {
                                                         'None'}
                                                     </p>
 
-                                                    <p>Favorite Recipe: {user.favoriteRecipe ?
+                                                    {/* <p>Favorite Recipe: {user.favoriteRecipe ?
                                                         <Link className='profileCardLink' to={`/singleRecipe/${user.favoriteRecipe._id}`}>
                                                             {user.favoriteRecipe.name}
                                                         </Link>
 
                                                         :
                                                         'None'}
-                                                    </p>
-                                                    <p>Favorite Cuisine: </p>
+                                                    </p> */}
+                                                    <p>Favorite Cuisine: <em style={{color: 'var(--a4)'}}> {user.favoriteCuisine} </em> </p>
                                                 </div>
                                             </Typography>
 

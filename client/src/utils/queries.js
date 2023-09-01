@@ -20,6 +20,23 @@ export const GET_ME = gql`
                 instructions
                 image
             }
+            favoriteRecipe {
+        _id
+        name
+        description
+        image
+        chef {
+            _id
+            username
+        }
+        }
+        signatureRecipe {
+        _id
+        name
+        description
+        image
+        }
+        favoriteCuisine
         }
     }
 
@@ -97,16 +114,12 @@ export const GET_USER = gql`
             username
         }
         }
-        # signatureRecipe {
-        # _id
-        # name
-        # description
-        # image
-        # favorites {
-        #     _id
-        #     username
-        # }
-        # }
+        signatureRecipe {
+        _id
+        name
+        description
+        image
+        }
         favoriteCuisine
     }
     }
