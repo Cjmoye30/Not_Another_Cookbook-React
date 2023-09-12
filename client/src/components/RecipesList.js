@@ -10,6 +10,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useState } from 'react';
 import { Switch } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
 
 const RecipesList = () => {
 
@@ -45,15 +46,15 @@ const RecipesList = () => {
             <div className='recipeListHeader'>
                 <h1>Recipes from our users:</h1>
 
-                    <FormControlLabel
-                        className='listToggle'
-                        label="List View!"
-                        labelPlacement='start'
-                        control={<Switch
-                            checked={view}
-                            onChange={handleView}
-                        />}
-                    />
+                <FormControlLabel
+                    className='listToggle'
+                    label="List View:"
+                    labelPlacement='start'
+                    control={<Switch
+                        checked={view}
+                        onChange={handleView}
+                    />}
+                />
             </div>
 
             {view ? (
@@ -101,9 +102,27 @@ const RecipesList = () => {
                 </div>
 
             ) : (
-                <p>Show the list view dude</p>
-            )}
+                <>
+                    <Grid container className='recipeTextListContainer'>
+                        {recipesData.map((recipe, index) => (
+                            <Grid item xs={4}>
+                                <Grid item xs={12} sx={{p:1}}>
+                                    <Link
+                                        key={index}
+                                        to={`/singleRecipe/${recipe._id}`}
+                                    >
+                                        <div className='recipeTextList'>
+                                            <h3>{recipe.name}</h3>
+                                            <p>{recipe.description}</p>
+                                        </div>
 
+                                    </Link>
+                                </Grid>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </>
+            )}
         </>
     )
 }

@@ -134,14 +134,30 @@
 .recipeListHeader {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     position: relative;
     align-items: center;
 }
 
-.listToggle {
+/* .listToggle {
     position: absolute;
     right: 0;
     padding: 20px;
+} */
+
+.recipeTextListContainer {
+    justify-content: center;
+}
+
+.recipeTextList {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 20px;
+    color: var(--a3);
+    border: 1px solid var(--a3);
 }
 
 /* Media Queires */

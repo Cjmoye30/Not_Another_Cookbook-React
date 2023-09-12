@@ -11,9 +11,19 @@ import { DELETE_RECIPE } from '../utils/mutations';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
+import { Switch } from '@mui/material';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
+import { useState } from 'react';
 import '../styles/Home.css'
 
 const UserRecipes = () => {
+
+    const [view, setView] = useState(true)
+
+    const handleView = (event) => {
+        setView((previousView) => !previousView)
+    }
 
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
@@ -64,45 +74,86 @@ const UserRecipes = () => {
     }
 
     return (
-        <Box>
-            <ImageList
-                variant='masonry'
-                cols={cols}
-                gap={20}
-                sx={{ px: 1, py: 3 }}
-                className='recipeListInner'
-            >
-                {userData.recipes.map((recipe, index) => (
-                    <Link
-                        key={index}
-                        to={`/singleRecipe/${recipe._id}`}
-                    >
-                        <ImageListItem
+        <Box sx={{ color: 'var(--a3)' }}>
+
+            <div className='recipeListHeader'>
+                <h1>Your Recipes:</h1>
+
+                <FormControlLabel
+                    className='listToggle'
+                    label="List View:"
+                    labelPlacement='start'
+                    control={<Switch
+                        checked={view}
+                        onChange={handleView}
+                    />}
+                />
+            </div>
+
+            {view ? (
+                <ImageList
+                    variant='masonry'
+                    cols={cols}
+                    gap={20}
+                    sx={{ px: 1, py: 3 }}
+                    className='recipeListInner'
+                >
+                    {userData.recipes.map((recipe, index) => (
+                        <Link
                             key={index}
-                            className='homeImageListItem'
+                            to={`/singleRecipe/${recipe._id}`}
                         >
-                            {!recipe.image[0] ? (
-                                <img
-                                    src='https://ik.imagekit.io/ofawn8dpgq/react-cookbook-food-pics/foodPlaceholder.png?updatedAt=1694519579069'
-                                    loading='lazy'
+                            <ImageListItem
+                                key={index}
+                                className='homeImageListItem'
+                            >
+                                {!recipe.image[0] ? (
+                                    <img
+                                        src='https://ik.imagekit.io/ofawn8dpgq/react-cookbook-food-pics/foodPlaceholder.png?updatedAt=1694519579069'
+                                        loading='lazy'
+                                    />
+                                ) : (
+                                    <img
+                                        key={recipe._id}
+                                        className='homeRecipeImage'
+                                        src={recipe.image[0]}
+                                        loading='lazy'
+                                    />
+                                )}
+                                <ImageListItemBar
+                                    title={recipe.name}
+                                    subtitle={recipe.description}
+                                    className='homeRecipeInfoBar'
                                 />
-                            ) : (
-                                <img
-                                    key={recipe._id}
-                                    className='homeRecipeImage'
-                                    src={recipe.image[0]}
-                                    loading='lazy'
-                                />
-                            )}
-                            <ImageListItemBar
-                                title={recipe.name}
-                                subtitle={recipe.description}
-                                className='homeRecipeInfoBar'
-                            />
-                        </ImageListItem>
-                    </Link>
-                ))}
-            </ImageList>
+                            </ImageListItem>
+                        </Link>
+                    ))}
+                </ImageList>
+
+            ) : (
+                <>
+                <Grid container className='recipeTextListContainer'>
+                {userData.recipes.map((recipe, index) => (
+                            <Grid item xs={4}>
+                                <Grid item xs={12} sx={{p:1}}>
+                                    <Link
+                                        key={index}
+                                        to={`/singleRecipe/${recipe._id}`}
+                                    >
+                                        <div className='recipeTextList'>
+                                            <h3>{recipe.name}</h3>
+                                            <p>{recipe.description}</p>
+                                        </div>
+
+                                    </Link>
+                                </Grid>
+                            </Grid>
+                        ))}
+
+                </Grid>
+                </>
+            )}
+
         </Box>
     )
 }
