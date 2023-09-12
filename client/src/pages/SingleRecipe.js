@@ -25,6 +25,7 @@ const style = {
     border: '1px solid #000',
     boxShadow: 24,
     p: 4,
+    height: '90%'
 };
 
 const SingleRecipe = () => {
