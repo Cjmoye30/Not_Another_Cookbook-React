@@ -39,7 +39,6 @@ const Home = () => {
             </div>
 
             <div className='homePageImageList'>
-                <h1>Recipes from our users:</h1>
                 <RecipesList />
             </div>
 

@@ -94,7 +94,7 @@ const Profile = () => {
 
                         <h1> {user.firstName} {user.lastName} </h1>
                         <h5>Member Since: {userCreated}</h5>
-                        <h5>Recipes Created: {user.recipes.length} </h5>
+                        {/* <h5>Recipes Created: {user.recipes.length} </h5> */}
 
 {/* if there is no favorite cuisine or signature recipe yet aka null, return none */}
                         <h5>Favorite Cuisine: {user.favoriteCuisine ? user.favoriteCuisine : 'None'}</h5>

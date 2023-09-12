@@ -57,7 +57,7 @@ const UserRecipes = () => {
     // console.log(userData)
 
     if (userData.recipes.length === 0) {
-        return <div style={{color: 'var(--a3)'}}>
+        return <div style={{ color: 'var(--a3)' }}>
             <h1>No recipes created yet </h1>
             <p>Navigate over to the "Create New Recipe" tab to create your first one!</p>
         </div>
@@ -81,12 +81,19 @@ const UserRecipes = () => {
                             key={index}
                             className='homeImageListItem'
                         >
-                            <img
-                                key={recipe.image[0]}
-                                className='homeRecipeImage'
-                                src={recipe.image[0]}
-                                loading='lazy'
-                            />
+                            {!recipe.image[0] ? (
+                                <img
+                                    src='https://ik.imagekit.io/ofawn8dpgq/react-cookbook-food-pics/foodPlaceholder.png?updatedAt=1694519579069'
+                                    loading='lazy'
+                                />
+                            ) : (
+                                <img
+                                    key={recipe._id}
+                                    className='homeRecipeImage'
+                                    src={recipe.image[0]}
+                                    loading='lazy'
+                                />
+                            )}
                             <ImageListItemBar
                                 title={recipe.name}
                                 subtitle={recipe.description}

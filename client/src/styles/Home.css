@@ -131,6 +131,19 @@
     margin-top: 5px;
 }
 
+.recipeListHeader {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+}
+
+.listToggle {
+    position: absolute;
+    right: 0;
+    padding: 20px;
+}
+
 /* Media Queires */
 @media screen and (max-width: 576px) { 
     .homeHeader {

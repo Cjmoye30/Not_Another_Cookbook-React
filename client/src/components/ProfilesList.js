@@ -55,6 +55,7 @@ const ProfilesList = () => {
                                             image={user.avatar}
                                             title={user.username}
                                             className='cardMedia'
+                                            sx={{maxHeight: 500}}
                                         />
                                         <CardContent>
 
@@ -99,7 +100,7 @@ const ProfilesList = () => {
 
                                             <Typography className="profileCardSection" gutterBottom component='div'>
                                                 <div className='bioMetrics'>
-                                                    <p>Member Since: {moment.unix(user.dateCreated / 1000).format("MMM Do, YYYY")}</p>
+                                                    {/* <p>Member Since: {moment.unix(user.dateCreated / 1000).format("MMM Do, YYYY")}</p> */}
                                                     <p>Recipes: {user.recipes.length}</p>
 
                                                     {/* have to first check if one exists! otherwise, return none */}
