@@ -15,11 +15,17 @@
     border-radius: 20px;
     box-shadow: 0 10px 8px -7px black;
     justify-content: center;
+    
 }
 
 .profileHeaderText {
     padding: 30px;
     text-align: center;
+ }
+
+ .profileAvatarContainer {
+    display: flex;
+    justify-content: center;
  }
 
 .profileAvatar {

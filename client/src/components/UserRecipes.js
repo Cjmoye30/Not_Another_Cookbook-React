@@ -19,7 +19,7 @@ import '../styles/Home.css'
 
 const UserRecipes = () => {
 
-    const [view, setView] = useState(true)
+    const [view, setView] = useState(false)
 
     const handleView = (event) => {
         setView((previousView) => !previousView)
@@ -90,7 +90,7 @@ const UserRecipes = () => {
                 />
             </div>
 
-            {view ? (
+            {!view ? (
                 <ImageList
                     variant='masonry'
                     cols={cols}
@@ -134,7 +134,7 @@ const UserRecipes = () => {
                 <>
                 <Grid container className='recipeTextListContainer'>
                 {userData.recipes.map((recipe, index) => (
-                            <Grid item xs={4}>
+                            <Grid item sm={4} xs={12}>
                                 <Grid item xs={12} sx={{p:1}}>
                                     <Link
                                         key={index}

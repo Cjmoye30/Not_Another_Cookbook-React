@@ -21,33 +21,31 @@
     font-family: var(--fontHeaders);
 }
 
-.testWrapper {
+
+.imagesContainer {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+    justify-content: center;    
 }
 
-.carousel {
-    height: 100%;
-    width: 100%;
-    /* Adjust width to fit the content */
-    max-width: 800px;
+.imagesWrapper {
+    background-color: var(--a1);
+    flex-direction: column;
+    text-align: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
 }
 
-.singleRecipeHeroImage {
-    max-width: 98%;
-    max-height: 600px;
-    width: auto;
-    /* Make sure the image doesn't exceed the container's width */
-    border-radius: 20px;
-    box-shadow: 0 10px 8px -7px black;
-    margin: 20px auto;
-    /* Center the image horizontally */
+.imageContainer {
+    padding: 10px;
+}
+
+.recipeImage {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
     object-fit: cover;
-    object-position: center;
+    border-radius: 10px;
+    box-shadow: 0 10px 8px -7px black;
 }
 
 .headerImg {
@@ -156,6 +154,10 @@
     width: 90%;
 }
 
+.modal-container {
+    height: 90%;
+}
+
 .userBio {
     width: 98%;
     margin: 0 auto;
@@ -200,7 +202,7 @@
 }
 
 .modal-body {
-    height: 95vh;
+    height: 90%;
     overflow-y: auto;
     max-width: 1000px;
 }

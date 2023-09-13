@@ -8,6 +8,7 @@ footer {
     background-image: linear-gradient(var(--a1), #191c1e);
     height: 100px;
     padding: 20px;
+    margin-top: 20px;
 }
 
 footer p a {

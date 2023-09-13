@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_RECIPE } from '../utils/queries';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import UpdateRecipe from '../components/UpdateRecipe';
 import Modal from '@mui/material/Modal';
 import '../styles/SingleRecipe.css'
@@ -11,10 +10,12 @@ import { useMutation } from '@apollo/client';
 import { DELETE_RECIPE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import Grid from '@mui/material/Grid';
-import Carousel from 'react-material-ui-carousel';
 import NavIcons from '../components/NavIcons';
 import CloseIcon from '@mui/icons-material/Close';
-import moment from 'moment'
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const style = {
     position: 'absolute',
@@ -32,6 +33,15 @@ const SingleRecipe = () => {
 
     if (!Auth.loggedIn()) {
         window.location.assign('/login')
+    }
+
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down('md'));
+
+    // if there is a match, return 12, if not, return 4
+    let cols = 3
+    if (matches) {
+        cols = 1;
     }
 
     const { recipeId } = useParams();
@@ -78,25 +88,15 @@ const SingleRecipe = () => {
             {/* use the grid to scale it down? */}
             <NavIcons />
             <Box>
-                <div className='headerWrapper'>
+                <Box className='headerWrapper'>
                     <div className='headerTitleDesc'>
                         <h1 className='recipeTitle'>{recipeData.name}</h1>
 
                         <hr />
 
                         <h3 className='recipeDesc'>{recipeData.description}</h3>
-                        <p>Created by: {recipeData.chef.username} on {moment.unix(recipeData.dateCreated / 1000).format("MMM Do YYYY")}</p>
                     </div>
-                    <div className='testWrapper'>
-                        <Carousel className='carousel'>
-                            {images.map((image) => (
-                                <div className='testDiv'>
-                                    <img className='singleRecipeHeroImage' src={image} />
-                                </div>
-                            ))}
-                        </Carousel>
-                    </div>
-                </div>
+                </Box>
 
                 <Box className='ingAndMeasureWrapper'>
                     <h2 className='sectionTitle'>Ingredients & Measurements</h2>
@@ -143,6 +143,21 @@ const SingleRecipe = () => {
                     </div>
                 </Box>
 
+
+                <Box className='imagesWrapper'>
+                    <h2 className='sectionTitle imagesTitle'>Images</h2>
+                    <Grid container className='imagesContainer'>
+                        {images.map((image, index) => (
+                            <Grid key={index} item sm={4} xs={12}>
+                                <div className='imageContainer'>
+                                    <img className='recipeImage' src={image} />
+                                </div>
+                            </Grid>
+                        ))}
+                    </Grid>
+
+                </Box>
+
                 {loggedInUser === chef ? (
                     <div className='recipeEditbuttons'>
                         <button className='button1 recipeEditButton' onClick={handleOpen}>Edit</button>
@@ -157,12 +172,13 @@ const SingleRecipe = () => {
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
+                    className='modal-container'
                 >
                     <Box
                         className='modal-body'
                         sx={style}
                     >
-                        
+
                         <CloseIcon className='modalCloseIcon' onClick={handleClose} />
                         <UpdateRecipe />
 

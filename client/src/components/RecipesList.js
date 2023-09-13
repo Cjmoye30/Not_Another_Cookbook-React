@@ -14,7 +14,7 @@ import Grid from '@mui/material/Grid';
 
 const RecipesList = () => {
 
-    const [view, setView] = useState(true)
+    const [view, setView] = useState(false)
 
     const handleView = (event) => {
         setView((previousView) => !previousView)
@@ -57,7 +57,7 @@ const RecipesList = () => {
                 />
             </div>
 
-            {view ? (
+            {!view ? (
                 <div className='testWrapper'>
                     <ImageList
                         variant='masonry'
@@ -105,8 +105,8 @@ const RecipesList = () => {
                 <>
                     <Grid container className='recipeTextListContainer'>
                         {recipesData.map((recipe, index) => (
-                            <Grid item xs={4}>
-                                <Grid item xs={12} sx={{p:1}}>
+                            <Grid item sm={4} xs={12}>
+                                <Grid item xs={12} sx={{ p: 1 }}>
                                     <Link
                                         key={index}
                                         to={`/singleRecipe/${recipe._id}`}
