@@ -6,16 +6,16 @@ import Box from '@mui/material/Box';
 import UpdateRecipe from '../components/UpdateRecipe';
 import Modal from '@mui/material/Modal';
 import '../styles/SingleRecipe.css'
-import { useMutation } from '@apollo/client';
-import { DELETE_RECIPE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import Grid from '@mui/material/Grid';
 import NavIcons from '../components/NavIcons';
 import CloseIcon from '@mui/icons-material/Close';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import EditIcon from '@mui/icons-material/Edit';
+import { Button, Divider } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -35,6 +35,11 @@ const SingleRecipe = () => {
         window.location.assign('/login')
     }
 
+    const { pathname } = useLocation();
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [pathname])
+
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -46,25 +51,14 @@ const SingleRecipe = () => {
 
     const { recipeId } = useParams();
 
-    const [deleteRecipeMutation] = useMutation(DELETE_RECIPE);
 
-    const deleteRecipe = async () => {
-        console.log(`Delete ${recipeId}`)
-        try {
-            const { data } = await deleteRecipeMutation({
-                variables: { recipeId: recipeId }
-            })
-            window.location.assign('/me')
-
-        } catch (err) {
-            console.log("ERROR. Recipe not deleted: ", err)
-        }
-    }
 
     const { loading, data, error } = useQuery(GET_RECIPE,
         { variables: { recipeId: recipeId } })
 
+        console.log("Data:", data?.getRecipe.image[0])
 
+    const chefName = data?.getRecipe.chef
     const recipeData = data?.getRecipe || {}
     const ingredients = recipeData.ingredients
     const measure = recipeData.measure
@@ -91,16 +85,14 @@ const SingleRecipe = () => {
                 <Box className='headerWrapper'>
                     <div className='headerTitleDesc'>
                         <h1 className='recipeTitle'>{recipeData.name}</h1>
-
-                        <hr />
-
                         <h3 className='recipeDesc'>{recipeData.description}</h3>
-                    </div>
-                </Box>
+                        <p> <em>Created by: {chefName.firstName} {chefName.lastName}</em> </p>
 
-                <Box className='ingAndMeasureWrapper'>
-                    <h2 className='sectionTitle'>Ingredients & Measurements</h2>
-                    <Grid container className='outerWrapper'>
+                        <EditIcon className='editIcon' onClick={handleOpen}/>
+                    </div>
+
+                    <Grid container className='sectionContainer'>
+                        <h2>Ingredients & Measurements</h2>
                         <Grid className='ingAndMeasureContainer' item xs={12}>
                             <Grid sx={{ display: 'flex' }} item xs={12}>
                                 <Grid className='ingAndMeasureHeader ingHeader' item xs={6}>
@@ -123,49 +115,41 @@ const SingleRecipe = () => {
                             ))}
                         </Grid>
                     </Grid>
-                </Box>
 
-                <Box className='instructionsWrapper'>
-                    <h2 className='sectionTitle instructionTitle'>Instructions</h2>
-                    <div className='outerWrapper'>
-                        <Grid className='instructionsContainer' container>
-                            {instructions.map((instruction, index) => (
-                                <Grid container key={index}>
-                                    <Grid className='gridItem' item xs={3}>
-                                        <p>{`Step ${index + 1}:`}</p>
-                                    </Grid>
-                                    <Grid className='gridItem gridInstruction' item xs={9}>
-                                        <p>{instruction}</p>
-                                    </Grid>
+                    <Grid container className='sectionContainer'>
+                        <h2>Instructions</h2>
+                        {instructions.map((instruction, index) => (
+                            <Grid container key={index} className='ingAndMeasureContainer'>
+                                <Grid className='gridItem' item xs={3}>
+                                    <p>{`Step ${index + 1}:`}</p>
                                 </Grid>
-                            ))}
-                        </Grid>
-                    </div>
-                </Box>
-
-
-                <Box className='imagesWrapper'>
-                    <h2 className='sectionTitle imagesTitle'>Images</h2>
-                    <Grid container className='imagesContainer'>
-                        {images.map((image, index) => (
-                            <Grid key={index} item sm={4} xs={12}>
-                                <div className='imageContainer'>
-                                    <img className='recipeImage' src={image} />
-                                </div>
+                                <Grid className='gridItem gridInstruction' item xs={9}>
+                                    <p>{instruction}</p>
+                                </Grid>
                             </Grid>
                         ))}
                     </Grid>
 
-                </Box>
+                    <Grid container className='sectionContainer'>
+                        <h2>Images</h2>
 
-                {loggedInUser === chef ? (
-                    <div className='recipeEditbuttons'>
-                        <button className='button1 recipeEditButton' onClick={handleOpen}>Edit</button>
-                        <button className='button2 recipeEditButton' onClick={deleteRecipe}>DELETE</button>
-                    </div>
-                ) : (
-                    <></>
-                )}
+                        {data?.getRecipe.image[0] === '' ? (
+                                <p sx={{width: '100%'}}>No images yet - upload <span className='noRecipeEdit' onClick={handleOpen}>here</span>.</p>
+                        ) : (
+
+                        <Grid container className='ingAndMeasureContainer'>
+                            {images.map((image, index) => (
+                                <Grid key={index} item sm={4} xs={12}>
+                                    <div className='imageDiv'>
+                                        <img className='recipeImage' src={image} />
+                                    </div>
+                                </Grid>
+                            ))}
+                        </Grid>
+                        )}
+                    </Grid>
+
+                </Box>
 
                 <Modal
                     open={open}
@@ -184,7 +168,7 @@ const SingleRecipe = () => {
 
                     </Box>
                 </Modal>
-            </Box>
+            </Box >
         </>
     )
 }

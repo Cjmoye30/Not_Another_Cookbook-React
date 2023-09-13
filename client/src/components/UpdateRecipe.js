@@ -12,6 +12,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Grid from '@mui/material/Grid';
 import { IKContext, IKImage, IKUpload } from 'imagekitio-react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { DELETE_RECIPE } from '../utils/mutations';
+
 
 const publicKey = 'public_HCJZE+YwKYecvofGGZ+jCfHG1yw=';
 const urlEndpoint = 'https://ik.imagekit.io/ofawn8dpgq';
@@ -231,6 +233,21 @@ const UpdateRecipe = () => {
         }
     }
 
+    const [deleteRecipeMutation] = useMutation(DELETE_RECIPE);
+
+    const deleteRecipe = async () => {
+        console.log(`Delete ${recipeId}`)
+        try {
+            const { data } = await deleteRecipeMutation({
+                variables: { recipeId: recipeId }
+            })
+            window.location.assign('/me')
+
+        } catch (err) {
+            console.log("ERROR. Recipe not deleted: ", err)
+        }
+    }
+
     const inputRefTest = useRef(null);
     const ikUploadRefTest = useRef(null);
 
@@ -409,6 +426,9 @@ const UpdateRecipe = () => {
                 </form>
                 <div className='buttonWrapper'>
                     <button className='button1 modalSubmitButton' onClick={saveUpdates} >Save!</button>
+
+                    <button className='button2 modalDeleteButton' onClick={deleteRecipe}>DELETE</button>
+
                 </div>
             </React.Fragment>
         </>
